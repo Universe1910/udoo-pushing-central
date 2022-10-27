@@ -401,7 +401,7 @@ const update = async() => {
   if (res.code === 0) {
     ElMessage({
       type: 'success',
-      message: '配置文件设置成功'
+      message: '配置文件Set successfully!'
     })
     await initForm()
   }

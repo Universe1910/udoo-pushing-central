@@ -136,7 +136,7 @@ const deleteFileFunc = async(row) => {
       if (res.code === 0) {
         ElMessage({
           type: 'success',
-          message: '删除成功!',
+          message: 'Deleted successfully!',
         })
         if (tableData.value.length === 1 && page.value > 1) {
           page.value--
@@ -147,7 +147,7 @@ const deleteFileFunc = async(row) => {
     .catch(() => {
       ElMessage({
         type: 'info',
-        message: '已取消删除',
+        message: 'Cancelled',
       })
     })
 }

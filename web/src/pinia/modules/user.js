@@ -98,7 +98,7 @@ export const useUserStore = defineStore('user', () => {
       userInfo.value.sideMode = data
       ElMessage({
         type: 'success',
-        message: '设置成功'
+        message: 'Set successfully!'
       })
     }
   }

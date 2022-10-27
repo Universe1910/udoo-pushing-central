@@ -137,7 +137,7 @@ const deleteApiFunc = async(row) => {
       if (res.code === 0) {
         ElMessage({
           type: 'success',
-          message: '删除成功!'
+          message: 'Deleted successfully!'
         })
         getTableData()
       }

@@ -363,7 +363,7 @@ const changeAuthority = async(row, flag, removeAuth) => {
     authorityIds: row.authorityIds
   })
   if (res.code === 0) {
-    ElMessage({ type: 'success', message: '角色设置成功' })
+    ElMessage({ type: 'success', message: '角色Set successfully!' })
   } else {
     if (!removeAuth) {
       row.authorityIds = [...tempAuth[row.ID]]

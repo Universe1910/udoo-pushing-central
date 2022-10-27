@@ -378,7 +378,7 @@ const deleteMenu = (ID) => {
       if (res.code === 0) {
         ElMessage({
           type: 'success',
-          message: '删除成功!'
+          message: 'Deleted successfully!'
         })
         if (tableData.value.length === 1 && page.value > 1) {
           page.value--
@@ -389,7 +389,7 @@ const deleteMenu = (ID) => {
     .catch(() => {
       ElMessage({
         type: 'info',
-        message: '已取消删除'
+        message: 'Cancelled'
       })
     })
 }
@@ -435,7 +435,7 @@ const enterDialog = async() => {
       if (res.code === 0) {
         ElMessage({
           type: 'success',
-          message: isEdit.value ? '编辑成功' : '添加成功!'
+          message: isEdit.value ? '编辑成功' : 'Added successfully!'
         })
         getTableData()
       }

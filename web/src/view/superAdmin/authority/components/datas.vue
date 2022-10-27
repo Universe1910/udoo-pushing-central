@@ -2,16 +2,16 @@
   <div>
     <div class="clearfix sticky-button" style="margin: 18px">
       <el-button class="fl-right" size="small" type="primary" @click="authDataEnter">Sure</el-button>
-      <el-button class="fl-left" size="small" type="primary" @click="all">全选</el-button>
-      <el-button class="fl-left" size="small" type="primary" @click="self">本角色</el-button>
-      <el-button class="fl-left" size="small" type="primary" @click="selfAndChildren">本角色及子角色</el-button>
+      <el-button class="fl-left" size="small" type="primary" @click="all">Select all</el-button>
+      <el-button class="fl-left" size="small" type="primary" @click="self">Self</el-button>
+      <el-button class="fl-left" size="small" type="primary" @click="selfAndChildren">This role and the character</el-button>
     </div>
     <div class="tree-content">
       <el-checkbox-group v-model="dataAuthorityId" @change="selectAuthority">
         <el-checkbox v-for="(item,key) in authoritys" :key="key" :label="item">{{ item.authorityName }}</el-checkbox>
       </el-checkbox-group>
     </div>
-    <warning-bar title="此功能仅用于创建角色和角色的many2many关系表，具体使用还须自己结合表实现业务，详情参考示例代码（客户示例）" />
+    <warning-bar title="This function is only used to create the Many2many Relationship table of characters and characters. The specific use must be combined with the display business by itself. For details, please refer to the example code (customer example)" />
   </div>
 </template>
 
@@ -100,7 +100,7 @@ const getChildrenId = (row, arrBox) => {
 const authDataEnter = async() => {
   const res = await setDataAuthority(props.row)
   if (res.code === 0) {
-    ElMessage({ type: 'success', message: '资源设置成功' })
+    ElMessage({ type: 'success', message: 'Set successfully!' })
   }
 }
 

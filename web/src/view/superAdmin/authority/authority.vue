@@ -47,15 +47,15 @@
       </template>
     </el-dialog>
 
-    <el-drawer v-if="drawer" v-model="drawer" custom-class="auth-drawer" :with-header="false" size="40%" title="角色配置">
+    <el-drawer v-if="drawer" v-model="drawer" custom-class="auth-drawer" :with-header="false" size="40%" title="configuration">
       <el-tabs :before-leave="autoEnter" type="border-card">
-        <el-tab-pane label="角色菜单">
+        <el-tab-pane label="Menu">
           <Menus ref="menus" :row="activeRow" @changeRow="changeRow" />
         </el-tab-pane>
-        <el-tab-pane label="角色api">
+        <el-tab-pane label="API">
           <Apis ref="apis" :row="activeRow" @changeRow="changeRow" />
         </el-tab-pane>
-        <el-tab-pane label="资源权限">
+        <el-tab-pane label="Resource Permission">
           <Datas ref="datas" :authority="tableData" :row="activeRow" @changeRow="changeRow" />
         </el-tab-pane>
       </el-tabs>
@@ -82,7 +82,7 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 
 const mustUint = (rule, value, callback) => {
   if (!/^[0-9]*[1-9][0-9]*$/.test(value)) {
-    return callback(new Error('请输入正整数'))
+    return callback(new Error('Please enter the positive integer'))
   }
   return callback()
 }
@@ -90,14 +90,14 @@ const mustUint = (rule, value, callback) => {
 const AuthorityOption = ref([
   {
     authorityId: 0,
-    authorityName: '根角色'
+    authorityName: 'Root'
   }
 ])
 const drawer = ref(false)
 const dialogType = ref('add')
 const activeRow = ref({})
 
-const dialogTitle = ref('新增角色')
+const dialogTitle = ref('New role')
 const dialogFormVisible = ref(false)
 const apiDialogFlag = ref(false)
 const copyForm = ref({})
@@ -109,14 +109,14 @@ const form = ref({
 })
 const rules = ref({
   authorityId: [
-    { required: true, message: '请输入角色ID', trigger: 'blur' },
-    { validator: mustUint, trigger: 'blur', message: '必须为正整数' }
+    { required: true, message: 'Please enter the character ID', trigger: 'blur' },
+    { validator: mustUint, trigger: 'blur', message: 'Must be a positive integer' }
   ],
   authorityName: [
-    { required: true, message: '请输入角色名', trigger: 'blur' }
+    { required: true, message: 'Please enter the character name', trigger: 'blur' }
   ],
   parentId: [
-    { required: true, message: '请选择父角色', trigger: 'blur' },
+    { required: true, message: 'Please choose a parent role', trigger: 'blur' },
   ]
 })
 
@@ -157,7 +157,7 @@ const autoEnter = (activeName, oldActiveName) => {
 // 拷贝角色
 const copyAuthorityFunc = (row) => {
   setOptions()
-  dialogTitle.value = '拷贝角色'
+  dialogTitle.value = 'Copy'
   dialogType.value = 'copy'
   for (const k in form.value) {
     form.value[k] = row[k]
@@ -171,9 +171,9 @@ const opdendrawer = (row) => {
 }
 // 删除角色
 const deleteAuth = (row) => {
-  ElMessageBox.confirm('此操作将永久删除该角色, 是否继续?', '提示', {
-    confirmButtonText: '确定',
-    cancelButtonText: '取消',
+  ElMessageBox.confirm('Please choose a parent role', 'Hint', {
+    confirmButtonText: 'Sure',
+    cancelButtonText: 'Cancel',
     type: 'warning'
   })
     .then(async () => {
@@ -181,7 +181,7 @@ const deleteAuth = (row) => {
       if (res.code === 0) {
         ElMessage({
           type: 'success',
-          message: '删除成功!'
+          message: 'Deleted successfully!'
         })
         if (tableData.value.length === 1 && page.value > 1) {
           page.value--
@@ -192,7 +192,7 @@ const deleteAuth = (row) => {
     .catch(() => {
       ElMessage({
         type: 'info',
-        message: '已取消删除'
+        message: 'Cancelled'
       })
     })
 }
@@ -221,7 +221,7 @@ const enterDialog = () => {
   if (form.value.authorityId === 0) {
     ElMessage({
       type: 'error',
-      message: '角色id不能为0'
+      message: 'The character ID cannot be 0'
     })
     return false
   }
@@ -234,7 +234,7 @@ const enterDialog = () => {
             if (res.code === 0) {
               ElMessage({
                 type: 'success',
-                message: '添加成功!'
+                message: 'Added successfully!'
               })
               getTableData()
               closeDialog()
@@ -247,7 +247,7 @@ const enterDialog = () => {
             if (res.code === 0) {
               ElMessage({
                 type: 'success',
-                message: '添加成功!'
+                message: 'Added successfully!'
               })
               getTableData()
               closeDialog()
@@ -273,7 +273,7 @@ const enterDialog = () => {
           if (res.code === 0) {
             ElMessage({
               type: 'success',
-              message: '复制成功！'
+              message: 'Copy successfully!'
             })
             getTableData()
           }
@@ -289,7 +289,7 @@ const setOptions = () => {
   AuthorityOption.value = [
     {
       authorityId: 0,
-      authorityName: '根角色'
+      authorityName: 'Root'
     }
   ]
   setAuthorityOptions(tableData.value, AuthorityOption.value, false)
@@ -324,7 +324,7 @@ const setAuthorityOptions = (AuthorityData, optionsData, disabled) => {
 // 增加角色
 const addAuthority = (parentId) => {
   initForm()
-  dialogTitle.value = '新增角色'
+  dialogTitle.value = 'New Role'
   dialogType.value = 'add'
   form.value.parentId = parentId
   setOptions()
@@ -333,7 +333,7 @@ const addAuthority = (parentId) => {
 // 编辑角色
 const editAuthority = (row) => {
   setOptions()
-  dialogTitle.value = '编辑角色'
+  dialogTitle.value = 'Edit'
   dialogType.value = 'edit'
   for (const key in form.value) {
     form.value[key] = row[key]

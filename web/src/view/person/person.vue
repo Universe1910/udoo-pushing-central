@@ -308,7 +308,7 @@ const enterImg = async(url) => {
     userStore.ResetUserInfo({ headerImg: url })
     ElMessage({
       type: 'success',
-      message: '设置成功',
+      message: 'Set successfully!',
     })
   }
 }
@@ -331,7 +331,7 @@ const enterEdit = async() => {
     userStore.ResetUserInfo({ nickName: nickName.value })
     ElMessage({
       type: 'success',
-      message: '设置成功',
+      message: 'Set successfully!',
     })
   }
   nickName.value = ''
