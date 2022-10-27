@@ -102,42 +102,42 @@ const weatherInfo = useWeatherInfo()
 
 const toolCards = ref([
   {
-    label: '用户管理',
+    label: 'Users',
     icon: 'monitor',
     name: 'user',
     color: '#ff9c6e',
     bg: 'rgba(255, 156, 110,.3)'
   },
   {
-    label: '角色管理',
+    label: 'Role Management',
     icon: 'setting',
     name: 'authority',
     color: '#69c0ff',
     bg: 'rgba(105, 192, 255,.3)'
   },
   {
-    label: '菜单管理',
+    label: 'Menu',
     icon: 'menu',
     name: 'menu',
     color: '#b37feb',
     bg: 'rgba(179, 127, 235,.3)'
   },
   {
-    label: '代码生成器',
+    label: 'Code Generator',
     icon: 'cpu',
     name: 'autoCode',
     color: '#ffd666',
     bg: 'rgba(255, 214, 102,.3)'
   },
   {
-    label: '表单生成器',
+    label: 'Form Generator',
     icon: 'document-checked',
     name: 'formCreate',
     color: '#ff85c0',
     bg: 'rgba(255, 133, 192,.3)'
   },
   {
-    label: '关于我们',
+    label: 'About Us',
     icon: 'user',
     name: 'about',
     color: '#5cdbd3',
