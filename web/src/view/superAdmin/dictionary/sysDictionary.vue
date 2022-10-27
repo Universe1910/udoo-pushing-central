@@ -193,7 +193,7 @@
             size="small"
             type="primary"
             @click="enterDialog"
-          >确 定</el-button>
+          >Sure</el-button>
         </div>
       </template>
     </el-dialog>

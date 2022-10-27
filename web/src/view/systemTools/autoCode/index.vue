@@ -210,7 +210,7 @@
       <template #footer>
         <div class="dialog-footer">
           <el-button size="small" @click="closeDialog">取 消</el-button>
-          <el-button size="small" type="primary" @click="enterDialog">确 定</el-button>
+          <el-button size="small" type="primary" @click="enterDialog">Sure</el-button>
         </div>
       </template>
     </el-dialog>
@@ -226,7 +226,7 @@
       <PreviewCodeDialog v-if="previewFlag" ref="previewNode" :preview-code="preViewCode" />
       <template #footer>
         <div class="dialog-footer" style="padding-top:14px;padding-right:14px">
-          <el-button size="small" type="primary" @click="previewFlag = false">确 定</el-button>
+          <el-button size="small" type="primary" @click="previewFlag = false">Sure</el-button>
         </div>
       </template>
     </el-dialog>

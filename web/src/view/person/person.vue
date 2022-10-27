@@ -163,7 +163,7 @@
             size="small"
             type="primary"
             @click="savePassword"
-          >确 定</el-button>
+          >Sure</el-button>
         </div>
       </template>
     </el-dialog>

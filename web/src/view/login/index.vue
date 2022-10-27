@@ -20,7 +20,7 @@
           <el-form-item prop="username">
             <el-input
               v-model="loginFormData.username"
-              placeholder="请输入用户名"
+              placeholder="Enter your username"
             >
               <template #suffix>
                 <span class="input-icon">
@@ -35,7 +35,7 @@
             <el-input
               v-model="loginFormData.password"
               :type="lock === 'lock' ? 'password' : 'text'"
-              placeholder="请输入密码"
+              placeholder="Enter your password"
             >
               <template #suffix>
                 <span class="input-icon">
@@ -53,14 +53,14 @@
             <div class="vPicBox">
               <el-input
                 v-model="loginFormData.captcha"
-                placeholder="请输入验证码"
+                placeholder="Enter verification code"
                 style="width: 60%"
               />
               <div class="vPic">
                 <img
                   v-if="picPath"
                   :src="picPath"
-                  alt="请输入验证码"
+                  alt="Please Enter your verification code"
                   @click="loginVerify()"
                 >
               </div>
@@ -72,13 +72,13 @@
               style="width: 46%"
               size="large"
               @click="checkInit"
-            >前往初始化</el-button>
+            >Go to Initialization</el-button>
             <el-button
               type="primary"
               size="large"
               style="width: 46%; margin-left: 8%"
               @click="submitForm"
-            >登 录</el-button>
+            >Login</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -127,14 +127,14 @@ const router = useRouter()
 // 验证函数
 const checkUsername = (rule, value, callback) => {
   if (value.length < 5) {
-    return callback(new Error('请输入正确的用户名'))
+    return callback(new Error('Please enter the correct user name'))
   } else {
     callback()
   }
 }
 const checkPassword = (rule, value, callback) => {
   if (value.length < 6) {
-    return callback(new Error('请输入正确的密码'))
+    return callback(new Error('Please enter the correct password'))
   } else {
     callback()
   }
@@ -146,7 +146,7 @@ const loginVerify = () => {
     rules.captcha.push({
       max: ele.data.captchaLength,
       min: ele.data.captchaLength,
-      message: `请输入${ele.data.captchaLength}位验证码`,
+      message: `Please enter ${ele.data.captchaLength} Bit verification code `,
       trigger: 'blur',
     })
     picPath.value = ele.data.picPath
@@ -174,7 +174,7 @@ const rules = reactive({
   password: [{ validator: checkPassword, trigger: 'blur' }],
   captcha: [
     {
-      message: '验证码格式不正确',
+      message: 'The format of the verification code is incorrect',
       trigger: 'blur',
     },
   ],
@@ -194,7 +194,7 @@ const submitForm = () => {
     } else {
       ElMessage({
         type: 'error',
-        message: '请正确填写登录信息',
+        message: 'Please fill in the login information correctly',
         showClose: true,
       })
       loginVerify()
@@ -213,7 +213,7 @@ const checkInit = async() => {
     } else {
       ElMessage({
         type: 'info',
-        message: '已配置数据库信息，无法初始化',
+        message: 'The database information has been configured, and it cannot be initialized',
       })
     }
   }

@@ -132,7 +132,7 @@
       <template #footer>
         <div class="dialog-footer">
           <el-button size="small" @click="closeAddUserDialog">取 消</el-button>
-          <el-button size="small" type="primary" @click="enterAddUserDialog">确 定</el-button>
+          <el-button size="small" type="primary" @click="enterAddUserDialog">Sure</el-button>
         </div>
       </template>
     </el-dialog>

@@ -2,7 +2,7 @@
   <div>
     <div class="clearfix sticky-button">
       <el-input v-model="filterText" class="fitler" placeholder="筛选" />
-      <el-button class="fl-right" size="small" type="primary" @click="relation">确 定</el-button>
+      <el-button class="fl-right" size="small" type="primary" @click="relation">Sure</el-button>
     </div>
     <div class="tree-content">
       <el-tree
@@ -60,7 +60,7 @@
       <template #footer>
         <div class="dialog-footer">
           <el-button size="small" @click="closeDialog">取 消</el-button>
-          <el-button size="small" type="primary" @click="enterDialog">确 定</el-button>
+          <el-button size="small" type="primary" @click="enterDialog">Sure</el-button>
         </div>
       </template>
     </el-dialog>

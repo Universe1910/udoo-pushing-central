@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="clearfix sticky-button" style="margin: 18px">
-      <el-button class="fl-right" size="small" type="primary" @click="authDataEnter">确 定</el-button>
+      <el-button class="fl-right" size="small" type="primary" @click="authDataEnter">Sure</el-button>
       <el-button class="fl-left" size="small" type="primary" @click="all">全选</el-button>
       <el-button class="fl-left" size="small" type="primary" @click="self">本角色</el-button>
       <el-button class="fl-left" size="small" type="primary" @click="selfAndChildren">本角色及子角色</el-button>
