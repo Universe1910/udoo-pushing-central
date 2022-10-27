@@ -112,7 +112,7 @@ const choseFile = async(e) => {
 }
 
 const getFile = () => {
-  // 确定按钮
+  // Sure按钮
   if (file.value === null) {
     ElMessage('请先上传文件')
     return
@@ -157,7 +157,7 @@ const upLoadFileSlice = async(item) => {
     }
     const res = await breakpointContinueFinish(params)
     if (res.code === 0) {
-      // 合成文件过后 删除缓存切片
+      // 合成文件过后 Delete缓存切片
       const params = {
         fileName: file.value.name,
         fileMd5: fileMd5.value,

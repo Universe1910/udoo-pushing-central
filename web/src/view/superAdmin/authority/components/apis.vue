@@ -98,7 +98,7 @@ const buildApiTree = (apis) => {
   return apiTree
 }
 
-// 关联关系确定
+// 关联关系Sure
 const apiTree = ref(null)
 const authApiEnter = async() => {
   const checkArr = apiTree.value.getCheckedNodes(true)

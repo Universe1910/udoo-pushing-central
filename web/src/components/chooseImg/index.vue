@@ -127,8 +127,8 @@ const open = async() => {
  */
 const editFileNameFunc = async(row) => {
   ElMessageBox.prompt('请输入文件名或者备注', '编辑', {
-    confirmButtonText: '确定',
-    cancelButtonText: '取消',
+    confirmButtonText: 'Sure',
+    cancelButtonText: 'Cancel',
     inputPattern: /\S/,
     inputErrorMessage: '不能为空',
     inputValue: row.name
@@ -146,7 +146,7 @@ const editFileNameFunc = async(row) => {
   }).catch(() => {
     ElMessage({
       type: 'info',
-      message: '取消修改'
+      message: 'Cancel修改'
     })
   })
 }

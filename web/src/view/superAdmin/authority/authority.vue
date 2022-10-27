@@ -23,7 +23,7 @@
         </el-table-column>
       </el-table>
     </div>
-    <!-- 新增角色弹窗 -->
+    <!-- Add new角色弹窗 -->
     <el-dialog v-model="dialogFormVisible" :title="dialogTitle">
       <el-form ref="authorityForm" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="Parent" prop="parentId">
@@ -169,7 +169,7 @@ const opdendrawer = (row) => {
   drawer.value = true
   activeRow.value = row
 }
-// 删除角色
+// Delete角色
 const deleteAuth = (row) => {
   ElMessageBox.confirm('Please choose a parent role', 'Hint', {
     confirmButtonText: 'Sure',
@@ -214,7 +214,7 @@ const closeDialog = () => {
   dialogFormVisible.value = false
   apiDialogFlag.value = false
 }
-// 确定弹窗
+// Sure弹窗
 
 const enterDialog = () => {
   form.value.authorityId = Number(form.value.authorityId)

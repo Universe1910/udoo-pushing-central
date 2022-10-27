@@ -100,12 +100,12 @@ export const getAllApis = (data) => {
 }
 
 // @Tags Api
-// @Summary 删除指定api
+// @Summary Delete指定api
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data body dbModel.Api true "删除api"
-// @Success 200 {string} json "{"success":true,"data":{},"msg":"删除成功"}"
+// @Param data body dbModel.Api true "Deleteapi"
+// @Success 200 {string} json "{"success":true,"data":{},"msg":"Delete成功"}"
 // @Router /api/deleteApi [post]
 export const deleteApi = (data) => {
   return service({
@@ -116,12 +116,12 @@ export const deleteApi = (data) => {
 }
 
 // @Tags SysApi
-// @Summary 删除选中Api
+// @Summary Delete选中Api
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
 // @Param data body request.IdsReq true "ID"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"删除成功"}"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"Delete成功"}"
 // @Router /api/deleteApisByIds [delete]
 export const deleteApisByIds = (data) => {
   return service({

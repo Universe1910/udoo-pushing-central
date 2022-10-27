@@ -295,7 +295,7 @@ const getTableData = async() => {
 
 getTableData()
 
-// 新增参数
+// Add new参数
 const addParameter = (form) => {
   if (!form.parameters) {
     form.parameters = []
@@ -311,12 +311,12 @@ const fmtComponent = () => {
   form.value.component = form.value.component.replace(/\\/g, '/')
 }
 
-// 删除参数
+// Delete参数
 const deleteParameter = (parameters, index) => {
   parameters.splice(index, 1)
 }
 
-// 新增可控按钮
+// Add new可控按钮
 const addBtn = (form) => {
   if (!form.menuBtn) {
     form.menuBtn = []
@@ -326,7 +326,7 @@ const addBtn = (form) => {
     desc: '',
   })
 }
-// 删除可控按钮
+// Delete可控按钮
 const deleteBtn = async(btns, index) => {
   const btn = btns[index]
   if (btn.ID === 0) {
@@ -366,11 +366,11 @@ const handleClose = (done) => {
   initForm()
   done()
 }
-// 删除菜单
+// Delete菜单
 const deleteMenu = (ID) => {
-  ElMessageBox.confirm('此操作将永久删除所有角色下该菜单, 是否继续?', '提示', {
-    confirmButtonText: '确定',
-    cancelButtonText: '取消',
+  ElMessageBox.confirm('此操作将永久Delete所有角色下该菜单, 是否继续?', '提示', {
+    confirmButtonText: 'Sure',
+    cancelButtonText: 'Cancel',
     type: 'warning'
   })
     .then(async() => {

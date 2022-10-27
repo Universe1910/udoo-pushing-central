@@ -1,11 +1,11 @@
 import service from '@/utils/request'
 // @Tags SysOperationRecord
-// @Summary 删除SysOperationRecord
+// @Summary DeleteSysOperationRecord
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data body model.SysOperationRecord true "删除SysOperationRecord"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"删除成功"}"
+// @Param data body model.SysOperationRecord true "DeleteSysOperationRecord"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"Delete成功"}"
 // @Router /sysOperationRecord/deleteSysOperationRecord [delete]
 export const deleteSysOperationRecord = (data) => {
   return service({
@@ -16,12 +16,12 @@ export const deleteSysOperationRecord = (data) => {
 }
 
 // @Tags SysOperationRecord
-// @Summary 删除SysOperationRecord
+// @Summary DeleteSysOperationRecord
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data body request.IdsReq true "删除SysOperationRecord"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"删除成功"}"
+// @Param data body request.IdsReq true "DeleteSysOperationRecord"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"Delete成功"}"
 // @Router /sysOperationRecord/deleteSysOperationRecord [delete]
 export const deleteSysOperationRecordByIds = (data) => {
   return service({

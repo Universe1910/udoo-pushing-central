@@ -3,17 +3,17 @@
     <div class="gva-search-box">
       <el-form :inline="true" :model="searchInfo">
         <el-form-item label="请求方法">
-          <el-input v-model="searchInfo.method" placeholder="搜索条件" />
+          <el-input v-model="searchInfo.method" placeholder="Search condition" />
         </el-form-item>
         <el-form-item label="请求路径">
-          <el-input v-model="searchInfo.path" placeholder="搜索条件" />
+          <el-input v-model="searchInfo.path" placeholder="Search condition" />
         </el-form-item>
         <el-form-item label="结果状态码">
-          <el-input v-model="searchInfo.status" placeholder="搜索条件" />
+          <el-input v-model="searchInfo.status" placeholder="Search condition" />
         </el-form-item>
         <el-form-item>
           <el-button size="small" type="primary" icon="search" @click="onSubmit">查询</el-button>
-          <el-button size="small" icon="refresh" @click="onReset">重置</el-button>
+          <el-button size="small" icon="refresh" @click="onReset">Reset</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -21,13 +21,13 @@
       <div class="gva-btn-list">
 
         <el-popover v-model="deleteVisible" placement="top" width="160">
-          <p>确定要删除吗？</p>
+          <p>You sure you want to delete it?？</p>
           <div style="text-align: right; margin-top: 8px;">
-            <el-button size="small" type="primary" link @click="deleteVisible = false">取消</el-button>
-            <el-button size="small" type="primary" @click="onDelete">确定</el-button>
+            <el-button size="small" type="primary" link @click="deleteVisible = false">Cancel</el-button>
+            <el-button size="small" type="primary" @click="onDelete">Sure</el-button>
           </div>
           <template #reference>
-            <el-button icon="delete" size="small" style="margin-left: 10px;" :disabled="!multipleSelection.length" @click="deleteVisible = true">删除</el-button>
+            <el-button icon="delete" size="small" style="margin-left: 10px;" :disabled="!multipleSelection.length" @click="deleteVisible = true">Delete</el-button>
           </template>
         </el-popover>
       </div>
@@ -89,16 +89,16 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column align="left" label="按钮组">
+        <el-table-column align="left" label="Action">
           <template #default="scope">
             <el-popover v-model="scope.row.visible" placement="top" width="160">
-              <p>确定要删除吗？</p>
+              <p>You sure you want to delete it?？</p>
               <div style="text-align: right; margin-top: 8px;">
-                <el-button size="small" type="primary" link @click="scope.row.visible = false">取消</el-button>
-                <el-button size="small" type="primary" @click="deleteSysOperationRecordFunc(scope.row)">确定</el-button>
+                <el-button size="small" type="primary" link @click="scope.row.visible = false">Cancel</el-button>
+                <el-button size="small" type="primary" @click="deleteSysOperationRecordFunc(scope.row)">Sure</el-button>
               </div>
               <template #reference>
-                <el-button icon="delete" size="small" type="primary" link @click="scope.row.visible = true">删除</el-button>
+                <el-button icon="delete" size="small" type="primary" link @click="scope.row.visible = true">Delete</el-button>
               </template>
             </el-popover>
           </template>
@@ -190,7 +190,7 @@ const onDelete = async() => {
   if (res.code === 0) {
     ElMessage({
       type: 'success',
-      message: '删除成功'
+      message: 'Delete成功'
     })
     if (tableData.value.length === ids.length && page.value > 1) {
       page.value--
@@ -205,7 +205,7 @@ const deleteSysOperationRecordFunc = async(row) => {
   if (res.code === 0) {
     ElMessage({
       type: 'success',
-      message: '删除成功'
+      message: 'Delete成功'
     })
     if (tableData.value.length === 1 && page.value > 1) {
       page.value--

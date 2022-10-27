@@ -5,8 +5,8 @@
         <el-form-item label="路径">
           <el-input v-model="searchInfo.path" placeholder="路径" />
         </el-form-item>
-        <el-form-item label="描述">
-          <el-input v-model="searchInfo.description" placeholder="描述" />
+        <el-form-item label="describe">
+          <el-input v-model="searchInfo.description" placeholder="describe" />
         </el-form-item>
         <el-form-item label="API组">
           <el-input v-model="searchInfo.apiGroup" placeholder="api组" />
@@ -23,21 +23,21 @@
         </el-form-item>
         <el-form-item>
           <el-button size="small" type="primary" icon="search" @click="onSubmit">查询</el-button>
-          <el-button size="small" icon="refresh" @click="onReset">重置</el-button>
+          <el-button size="small" icon="refresh" @click="onReset">Reset</el-button>
         </el-form-item>
       </el-form>
     </div>
     <div class="gva-table-box">
       <div class="gva-btn-list">
-        <el-button size="small" type="primary" icon="plus" @click="openDialog('addApi')">新增</el-button>
+        <el-button size="small" type="primary" icon="plus" @click="openDialog('addApi')">Add new</el-button>
         <el-popover v-model="deleteVisible" placement="top" width="160">
-          <p>确定要删除吗？</p>
+          <p>You sure you want to delete it?？</p>
           <div style="text-align: right; margin-top: 8px;">
-            <el-button size="small" type="primary" link @click="deleteVisible = false">取消</el-button>
-            <el-button size="small" type="primary" @click="onDelete">确定</el-button>
+            <el-button size="small" type="primary" link @click="deleteVisible = false">Cancel</el-button>
+            <el-button size="small" type="primary" @click="onDelete">Sure</el-button>
           </div>
           <template #reference>
-            <el-button icon="delete" size="small" :disabled="!apis.length" style="margin-left: 10px;" @click="deleteVisible = true">删除</el-button>
+            <el-button icon="delete" size="small" :disabled="!apis.length" style="margin-left: 10px;" @click="deleteVisible = true">Delete</el-button>
           </template>
         </el-popover>
       </div>
@@ -73,7 +73,7 @@
               type="primary"
               link
               @click="deleteApiFunc(scope.row)"
-            >删除</el-button>
+            >Delete</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -92,7 +92,7 @@
     </div>
 
     <el-dialog v-model="dialogFormVisible" :before-close="closeDialog" :title="dialogTitle">
-      <warning-bar title="新增API，需要在角色管理内配置权限才可使用" />
+      <warning-bar title="Add newAPI，需要在角色管理内配置权限才可使用" />
       <el-form ref="apiForm" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="路径" prop="path">
           <el-input v-model="form.path" autocomplete="off" />
@@ -174,7 +174,7 @@ const methodOptions = ref([
   },
   {
     value: 'DELETE',
-    label: '删除',
+    label: 'Delete',
     type: 'danger'
   }
 ])
@@ -280,12 +280,12 @@ const initForm = () => {
   }
 }
 
-const dialogTitle = ref('新增Api')
+const dialogTitle = ref('Add newApi')
 const dialogFormVisible = ref(false)
 const openDialog = (key) => {
   switch (key) {
     case 'addApi':
-      dialogTitle.value = '新增Api'
+      dialogTitle.value = 'Add newApi'
       break
     case 'edit':
       dialogTitle.value = '编辑Api'
@@ -356,9 +356,9 @@ const enterDialog = async() => {
 }
 
 const deleteApiFunc = async(row) => {
-  ElMessageBox.confirm('此操作将永久删除所有角色下该api, 是否继续?', '提示', {
-    confirmButtonText: '确定',
-    cancelButtonText: '取消',
+  ElMessageBox.confirm('此操作将永久Delete所有角色下该api, 是否继续?', '提示', {
+    confirmButtonText: 'Sure',
+    cancelButtonText: 'Cancel',
     type: 'warning'
   })
     .then(async() => {

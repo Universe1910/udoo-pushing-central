@@ -3,7 +3,7 @@
     <warning-bar title="注：右上角头像下拉可切换角色" />
     <div class="gva-table-box">
       <div class="gva-btn-list">
-        <el-button size="small" type="primary" icon="plus" @click="addUser">新增用户</el-button>
+        <el-button size="small" type="primary" icon="plus" @click="addUser">Add new用户</el-button>
       </div>
       <el-table
         :data="tableData"
@@ -48,17 +48,17 @@
         <el-table-column label="Action" min-width="250" fixed="right">
           <template #default="scope">
             <el-popover v-model="scope.row.visible" placement="top" width="160">
-              <p>确定要删除此用户吗</p>
+              <p>Sure要Delete此用户吗</p>
               <div style="text-align: right; margin-top: 8px;">
-                <el-button size="small" type="primary" link @click="scope.row.visible = false">取消</el-button>
-                <el-button type="primary" size="small" @click="deleteUserFunc(scope.row)">确定</el-button>
+                <el-button size="small" type="primary" link @click="scope.row.visible = false">Cancel</el-button>
+                <el-button type="primary" size="small" @click="deleteUserFunc(scope.row)">Sure</el-button>
               </div>
               <template #reference>
-                <el-button type="primary" link icon="delete" size="small">删除</el-button>
+                <el-button type="primary" link icon="delete" size="small">Delete</el-button>
               </template>
             </el-popover>
             <el-button type="primary" link icon="edit" size="small" @click="openEdit(scope.row)">编辑</el-button>
-            <el-button type="primary" link icon="magic-stick" size="small" @click="resetPasswordFunc(scope.row)">重置密码</el-button>
+            <el-button type="primary" link icon="magic-stick" size="small" @click="resetPasswordFunc(scope.row)">Reset密码</el-button>
           </template>
         </el-table-column>
 
@@ -226,11 +226,11 @@ initPage()
 
 const resetPasswordFunc = (row) => {
   ElMessageBox.confirm(
-    '是否将此用户密码重置为123456?',
+    '是否将此用户密码Reset为123456?',
     '警告',
     {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
+      confirmButtonText: 'Sure',
+      cancelButtonText: 'Cancel',
       type: 'warning',
     }
   ).then(async() => {
@@ -273,7 +273,7 @@ const setOptions = (authData) => {
 const deleteUserFunc = async(row) => {
   const res = await deleteUser({ id: row.ID })
   if (res.code === 0) {
-    ElMessage.success('删除成功')
+    ElMessage.success('Delete成功')
     row.visible = false
     await getTableData()
   }

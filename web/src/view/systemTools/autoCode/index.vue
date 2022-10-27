@@ -80,7 +80,7 @@
           <el-input v-model="form.abbreviation" placeholder="简称会作为入参对象名和路由group" />
         </el-form-item>
         <el-form-item label="Struct中文名称" prop="description">
-          <el-input v-model="form.description" placeholder="中文描述作为自动api描述" />
+          <el-input v-model="form.description" placeholder="中文describe作为自动apidescribe" />
         </el-form-item>
         <el-form-item label="文件名称" prop="packageName">
           <el-input v-model="form.packageName" placeholder="生成文件的默认名称(建议为驼峰格式,首字母小写,如sysXxxXxxx)" @blur="toLowerCaseFunc(form,'packageName')" />
@@ -146,7 +146,7 @@
     <!-- 组件列表 -->
     <div class="gva-table-box">
       <div class="gva-btn-list">
-        <el-button size="small" type="primary" @click="editAndAddField()">新增Field</el-button>
+        <el-button size="small" type="primary" @click="editAndAddField()">Add newField</el-button>
       </div>
       <el-table :data="form.fields">
         <el-table-column align="left" type="index" label="序列" width="60" />
@@ -159,8 +159,8 @@
         <el-table-column align="left" prop="fieldType" label="Field数据类型" width="130" />
         <el-table-column align="left" prop="dataTypeLong" label="数据库字段长度" width="130" />
         <el-table-column align="left" prop="columnName" label="数据库字段" width="130" />
-        <el-table-column align="left" prop="comment" label="数据库字段描述" width="130" />
-        <el-table-column align="left" prop="fieldSearchType" label="搜索条件" width="130" />
+        <el-table-column align="left" prop="comment" label="数据库字段describe" width="130" />
+        <el-table-column align="left" prop="fieldSearchType" label="Search condition" width="130" />
         <el-table-column align="left" prop="dictType" label="字典" width="130" />
         <el-table-column align="left" label="操作" width="300" fixed="right">
           <template #default="scope">
@@ -186,13 +186,13 @@
               @click="moveDownField(scope.$index)"
             >下移</el-button>
             <el-popover v-model="scope.row.visible" placement="top">
-              <p>确定删除吗？</p>
+              <p>SureDelete吗？</p>
               <div style="text-align: right; margin-top: 8px;">
-                <el-button size="small" type="primary" link @click="scope.row.visible = false">取消</el-button>
-                <el-button type="primary" size="small" @click="deleteField(scope.$index)">确定</el-button>
+                <el-button size="small" type="primary" link @click="scope.row.visible = false">Cancel</el-button>
+                <el-button type="primary" size="small" @click="deleteField(scope.$index)">Sure</el-button>
               </div>
               <template #reference>
-                <el-button size="small" type="primary" link icon="delete" @click="scope.row.visible = true">删除</el-button>
+                <el-button size="small" type="primary" link icon="delete" @click="scope.row.visible = true">Delete</el-button>
               </template>
             </el-popover>
           </template>
@@ -294,7 +294,7 @@ const rules = ref({
     { required: true, message: '请输入结构体简称', trigger: 'blur' }
   ],
   description: [
-    { required: true, message: '请输入结构体描述', trigger: 'blur' }
+    { required: true, message: '请输入结构体describe', trigger: 'blur' }
   ],
   packageName: [
     {

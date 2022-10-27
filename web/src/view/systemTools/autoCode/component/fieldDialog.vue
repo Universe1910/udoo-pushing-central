@@ -24,7 +24,7 @@
       <el-form-item label="数据库字段名" prop="columnName">
         <el-input v-model="middleDate.columnName" autocomplete="off" />
       </el-form-item>
-      <el-form-item label="数据库字段描述" prop="comment">
+      <el-form-item label="数据库字段describe" prop="comment">
         <el-input v-model="middleDate.comment" autocomplete="off" />
       </el-form-item>
       <el-form-item label="Field数据类型" prop="fieldType">

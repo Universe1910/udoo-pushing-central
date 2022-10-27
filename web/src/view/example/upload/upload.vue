@@ -59,7 +59,7 @@
         <el-table-column align="left" label="Action" width="160">
           <template #default="scope">
             <el-button size="small" icon="download" type="primary" link @click="downloadFile(scope.row)">下载</el-button>
-            <el-button size="small" icon="delete" type="primary" link @click="deleteFileFunc(scope.row)">删除</el-button>
+            <el-button size="small" icon="delete" type="primary" link @click="deleteFileFunc(scope.row)">Delete</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -126,9 +126,9 @@ const getTableData = async() => {
 getTableData()
 
 const deleteFileFunc = async(row) => {
-  ElMessageBox.confirm('此操作将永久删除文件, 是否继续?', '提示', {
-    confirmButtonText: '确定',
-    cancelButtonText: '取消',
+  ElMessageBox.confirm('此操作将永久Delete文件, 是否继续?', '提示', {
+    confirmButtonText: 'Sure',
+    cancelButtonText: 'Cancel',
     type: 'warning',
   })
     .then(async() => {
@@ -168,8 +168,8 @@ const downloadFile = (row) => {
  */
 const editFileNameFunc = async(row) => {
   ElMessageBox.prompt('请输入文件名或者备注', '编辑', {
-    confirmButtonText: '确定',
-    cancelButtonText: '取消',
+    confirmButtonText: 'Sure',
+    cancelButtonText: 'Cancel',
     inputPattern: /\S/,
     inputErrorMessage: '不能为空',
     inputValue: row.name
@@ -187,7 +187,7 @@ const editFileNameFunc = async(row) => {
   }).catch(() => {
     ElMessage({
       type: 'info',
-      message: '取消修改'
+      message: 'Cancel修改'
     })
   })
 }

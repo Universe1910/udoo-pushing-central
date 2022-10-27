@@ -25,7 +25,7 @@ export const getMenuList = (data) => {
   })
 }
 
-// @Summary 新增基础menu
+// @Summary Add new基础menu
 // @Produce  application/json
 // @Param menu Object
 // @Router /menu/getMenuList [post]

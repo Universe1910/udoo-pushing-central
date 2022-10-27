@@ -3,13 +3,13 @@
     <warning-bar href="https://www.bilibili.com/video/BV1kv4y1g7nT?p=3" title="此功能为开发环境使用，不建议发布到生产，具体使用效果请看视频https://www.bilibili.com/video/BV1kv4y1g7nT?p=3" />
     <div class="gva-table-box">
       <div class="gva-btn-list">
-        <el-button size="small" type="primary" icon="plus" @click="openDialog('addApi')">新增</el-button>
+        <el-button size="small" type="primary" icon="plus" @click="openDialog('addApi')">Add new</el-button>
       </div>
       <el-table :data="tableData">
         <el-table-column align="left" label="id" width="60" prop="ID" />
         <el-table-column align="left" label="包名" width="150" prop="packageName" />
         <el-table-column align="left" label="展示名" width="150" prop="label" />
-        <el-table-column align="left" label="描述" min-width="150" prop="desc" />
+        <el-table-column align="left" label="describe" min-width="150" prop="desc" />
 
         <el-table-column align="left" label="Action" width="200">
           <template #default="scope">
@@ -19,7 +19,7 @@
               type="primary"
               link
               @click="deleteApiFunc(scope.row)"
-            >删除</el-button>
+            >Delete</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -27,7 +27,7 @@
     </div>
 
     <el-dialog v-model="dialogFormVisible" :before-close="closeDialog" title="创建Package">
-      <warning-bar title="新增Pkg用于自动化代码使用" />
+      <warning-bar title="Add newPkg用于自动化代码使用" />
       <el-form ref="pkgForm" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="包名" prop="packageName">
           <el-input v-model="form.packageName" autocomplete="off" />
@@ -35,7 +35,7 @@
         <el-form-item label="展示名" prop="label">
           <el-input v-model="form.label" autocomplete="off" />
         </el-form-item>
-        <el-form-item label="描述" prop="desc">
+        <el-form-item label="describe" prop="desc">
           <el-input v-model="form.desc" autocomplete="off" />
         </el-form-item>
       </el-form>
@@ -127,9 +127,9 @@ const getTableData = async() => {
 }
 
 const deleteApiFunc = async(row) => {
-  ElMessageBox.confirm('此操作仅删除数据库中的pkg存储，后端相应目录结构请自行删除与数据库保持一致！', '提示', {
-    confirmButtonText: '确定',
-    cancelButtonText: '取消',
+  ElMessageBox.confirm('此操作仅Delete数据库中的pkg存储，后端相应目录结构请自行Delete与数据库保持一致！', '提示', {
+    confirmButtonText: 'Sure',
+    cancelButtonText: 'Cancel',
     type: 'warning'
   })
     .then(async() => {
