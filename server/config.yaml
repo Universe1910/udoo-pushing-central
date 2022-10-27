@@ -65,11 +65,11 @@ db-list:
   log-zap: false
 email:
   to: 1.tinhtd@gmail.com
-  port: 465
+  port: 587
   from: tinhpt.38@gmail.com
   host: smtp.gmail.com
-  is-ssl: true
-  secret: sowfiakhylxnefkb
+  is-ssl: false
+  secret: fwudhmiesryrfxyv
   nickname: test
 excel:
   dir: ./resource/excel/
