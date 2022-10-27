@@ -51,7 +51,7 @@
         </el-card>
         <el-card style="margin-top: 20px">
           <template #header>
-            <div>flipped-aurora团队</div>
+            <div>flipped-aurora Team</div>
           </template>
           <div>
             <el-row>
@@ -79,7 +79,7 @@
       <el-col :span="12">
         <el-card>
           <template #header>
-            <div>提交记录</div>
+            <div>Submitted record</div>
           </template>
           <div>
             <el-timeline>
