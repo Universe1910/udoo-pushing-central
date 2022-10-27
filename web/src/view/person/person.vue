@@ -21,7 +21,7 @@
                 <el-icon>
                   <edit />
                 </el-icon>
-                重新上传</span>
+                Re-upload</span>
             </div>
             <div class="user-personality">
               <p v-if="!editFlag" class="nickName">
