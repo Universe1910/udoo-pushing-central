@@ -9,7 +9,7 @@
       :show-file-list="false"
       class="upload-btn"
     >
-      <el-button size="small" type="primary">普通上传</el-button>
+      <el-button size="small" type="primary">Upload</el-button>
     </el-upload>
   </div>
 </template>
@@ -32,11 +32,11 @@ const checkFile = (file) => {
   const isPng = file.type === 'image/png'
   const isLt2M = file.size / 1024 / 1024 < 0.5
   if (!isJPG && !isPng) {
-    ElMessage.error('上传图片只能是 jpg或png 格式!')
+    ElMessage.error('Upload pictures can only be JPG or PNG format!')
     fullscreenLoading.value = false
   }
   if (!isLt2M) {
-    ElMessage.error('未压缩未见上传图片大小不能超过 500KB，请使用压缩上传')
+    ElMessage.error('No compression, no upload picture size cannot exceed 500KB, please use compression upload upload')
     fullscreenLoading.value = false
   }
   return (isPng || isJPG) && isLt2M
@@ -52,7 +52,7 @@ const uploadSuccess = (res) => {
 const uploadError = () => {
   ElMessage({
     type: 'error',
-    message: '上传失败'
+    message: 'Upload failed'
   })
   fullscreenLoading.value = false
 }

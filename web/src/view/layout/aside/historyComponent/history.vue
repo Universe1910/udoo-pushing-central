@@ -40,10 +40,10 @@
       :style="{ left: left + 'px', top: top + 'px' }"
       class="contextmenu"
     >
-      <li @click="closeAll">关闭所有</li>
-      <li @click="closeLeft">关闭左侧</li>
-      <li @click="closeRight">关闭右侧</li>
-      <li @click="closeOther">关闭其他</li>
+      <li @click="closeAll">Close all</li>
+      <li @click="closeLeft">Close Left</li>
+      <li @click="closeRight">Close Right</li>
+      <li @click="closeOther">Close Other</li>
     </ul>
   </div>
 </template>
@@ -120,7 +120,7 @@ const closeAll = () => {
     {
       name: defaultRouter.value,
       meta: {
-        title: '首页',
+        title: 'Front Page',
       },
       query: {},
       params: {},
@@ -297,7 +297,7 @@ const initPage = () => {
     {
       name: defaultRouter.value,
       meta: {
-        title: '首页',
+        title: 'Front page',
       },
       query: {},
       params: {},
@@ -361,3 +361,4 @@ onUnmounted(() => {
   cursor: pointer;
 }
 </style>
+ d

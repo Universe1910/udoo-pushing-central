@@ -1,7 +1,7 @@
 <template>
-  <el-drawer v-model="drawer" title="媒体库" size="650px">
+  <el-drawer v-model="drawer" title="Media Library" size="650px">
     <warning-bar
-      title="点击“文件名/备注”可以编辑文件名或者备注内容。"
+      title="Click File Name/Remarks to edit file name or remark content."
     />
     <div class="gva-btn-list">
       <upload-common
@@ -18,11 +18,11 @@
       />
       <el-form ref="searchForm" :inline="true" :model="search">
         <el-form-item label="">
-          <el-input v-model="search.keyword" class="keyword" placeholder="请输入文件名或备注" />
+          <el-input v-model="search.keyword" class="keyword" placeholder="Please enter the file name or note" />
         </el-form-item>
 
         <el-form-item>
-          <el-button size="small" type="primary" icon="search" @click="open">查询</el-button>
+          <el-button size="small" type="primary" icon="search" @click="open">Search</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -126,11 +126,11 @@ const open = async() => {
  * @returns {Promise<void>}
  */
 const editFileNameFunc = async(row) => {
-  ElMessageBox.prompt('请输入文件名或者备注', '编辑', {
+  ElMessageBox.prompt('Please enter the file name or note', 'hint', {
     confirmButtonText: 'Sure',
     cancelButtonText: 'Cancel',
     inputPattern: /\S/,
-    inputErrorMessage: '不能为空',
+    inputErrorMessage: 'Can not be empty',
     inputValue: row.name
   }).then(async({ value }) => {
     row.name = value
@@ -139,14 +139,14 @@ const editFileNameFunc = async(row) => {
     if (res.code === 0) {
       ElMessage({
         type: 'success',
-        message: '编辑成功!',
+        message: 'Edit successfully!',
       })
       open()
     }
   }).catch(() => {
     ElMessage({
       type: 'info',
-      message: 'Cancel修改'
+      message: 'Cancel'
     })
   })
 }
