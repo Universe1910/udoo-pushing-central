@@ -2,17 +2,17 @@
   <div>
     <div class="gva-search-box">
       <el-form :inline="true" :model="searchInfo">
-        <el-form-item label="请求方法">
+        <el-form-item label="Method or Request">
           <el-input v-model="searchInfo.method" placeholder="Search condition" />
         </el-form-item>
-        <el-form-item label="请求路径">
+        <el-form-item label="Request Path">
           <el-input v-model="searchInfo.path" placeholder="Search condition" />
         </el-form-item>
-        <el-form-item label="结果状态码">
+        <el-form-item label="Result Status Code">
           <el-input v-model="searchInfo.status" placeholder="Search condition" />
         </el-form-item>
         <el-form-item>
-          <el-button size="small" type="primary" icon="search" @click="onSubmit">查询</el-button>
+          <el-button size="small" type="primary" icon="search" @click="onSubmit">Search</el-button>
           <el-button size="small" icon="refresh" @click="onReset">Reset</el-button>
         </el-form-item>
       </el-form>
@@ -40,25 +40,25 @@
         @selection-change="handleSelectionChange"
       >
         <el-table-column align="left" type="selection" width="55" />
-        <el-table-column align="left" label="操作人" width="140">
+        <el-table-column align="left" label="Operator" width="140">
           <template #default="scope">
             <div>{{ scope.row.user.userName }}({{ scope.row.user.nickName }})</div>
           </template>
         </el-table-column>
-        <el-table-column align="left" label="日期" width="180">
+        <el-table-column align="left" label="Date" width="180">
           <template #default="scope">{{ formatDate(scope.row.CreatedAt) }}</template>
         </el-table-column>
-        <el-table-column align="left" label="状态码" prop="status" width="120">
+        <el-table-column align="left" label="Status Code" prop="status" width="120">
           <template #default="scope">
             <div>
               <el-tag type="success">{{ scope.row.status }}</el-tag>
             </div>
           </template>
         </el-table-column>
-        <el-table-column align="left" label="请求IP" prop="ip" width="120" />
-        <el-table-column align="left" label="请求方法" prop="method" width="120" />
-        <el-table-column align="left" label="请求路径" prop="path" width="240" />
-        <el-table-column align="left" label="请求" prop="path" width="80">
+        <el-table-column align="left" label="Request IP" prop="ip" width="120" />
+        <el-table-column align="left" label="Method" prop="method" width="120" />
+        <el-table-column align="left" label="Request Path" prop="path" width="240" />
+        <el-table-column align="left" label="Ask" prop="path" width="80">
           <template #default="scope">
             <div>
               <el-popover v-if="scope.row.body" placement="left-start" trigger="click">
@@ -70,11 +70,11 @@
                 </template>
               </el-popover>
 
-              <span v-else>无</span>
+              <span v-else>None</span>
             </div>
           </template>
         </el-table-column>
-        <el-table-column align="left" label="响应" prop="path" width="80">
+        <el-table-column align="left" label="Response" prop="path" width="100">
           <template #default="scope">
             <div>
               <el-popover v-if="scope.row.resp" placement="left-start" trigger="click">
@@ -85,7 +85,7 @@
                   <el-icon style="cursor: pointer;"><warning /></el-icon>
                 </template>
               </el-popover>
-              <span v-else>无</span>
+              <span v-else>None</span>
             </div>
           </template>
         </el-table-column>
@@ -190,7 +190,7 @@ const onDelete = async() => {
   if (res.code === 0) {
     ElMessage({
       type: 'success',
-      message: 'Delete成功'
+      message: 'Delete successfully'
     })
     if (tableData.value.length === ids.length && page.value > 1) {
       page.value--
@@ -205,7 +205,7 @@ const deleteSysOperationRecordFunc = async(row) => {
   if (res.code === 0) {
     ElMessage({
       type: 'success',
-      message: 'Delete成功'
+      message: 'Delete successfully'
     })
     if (tableData.value.length === 1 && page.value > 1) {
       page.value--
