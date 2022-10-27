@@ -1,37 +1,37 @@
 <template>
   <div>
-    <warning-bar title="id , created_at , updated_at , deleted_at 会自动生成请勿重复创建。搜索时如果条件为LIKE只支持字符串" />
+    <warning-bar title="id , created_at , updated_at , deleted_at Do not create automatically. If the condition is Like only supports string" />
     <el-form
       ref="fieldDialogFrom"
       :model="middleDate"
-      label-width="120px"
+      label-width="150px"
       label-position="right"
       :rules="rules"
       class="grid-form"
     >
-      <el-form-item label="Field名称" prop="fieldName">
+      <el-form-item label="Field Name" prop="fieldName">
         <el-input v-model="middleDate.fieldName" autocomplete="off" style="width:80%" />
         <el-button size="small" style="width:18%;margin-left:2%" @click="autoFill">
-          <span style="font-size: 12px">自动填充</span>
+          <span style="font-size: 12px">Auto Fill</span>
         </el-button>
       </el-form-item>
-      <el-form-item label="Field中文名" prop="fieldDesc">
+      <el-form-item label="Field Desc" prop="fieldDesc">
         <el-input v-model="middleDate.fieldDesc" autocomplete="off" />
       </el-form-item>
       <el-form-item label="FieldJSON" prop="fieldJson">
         <el-input v-model="middleDate.fieldJson" autocomplete="off" />
       </el-form-item>
-      <el-form-item label="数据库字段名" prop="columnName">
+      <el-form-item label="Database File Name" prop="columnName">
         <el-input v-model="middleDate.columnName" autocomplete="off" />
       </el-form-item>
-      <el-form-item label="数据库字段describe" prop="comment">
+      <el-form-item label="Describe" prop="comment">
         <el-input v-model="middleDate.comment" autocomplete="off" />
       </el-form-item>
-      <el-form-item label="Field数据类型" prop="fieldType">
+      <el-form-item label="Field Data Type" prop="fieldType">
         <el-select
           v-model="middleDate.fieldType"
           style="width:100%"
-          placeholder="请选择field数据类型"
+          placeholder="Please select Field data type"
           clearable
           @change="clearOther"
         >
@@ -43,14 +43,14 @@
           />
         </el-select>
       </el-form-item>
-      <el-form-item :label="middleDate.fieldType === 'enum' ? '枚举值' : '类型长度'" prop="dataTypeLong">
-        <el-input v-model="middleDate.dataTypeLong" :placeholder="middleDate.fieldType === 'enum'?`例:'北京','天津'`:'数据库类型长度'" />
+      <el-form-item :label="middleDate.fieldType === 'enum' ? 'Enumeration value' : 'Type length'" prop="dataTypeLong">
+        <el-input v-model="middleDate.dataTypeLong" :placeholder="middleDate.fieldType === 'enum'?`Example: 'Beijing', 'Tianjin' `: 'Database type length'" />
       </el-form-item>
-      <el-form-item label="Field查询条件" prop="fieldSearchType">
+      <el-form-item label="Field Search Type" prop="fieldSearchType">
         <el-select
           v-model="middleDate.fieldSearchType"
           style="width:100%"
-          placeholder="请选择Field查询条件"
+          placeholder="Please select Field query conditions"
           clearable
         >
           <el-option
@@ -65,12 +65,12 @@
           />
         </el-select>
       </el-form-item>
-      <el-form-item label="关联字典" prop="dictType">
+      <el-form-item label="Associated dictionary" prop="dictType">
         <el-select
           v-model="middleDate.dictType"
           style="width:100%"
           :disabled="middleDate.fieldType!=='int'"
-          placeholder="请选择字典"
+          placeholder="Please select the dictionary"
           clearable
         >
           <el-option
@@ -81,13 +81,13 @@
           />
         </el-select>
       </el-form-item>
-      <el-form-item label="是否必填">
+      <el-form-item label="Must be filled">
         <el-switch v-model="middleDate.require" />
       </el-form-item>
-      <el-form-item label="是否可清空">
+      <el-form-item label="Can be empty">
         <el-switch v-model="middleDate.clearable" />
       </el-form-item>
-      <el-form-item label="校验失败文案">
+      <el-form-item label="Verification failure">
         <el-input v-model="middleDate.errorText" />
       </el-form-item>
 
@@ -144,45 +144,45 @@ const typeSearchOptions = ref([
 ])
 const typeOptions = ref([
   {
-    label: '字符串',
+    label: 'String',
     value: 'string'
   },
   {
-    label: '整型',
+    label: 'int',
     value: 'int'
   },
   {
-    label: '布尔值',
+    label: 'bool',
     value: 'bool'
   },
   {
-    label: '浮点型',
+    label: 'float64',
     value: 'float64'
   },
   {
-    label: '时间',
+    label: 'Time',
     value: 'time.Time'
   },
   {
-    label: '枚举',
+    label: 'Enum',
     value: 'enum'
   }
 ])
 const rules = ref({
   fieldName: [
-    { required: true, message: '请输入field英文名', trigger: 'blur' }
+    { required: true, message: 'Please enter Field English name', trigger: 'blur' }
   ],
   fieldDesc: [
-    { required: true, message: '请输入field中文名', trigger: 'blur' }
+    { required: true, message: 'Please enter the Chinese name', trigger: 'blur' }
   ],
   fieldJson: [
-    { required: true, message: '请输入field格式化json', trigger: 'blur' }
+    { required: true, message: 'Please enter Field formatting JSON', trigger: 'blur' }
   ],
   columnName: [
-    { required: true, message: '请输入数据库字段', trigger: 'blur' }
+    { required: true, message: 'Please enter the database field', trigger: 'blur' }
   ],
   fieldType: [
-    { required: true, message: '请选择field数据类型', trigger: 'blur' }
+    { required: true, message: 'Please select Field data type', trigger: 'blur' }
   ]
 })
 
