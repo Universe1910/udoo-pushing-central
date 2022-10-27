@@ -3,24 +3,24 @@
     <el-form ref="form" :model="config" label-width="240px">
       <!--  System start  -->
       <el-collapse v-model="activeNames">
-        <el-collapse-item title="系统配置" name="1">
-          <el-form-item label="环境值">
+        <el-collapse-item title="System Configuration" name="1">
+          <el-form-item label="Environmental value">
             <!-- <el-input v-model="config.system.env" />-->
             <el-select v-model="config.system.env" style="width:100%">
               <el-option value="public" />
               <el-option value="develop" />
             </el-select>
           </el-form-item>
-          <el-form-item label="端口值">
+          <el-form-item label="Port">
             <el-input v-model.number="config.system.addr" />
           </el-form-item>
-          <el-form-item label="数据库类型">
+          <el-form-item label="Database Type">
             <el-select v-model="config.system['db-type']" style="width:100%">
               <el-option value="mysql" />
               <el-option value="pgsql" />
             </el-select>
           </el-form-item>
-          <el-form-item label="Oss类型">
+          <el-form-item label="Oss Type">
             <el-select v-model="config.system['oss-type']" style="width:100%">
               <el-option value="local" />
               <el-option value="qiniu" />
@@ -29,120 +29,120 @@
               <el-option value="huawei-obs" />
             </el-select>
           </el-form-item>
-          <el-form-item label="多点登录拦截">
-            <el-checkbox v-model="config.system['use-multipoint']">开启</el-checkbox>
+          <el-form-item label="Multi-point login interception">
+            <el-checkbox v-model="config.system['use-multipoint']">Open</el-checkbox>
           </el-form-item>
-          <el-form-item label="开启redis">
-            <el-checkbox v-model="config.system['use-redis']">开启</el-checkbox>
+          <el-form-item label="Open Redis">
+            <el-checkbox v-model="config.system['use-redis']">Open</el-checkbox>
           </el-form-item>
-          <el-form-item label="限流次数">
+          <el-form-item label="IP Limit count">
             <el-input-number v-model.number="config.system['iplimit-count']" />
           </el-form-item>
-          <el-form-item label="限流时间">
+          <el-form-item label="IP Limit time">
             <el-input-number v-model.number="config.system['iplimit-time']" />
           </el-form-item>
         </el-collapse-item>
-        <el-collapse-item title="jwt签名" name="2">
-          <el-form-item label="jwt签名">
+        <el-collapse-item title="Jwt signature" name="2">
+          <el-form-item label="Jwt signature">
             <el-input v-model="config.jwt['signing-key']" />
           </el-form-item>
-          <el-form-item label="有效期">
+          <el-form-item label="Expires Time">
             <el-input v-model="config.jwt['expires-time']" />
           </el-form-item>
-          <el-form-item label="缓冲期">
+          <el-form-item label="Buffer Time">
             <el-input v-model="config.jwt['buffer-time']" />
           </el-form-item>
-          <el-form-item label="签发者">
+          <el-form-item label="Issuer">
             <el-input v-model="config.jwt.issuer" />
           </el-form-item>
         </el-collapse-item>
-        <el-collapse-item title="Zap日志配置" name="3">
-          <el-form-item label="级别">
+        <el-collapse-item title="ZAP log configuration" name="3">
+          <el-form-item label="Level">
             <el-input v-model.number="config.zap.level" />
           </el-form-item>
-          <el-form-item label="输出">
+          <el-form-item label="Format">
             <el-input v-model="config.zap.format" />
           </el-form-item>
-          <el-form-item label="日志前缀">
+          <el-form-item label="Prefix">
             <el-input v-model="config.zap.prefix" />
           </el-form-item>
-          <el-form-item label="日志文件夹">
+          <el-form-item label="Director">
             <el-input v-model="config.zap.director" />
           </el-form-item>
-          <el-form-item label="编码级">
+          <el-form-item label="Encode Level">
             <el-input v-model="config.zap['encode-level']" />
           </el-form-item>
-          <el-form-item label="栈名">
+          <el-form-item label="Stracktrace Key">
             <el-input v-model="config.zap['stacktrace-key']" />
           </el-form-item>
-          <el-form-item label="日志留存时间(默认以天为单位)">
+          <el-form-item label="Log retention time (the default is based on heaven)">
             <el-input v-model.number="config.zap['max-age']" />
           </el-form-item>
-          <el-form-item label="显示行">
+          <el-form-item label="Show line">
             <el-checkbox v-model="config.zap['show-line']" />
           </el-form-item>
-          <el-form-item label="输出控制台">
+          <el-form-item label="Log in console">
             <el-checkbox v-model="config.zap['log-in-console']" />
           </el-form-item>
         </el-collapse-item>
-        <el-collapse-item title="Redis admin数据库配置" name="4">
-          <el-form-item label="库">
+        <el-collapse-item title="Redis admin database configuration" name="4">
+          <el-form-item label="Libary">
             <el-input v-model.number="config.redis.db" />
           </el-form-item>
-          <el-form-item label="地址">
+          <el-form-item label="Address">
             <el-input v-model="config.redis.addr" />
           </el-form-item>
-          <el-form-item label="密码">
+          <el-form-item label="Password">
             <el-input v-model="config.redis.password" />
           </el-form-item>
         </el-collapse-item>
 
-        <el-collapse-item title="邮箱配置" name="5">
-          <el-form-item label="接收者邮箱">
-            <el-input v-model="config.email.to" placeholder="可多个，以逗号分隔" />
+        <el-collapse-item title="Mailbox configuration" name="5">
+          <el-form-item label="Receiver mailbox">
+            <el-input v-model="config.email.to" placeholder="Can be separated by commas" />
           </el-form-item>
-          <el-form-item label="端口">
+          <el-form-item label="Port">
             <el-input v-model.number="config.email.port" />
           </el-form-item>
-          <el-form-item label="发送者邮箱">
+          <el-form-item label="Sender mailbox">
             <el-input v-model="config.email.from" />
           </el-form-item>
           <el-form-item label="host">
             <el-input v-model="config.email.host" />
           </el-form-item>
-          <el-form-item label="是否为ssl">
+          <el-form-item label="Is SSL">
             <el-checkbox v-model="config.email['is-ssl']" />
           </el-form-item>
           <el-form-item label="secret">
             <el-input v-model="config.email.secret" />
           </el-form-item>
-          <el-form-item label="测试邮件">
-            <el-button @click="email">测试邮件</el-button>
+          <el-form-item label="Test email">
+            <el-button @click="email">Test email</el-button>
           </el-form-item>
         </el-collapse-item>
-        <el-collapse-item title="验证码配置" name="7">
-          <el-form-item label="字符长度">
+        <el-collapse-item title="Verification Code configuration" name="7">
+          <el-form-item label="Character length">
             <el-input v-model.number="config.captcha['key-long']" />
           </el-form-item>
-          <el-form-item label="平台宽度">
+          <el-form-item label="Image width">
             <el-input v-model.number="config.captcha['img-width']" />
           </el-form-item>
-          <el-form-item label="图片高度">
+          <el-form-item label="Image Height">
             <el-input v-model.number="config.captcha['img-height']" />
           </el-form-item>
         </el-collapse-item>
-        <el-collapse-item title="数据库配置" name="9">
+        <el-collapse-item title="Database configuration" name="9">
           <template v-if="config.system['db-type'] === 'mysql'">
-            <el-form-item label="用户名">
+            <el-form-item label="Username">
               <el-input v-model="config.mysql.username" />
             </el-form-item>
-            <el-form-item label="密码">
+            <el-form-item label="Password">
               <el-input v-model="config.mysql.password" />
             </el-form-item>
-            <el-form-item label="地址">
+            <el-form-item label="Path">
               <el-input v-model="config.mysql.path" />
             </el-form-item>
-            <el-form-item label="数据库">
+            <el-form-item label="Database name">
               <el-input v-model="config.mysql['db-name']" />
             </el-form-item>
             <el-form-item label="maxIdleConns">
@@ -151,24 +151,24 @@
             <el-form-item label="maxOpenConns">
               <el-input v-model.number="config.mysql['max-open-conns']" />
             </el-form-item>
-            <el-form-item label="写入日志">
+            <el-form-item label="Write Log">
               <el-checkbox v-model="config.mysql['log-zap']" />
             </el-form-item>
-            <el-form-item label="日志模式">
+            <el-form-item label="Log Mode">
               <el-input v-model="config.mysql['log-mode']" />
             </el-form-item>
           </template>
           <template v-if="config.system.dbType === 'pgsql'">
-            <el-form-item label="用户名">
+            <el-form-item label="User name">
               <el-input v-model="config.pgsql.username" />
             </el-form-item>
-            <el-form-item label="密码">
+            <el-form-item label="Password">
               <el-input v-model="config.pgsql.password" />
             </el-form-item>
-            <el-form-item label="地址">
+            <el-form-item label="Path">
               <el-input v-model="config.pgsql.path" />
             </el-form-item>
-            <el-form-item label="数据库">
+            <el-form-item label="Database name">
               <el-input v-model="config.pgsql.dbname" />
             </el-form-item>
             <el-form-item label="maxIdleConns">
@@ -177,38 +177,38 @@
             <el-form-item label="maxOpenConns">
               <el-input v-model.number="config.pgsql['max-open-conns']" />
             </el-form-item>
-            <el-form-item label="写入日志">
+            <el-form-item label="Write Log">
               <el-checkbox v-model="config.pgsql['log-zap']" />
             </el-form-item>
-            <el-form-item label="日志模式">
+            <el-form-item label="Log mode">
               <el-input v-model="config.pgsql['log-mode']" />
             </el-form-item>
           </template>
         </el-collapse-item>
 
-        <el-collapse-item title="oss配置" name="10">
+        <el-collapse-item title="OSS configuration" name="10">
           <template v-if="config.system['oss-type'] === 'local'">
-            <h2>本地文件配置</h2>
-            <el-form-item label="本地文件访问路径">
+            <h2>Local file configuration</h2>
+            <el-form-item label="Local file access path">
               <el-input v-model="config.local.path" />
             </el-form-item>
-            <el-form-item label="本地文件存储路径">
+            <el-form-item label="Local file strogare path">
               <el-input v-model="config.local['store-path']" />
             </el-form-item>
           </template>
           <template v-if="config.system['oss-type'] === 'qiniu'">
-            <h2>qiniu上传配置</h2>
-            <el-form-item label="存储区域">
+            <h2>qiniu upload configuration</h2>
+            <el-form-item label="Storage area">
               <el-input v-model="config.qiniu.zone" />
             </el-form-item>
-            <el-form-item label="空间名称">
+            <el-form-item label="Space name">
               <el-input v-model="config.qiniu.bucket" />
             </el-form-item>
-            <el-form-item label="CDN加速域名">
+            <el-form-item label="CDN acceleration domain name">
               <el-input v-model="config.qiniu['img-path']" />
             </el-form-item>
-            <el-form-item label="是否使用https">
-              <el-checkbox v-model="config.qiniu['use-https']">开启</el-checkbox>
+            <el-form-item label="Use HTTPS">
+              <el-checkbox v-model="config.qiniu['use-https']">Open</el-checkbox>
             </el-form-item>
             <el-form-item label="accessKey">
               <el-input v-model="config.qiniu['access-key']" />
@@ -216,16 +216,16 @@
             <el-form-item label="secretKey">
               <el-input v-model="config.qiniu['secret-key']" />
             </el-form-item>
-            <el-form-item label="上传是否使用CDN上传加速">
-              <el-checkbox v-model="config.qiniu['use-cdn-domains']">开启</el-checkbox>
+            <el-form-item label="Use CDN domains">
+              <el-checkbox v-model="config.qiniu['use-cdn-domains']">Open</el-checkbox>
             </el-form-item>
           </template>
           <template v-if="config.system['oss-type'] === 'tencent-cos'">
-            <h2>腾讯云COS上传配置</h2>
-            <el-form-item label="存储桶名称">
+            <h2>Tencent Cloud COS upload configuration</h2>
+            <el-form-item label="Reserve bucket name">
               <el-input v-model="config['tencent-cos']['bucket']" />
             </el-form-item>
-            <el-form-item label="所属地域">
+            <el-form-item label="Affiliated area">
               <el-input v-model="config['tencent-cos'].region" />
             </el-form-item>
             <el-form-item label="secretID">
@@ -234,16 +234,16 @@
             <el-form-item label="secretKey">
               <el-input v-model="config['tencent-cos']['secret-key']" />
             </el-form-item>
-            <el-form-item label="路径前缀">
+            <el-form-item label="Affiliated area">
               <el-input v-model="config['tencent-cos']['path-prefix']" />
             </el-form-item>
-            <el-form-item label="访问域名">
+            <el-form-item label="Access domain name">
               <el-input v-model="config['tencent-cos']['base-url']" />
             </el-form-item>
           </template>
           <template v-if="config.system['oss-type'] === 'aliyun-oss'">
-            <h2>阿里云OSS上传配置</h2>
-            <el-form-item label="区域">
+            <h2>Alibaba Cloud OSS upload configuration</h2>
+            <el-form-item label="Area">
               <el-input v-model="config['aliyun-oss'].endpoint" />
             </el-form-item>
             <el-form-item label="accessKeyId">
@@ -252,22 +252,22 @@
             <el-form-item label="accessKeySecret">
               <el-input v-model="config['aliyun-oss']['access-key-secret']" />
             </el-form-item>
-            <el-form-item label="存储桶名称">
+            <el-form-item label="Reserve bucket name">
               <el-input v-model="config['aliyun-oss']['bucket-name']" />
             </el-form-item>
-            <el-form-item label="访问域名">
+            <el-form-item label="Access domain name">
               <el-input v-model="config['aliyun-oss']['bucket-url']" />
             </el-form-item>
           </template>
           <template v-if="config.system['oss-type'] === 'huawei-obs'">
-            <h2>华为云Obs上传配置</h2>
-            <el-form-item label="路径">
+            <h2>Huawei Cloud OBS upload configuration</h2>
+            <el-form-item label="Path">
               <el-input v-model="config['hua-wei-obs'].path" />
             </el-form-item>
-            <el-form-item label="存储桶名称">
+            <el-form-item label="Reserve bucket name">
               <el-input v-model="config['hua-wei-obs'].bucket" />
             </el-form-item>
-            <el-form-item label="区域">
+            <el-form-item label="Area">
               <el-input v-model="config['hua-wei-obs'].endpoint" />
             </el-form-item>
             <el-form-item label="accessKey">
@@ -280,59 +280,59 @@
 
         </el-collapse-item>
 
-        <el-collapse-item title="Excel上传配置" name="11">
-          <el-form-item label="合成目标地址">
+        <el-collapse-item title="Excel upload configuration" name="11">
+          <el-form-item label="Synthetic target address">
             <el-input v-model="config.excel.dir" />
           </el-form-item>
         </el-collapse-item>
 
-        <el-collapse-item title="自动化代码配置" name="12">
-          <el-form-item label="是否自动重启(linux)">
+        <el-collapse-item title="Automated code configuration" name="12">
+          <el-form-item label="Transfer restart(linux)">
             <el-checkbox v-model="config.autocode['transfer-restart']" />
           </el-form-item>
-          <el-form-item label="root(项目根路径)">
+          <el-form-item label="root(Project root path)">
             <el-input v-model="config.autocode.root" disabled />
           </el-form-item>
-          <el-form-item label="Server(后端代码地址)">
+          <el-form-item label="Server(Back -end code address)">
             <el-input v-model="config.autocode['transfer-restart']" />
           </el-form-item>
-          <el-form-item label="SApi(后端api文件夹地址)">
+          <el-form-item label="SApi(Back -end API folder address)">
             <el-input v-model="config.autocode['server-api']" />
           </el-form-item>
-          <el-form-item label="SInitialize(后端Initialize文件夹)">
+          <el-form-item label="SInitialize(Back end Initialize folder)">
             <el-input v-model="config.autocode['server-initialize']" />
           </el-form-item>
-          <el-form-item label="SModel(后端Model文件地址)">
+          <el-form-item label="SModel(Back -end Model file address)">
             <el-input v-model="config.autocode['server-model']" />
           </el-form-item>
-          <el-form-item label="SRequest(后端Request文件夹地址)">
+          <el-form-item label="SRequest(Request folder address)">
             <el-input v-model="config.autocode['server-request']" />
           </el-form-item>
-          <el-form-item label="SRouter(后端Router文件夹地址)">
+          <el-form-item label="SRouter(Back end Router folder address)">
             <el-input v-model="config.autocode['server-router']" />
           </el-form-item>
-          <el-form-item label="SService(后端Service文件夹地址)">
+          <el-form-item label="SService(The back -end service folder address)">
             <el-input v-model="config.autocode['server-service']" />
           </el-form-item>
-          <el-form-item label="Web(前端文件夹地址)">
+          <el-form-item label="Web(Folder folder address)">
             <el-input v-model="config.autocode.web" />
           </el-form-item>
-          <el-form-item label="WApi(后端WApi文件夹地址)">
+          <el-form-item label="WApi(Back -end wapi folder address)">
             <el-input v-model="config.autocode['web-api']" />
           </el-form-item>
-          <el-form-item label="WForm(后端WForm文件夹地址)">
+          <el-form-item label="WForm(Back -end wform folder address)">
             <el-input v-model="config.autocode['web-form']" />
           </el-form-item>
-          <el-form-item label="WTable(后端WTable文件夹地址)">
+          <el-form-item label="WTable(Back end wtable folder address)">
             <el-input v-model="config.autocode['web-table']" />
           </el-form-item>
         </el-collapse-item>
 
-        <el-collapse-item title="Timer(定时任务)" name="13">
-          <el-form-item label="Start（是否启用）">
+        <el-collapse-item title="Timer (Timing Task)" name="13">
+          <el-form-item label="Start（Is Enable）">
             <el-checkbox v-model="config.timer['start']" />
           </el-form-item>
-          <el-form-item label="Spec(CRON表达式)">
+          <el-form-item label="Spec(Cron expression)">
             <el-input v-model="config.timer.spec" />
           </el-form-item>
           <template v-for="(item,k) in config.timer.detail">
@@ -346,8 +346,8 @@
       </el-collapse>
     </el-form>
     <div class="gva-btn-list">
-      <el-button type="primary" size="small" @click="update">立即更新</el-button>
-      <el-button type="primary" size="small" @click="reload">重启服务（开发中）</el-button>
+      <el-button type="primary" size="small" @click="update">Update immediately</el-button>
+      <el-button type="primary" size="small" @click="reload">Restart service (under development)</el-button>
     </div>
   </div>
 </template>
@@ -401,7 +401,7 @@ const update = async() => {
   if (res.code === 0) {
     ElMessage({
       type: 'success',
-      message: '配置文件Set successfully!'
+      message: 'Update successfully!'
     })
     await initForm()
   }
@@ -411,13 +411,13 @@ const email = async() => {
   if (res.code === 0) {
     ElMessage({
       type: 'success',
-      message: '邮件发送成功'
+      message: 'Mail sent successfully'
     })
     await initForm()
   } else {
     ElMessage({
       type: 'error',
-      message: '邮件发送失败'
+      message: 'Email sending failuer'
     })
   }
 }
