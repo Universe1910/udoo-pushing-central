@@ -58,7 +58,7 @@
           </template>
         </el-table-column>
 
-        <el-table-column align="left" fixed="right" label="操作" width="200">
+        <el-table-column align="left" fixed="right" label="Action" width="200">
           <template #default="scope">
             <el-button
               icon="edit"
@@ -116,7 +116,7 @@
       </el-form>
       <template #footer>
         <div class="dialog-footer">
-          <el-button size="small" @click="closeDialog">取 消</el-button>
+          <el-button size="small" @click="closeDialog">Cancel</el-button>
           <el-button size="small" type="primary" @click="enterDialog">Sure</el-button>
         </div>
       </template>
@@ -246,7 +246,7 @@ const getTableData = async() => {
 
 getTableData()
 
-// 批量操作
+// 批量Action
 const handleSelectionChange = (val) => {
   apis.value = val
 }

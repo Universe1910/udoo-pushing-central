@@ -11,7 +11,7 @@
         <el-table-column align="left" label="展示名" width="150" prop="label" />
         <el-table-column align="left" label="描述" min-width="150" prop="desc" />
 
-        <el-table-column align="left" label="操作" width="200">
+        <el-table-column align="left" label="Action" width="200">
           <template #default="scope">
             <el-button
               icon="delete"
@@ -41,7 +41,7 @@
       </el-form>
       <template #footer>
         <div class="dialog-footer">
-          <el-button size="small" @click="closeDialog">取 消</el-button>
+          <el-button size="small" @click="closeDialog">Cancel</el-button>
           <el-button size="small" type="primary" @click="enterDialog">Sure</el-button>
         </div>
       </template>

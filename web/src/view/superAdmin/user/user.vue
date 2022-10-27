@@ -45,7 +45,7 @@
           </template>
         </el-table-column>
 
-        <el-table-column label="操作" min-width="250" fixed="right">
+        <el-table-column label="Action" min-width="250" fixed="right">
           <template #default="scope">
             <el-popover v-model="scope.row.visible" placement="top" width="160">
               <p>确定要删除此用户吗</p>
@@ -131,7 +131,7 @@
 
       <template #footer>
         <div class="dialog-footer">
-          <el-button size="small" @click="closeAddUserDialog">取 消</el-button>
+          <el-button size="small" @click="closeAddUserDialog">Cancel</el-button>
           <el-button size="small" type="primary" @click="enterAddUserDialog">Sure</el-button>
         </div>
       </template>

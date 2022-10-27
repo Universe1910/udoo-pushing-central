@@ -158,7 +158,7 @@
           <el-button
             size="small"
             @click="showPassword = false"
-          >取 消</el-button>
+          >Cancel</el-button>
           <el-button
             size="small"
             type="primary"

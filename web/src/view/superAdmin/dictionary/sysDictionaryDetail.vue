@@ -105,7 +105,7 @@
       </el-form>
       <template #footer>
         <div class="dialog-footer">
-          <el-button size="small" @click="closeDialog">取 消</el-button>
+          <el-button size="small" @click="closeDialog">Cancel</el-button>
           <el-button size="small" type="primary" @click="enterDialog">Sure</el-button>
         </div>
       </template>

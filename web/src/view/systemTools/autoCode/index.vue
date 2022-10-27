@@ -209,7 +209,7 @@
       <FieldDialog v-if="dialogFlag" ref="fieldDialogNode" :dialog-middle="dialogMiddle" />
       <template #footer>
         <div class="dialog-footer">
-          <el-button size="small" @click="closeDialog">取 消</el-button>
+          <el-button size="small" @click="closeDialog">Cancel</el-button>
           <el-button size="small" type="primary" @click="enterDialog">Sure</el-button>
         </div>
       </template>

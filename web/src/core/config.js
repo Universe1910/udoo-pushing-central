@@ -4,7 +4,7 @@
 
 const config = {
   appName: 'Puhsing Central',
-  appLogo: 'https://udoo.work/wp-content/uploads/2021/03/cropped-LogoTrans.png',
+  appLogo: 'https://dl.dropboxusercontent.com/s/1k19249eifen3e8/Udoo%20Square.png',
   showViteLogo: true
 }
 
