@@ -21,7 +21,7 @@
                 <el-icon>
                   <edit />
                 </el-icon>
-                重新上传</span>
+                Re-upload</span>
             </div>
             <div class="user-personality">
               <p v-if="!editFlag" class="nickName">
@@ -158,12 +158,12 @@
           <el-button
             size="small"
             @click="showPassword = false"
-          >取 消</el-button>
+          >Cancel</el-button>
           <el-button
             size="small"
             type="primary"
             @click="savePassword"
-          >确 定</el-button>
+          >Sure</el-button>
         </div>
       </template>
     </el-dialog>
@@ -185,7 +185,7 @@
           <el-button
             size="small"
             @click="closeChangePhone"
-          >取消</el-button>
+          >Cancel</el-button>
           <el-button
             type="primary"
             size="small"
@@ -212,7 +212,7 @@
           <el-button
             size="small"
             @click="closeChangeEmail"
-          >取消</el-button>
+          >Cancel</el-button>
           <el-button
             type="primary"
             size="small"
@@ -308,7 +308,7 @@ const enterImg = async(url) => {
     userStore.ResetUserInfo({ headerImg: url })
     ElMessage({
       type: 'success',
-      message: '设置成功',
+      message: 'Set successfully!',
     })
   }
 }
@@ -331,7 +331,7 @@ const enterEdit = async() => {
     userStore.ResetUserInfo({ nickName: nickName.value })
     ElMessage({
       type: 'success',
-      message: '设置成功',
+      message: 'Set successfully!',
     })
   }
   nickName.value = ''

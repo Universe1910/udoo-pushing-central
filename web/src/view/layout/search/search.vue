@@ -6,7 +6,7 @@
           ref="searchInput"
           v-model="value"
           filterable
-          placeholder="请选择"
+          placeholder="Choose"
           @blur="hiddenSearch"
           @change="changeRouter"
         >

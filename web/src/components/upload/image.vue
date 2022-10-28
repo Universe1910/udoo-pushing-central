@@ -9,7 +9,7 @@
       :before-upload="beforeImageUpload"
       :multiple="false"
     >
-      <el-button size="small" type="primary">压缩上传</el-button>
+      <el-button size="small" type="primary">Compress and upload</el-button>
     </el-upload>
   </div>
 </template>

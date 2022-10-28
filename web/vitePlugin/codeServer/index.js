@@ -54,6 +54,6 @@ function os() {
     case 'win32':
       return 'Windows'
     default:
-      return '无法确定操作系统!'
+      return '无法Sure操作系统!'
   }
 }

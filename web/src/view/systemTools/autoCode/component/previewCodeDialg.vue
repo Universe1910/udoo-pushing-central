@@ -67,7 +67,7 @@ const selectText = () => {
 const copy = () => {
   selectText()
   document.execCommand('copy')
-  ElMessage.success('复制成功')
+  ElMessage.success('Replication')
 }
 
 defineExpose({ copy })

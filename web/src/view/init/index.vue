@@ -3,51 +3,51 @@
     <div class="init_page_panel">
       <div v-if="hello < 2" id="hello" :class="[hello < 1 ? 'slide-in-fwd-top' : 'slide-out-right']" class="hello">
         <div>
-          <div class="hello_title">GIN-VUE-ADMIN</div>
-          <p class="in-two a-fadeinT">初始化须知</p>
-          <p class="init_p">1.您需有用一定的VUE和GOLANG基础</p>
-          <p class="init_p">2.请您确认是否已经阅读过官方文档</p>
-          <p class="init_p">3.请您确认是否了解后续的配置流程</p>
-          <p class="init_p">注：开发组不为文档中书写过的内容提供无偿服务</p>
+          <div class="hello_title">Udoo Pushing Central</div>
+          <p class="in-two a-fadeinT">Initialization notice</p>
+          <p class="init_p">1.You need a certain Vue and Golang basics</p>
+          <p class="init_p">2.Please confirm whether you have read the official documentation</p>
+          <p class="init_p">3.Please confirm whether to understand the subsequent configuration process</p>
+          <p class="init_p">Note: The development team does not provide free services for the content written in the documentation</p>
           <p class="init_btn">
             <el-button type="primary" @click="goDoc">
-              阅读文档
+              Reading documentation
             </el-button>
             <el-button type="primary" @click="showNext">
-              我已确认
+              Confirmed
             </el-button>
           </p>
         </div>
       </div>
       <div v-if="hello > 0 " :class="[(hello > 0 && !out)? 'slide-in-left' : '' , out ? 'slide-out-right' : '']" class="form">
         <el-form ref="formRef" :model="form" label-width="100px">
-          <el-form-item label="数据库类型">
-            <el-select v-model="form.dbType" placeholder="请选择" @change="changeDB">
+          <el-form-item label="Database type">
+            <el-select v-model="form.dbType" placeholder="Please choose" @change="changeDB">
               <el-option key="mysql" label="mysql" value="mysql" />
-              <el-option key="pgsql" label="pgsql(测试版)" value="pgsql" />
+              <el-option key="pgsql" label="pgsql(Beta)" value="pgsql" />
             </el-select>
           </el-form-item>
           <el-form-item label="host">
-            <el-input v-model="form.host" placeholder="请输入数据库链接" />
+            <el-input v-model="form.host" placeholder="Host" />
           </el-form-item>
           <el-form-item label="port">
-            <el-input v-model="form.port" placeholder="请输入数据库端口" />
+            <el-input v-model="form.port" placeholder="Port" />
           </el-form-item>
           <el-form-item label="userName">
-            <el-input v-model="form.userName" placeholder="请输入数据库用户名" />
+            <el-input v-model="form.userName" placeholder="Username" />
           </el-form-item>
           <el-form-item label="password">
             <el-input
               v-model="form.password"
-              placeholder="请输入数据库密码（没有则为空）"
+              placeholder="Please enter the database password (there is no empty)"
             />
           </el-form-item>
           <el-form-item label="dbName">
-            <el-input v-model="form.dbName" placeholder="请输入数据库名称" />
+            <el-input v-model="form.dbName" placeholder="Database name" />
           </el-form-item>
           <el-form-item>
             <div style="text-align: right">
-              <el-button type="primary" @click="onSubmit">立即初始化</el-button>
+              <el-button type="primary" @click="onSubmit">Initialize</el-button>
             </div>
           </el-form-item>
         </el-form>
@@ -125,7 +125,7 @@ const changeDB = (val) => {
 const onSubmit = async() => {
   const loading = ElLoading.service({
     lock: true,
-    text: '正在初始化数据库，请稍候',
+    text: 'Initialize the database, please wait a moment',
     spinner: 'loading',
     background: 'rgba(0, 0, 0, 0.7)'
   })

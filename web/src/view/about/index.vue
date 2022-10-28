@@ -51,16 +51,16 @@
         </el-card>
         <el-card style="margin-top: 20px">
           <template #header>
-            <div>flipped-aurora团队</div>
+            <div>Udoo Team</div>
           </template>
           <div>
             <el-row>
               <el-col :span="8" :offset="8">
-                <a href="https://github.com/flipped-aurora">
+                <a href="https://udoo.ooo">
                   <img
                     class="org-img dom-center"
-                    src="@/assets/flipped-aurora.png"
-                    alt="flipped-aurora"
+                    src="https://udoo.work/wp-content/uploads/2021/03/cropped-LogoTrans.png"
+                    alt="udoo"
                   >
                 </a>
               </el-col>
@@ -79,7 +79,7 @@
       <el-col :span="12">
         <el-card>
           <template #header>
-            <div>提交记录</div>
+            <div>Submitted record</div>
           </template>
           <div>
             <el-timeline>
@@ -141,7 +141,16 @@ const loadCommits = () => {
   })
 }
 
-const members = ref([])
+const members = ref([
+  {
+    avatar_url: 'https://scontent.fdad3-4.fna.fbcdn.net/v/t39.30808-6/295014024_1714222422244800_7469366795537705993_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=RKyMbQwBJXcAX9rwqnr&_nc_ht=scontent.fdad3-4.fna&oh=00_AfAW_SLPU8BAuWxQQPLyPBwLRh4yRtq1bcleLyRPTEprxQ&oe=635F9FB4',
+    login: 'Tính TD'
+  },
+  {
+    avatar_url: 'https://scontent.fdad3-4.fna.fbcdn.net/v/t39.30808-1/292681902_452648410036839_5622974227784398322_n.jpg?stp=dst-jpg_p200x200&_nc_cat=111&ccb=1-7&_nc_sid=7206a8&_nc_ohc=SiUAro3oOPoAX-wzPbP&_nc_oc=AQm__y6fy_iQ2PH1F2COyOIWFOsqReFUI5mD0zq7xXuwoTWHkU1p6o4McK6KdezWc6O_hvLyxrxD4zZVaMbI_BNt&_nc_ht=scontent.fdad3-4.fna&oh=00_AfBc8ZPf4P-J7PB4kE6fgBHGuW1JmrAATGAig_fY1tiZ0g&oe=635F6E1A',
+    login: 'Duyên Phan'
+  }
+])
 const loadMembers = () => {
   Members().then(({ data }) => {
     members.value = data
@@ -150,7 +159,7 @@ const loadMembers = () => {
 }
 
 loadCommits()
-loadMembers()
+// loadMembers()
 
 </script>
 
@@ -170,7 +179,7 @@ loadMembers()
 }
 
 .org-img {
-  height: 150px;
+  height: auto;
   width: 150px;
 }
 

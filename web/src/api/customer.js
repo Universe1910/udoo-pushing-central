@@ -1,10 +1,10 @@
 import service from '@/utils/request'
 // @Tags SysApi
-// @Summary 删除客户
+// @Summary Delete客户
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data body dbModel.ExaCustomer true "删除客户"
+// @Param data body dbModel.ExaCustomer true "Delete客户"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
 // @Router /customer/customer [post]
 export const createExaCustomer = (data) => {

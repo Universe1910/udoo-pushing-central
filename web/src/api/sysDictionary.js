@@ -16,12 +16,12 @@ export const createSysDictionary = (data) => {
 }
 
 // @Tags SysDictionary
-// @Summary 删除SysDictionary
+// @Summary DeleteSysDictionary
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data body model.SysDictionary true "删除SysDictionary"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"删除成功"}"
+// @Param data body model.SysDictionary true "DeleteSysDictionary"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"Delete成功"}"
 // @Router /sysDictionary/deleteSysDictionary [delete]
 export const deleteSysDictionary = (data) => {
   return service({

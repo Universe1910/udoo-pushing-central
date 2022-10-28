@@ -52,7 +52,7 @@ export const useUserStore = defineStore('user', () => {
   const LoginIn = async(loginInfo) => {
     loadingInstance.value = ElLoading.service({
       fullscreen: true,
-      text: '登录中，请稍候...',
+      text: 'In the login, please wait a moment',
     })
     try {
       const res = await login(loginInfo)
@@ -98,7 +98,7 @@ export const useUserStore = defineStore('user', () => {
       userInfo.value.sideMode = data
       ElMessage({
         type: 'success',
-        message: '设置成功'
+        message: 'Set successfully!'
       })
     }
   }

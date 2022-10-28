@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="clearfix sticky-button">
-      <el-input v-model="filterText" class="fitler" placeholder="筛选" />
-      <el-button class="fl-right" size="small" type="primary" @click="authApiEnter">确 定</el-button>
+      <el-input v-model="filterText" class="fitler" placeholder="Filter" />
+      <el-button class="fl-right" size="small" type="primary" @click="authApiEnter">Sure</el-button>
     </div>
     <div class="tree-content">
       <el-tree
@@ -90,7 +90,7 @@ const buildApiTree = (apis) => {
   for (const key in apiObj) {
     const treeNode = {
       ID: key,
-      description: key + '组',
+      description: key + 'Group',
       children: apiObj[key]
     }
     apiTree.push(treeNode)
@@ -98,7 +98,7 @@ const buildApiTree = (apis) => {
   return apiTree
 }
 
-// 关联关系确定
+// 关联关系Sure
 const apiTree = ref(null)
 const authApiEnter = async() => {
   const checkArr = apiTree.value.getCheckedNodes(true)
@@ -115,7 +115,7 @@ const authApiEnter = async() => {
     casbinInfos
   })
   if (res.code === 0) {
-    ElMessage({ type: 'success', message: 'api设置成功' })
+    ElMessage({ type: 'success', message: 'apiSet successfully!' })
   }
 }
 

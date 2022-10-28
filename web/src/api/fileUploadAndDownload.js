@@ -16,7 +16,7 @@ export const getFileList = (data) => {
 }
 
 // @Tags FileUploadAndDownload
-// @Summary 删除文件
+// @Summary Delete文件
 // @Security ApiKeyAuth
 // @Produce  application/json
 // @Param data body dbModel.FileUploadAndDownload true "传入文件里面id即可"
