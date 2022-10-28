@@ -12,11 +12,11 @@
     >
       <el-icon class="el-icon--upload"><upload-filled /></el-icon>
       <div class="el-upload__text">
-        拖拽或<em>点击上传</em>
+        Drag and drop<em>Click to upload</em>
       </div>
       <template #tip>
         <div class="el-upload__tip">
-          请把安装包的zip拖拽至此处上传
+          Please drag the installed package ZIP to upload here
         </div>
       </template>
     </el-upload>
