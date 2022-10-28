@@ -2,22 +2,22 @@
   <div>
     <div class="gva-table-box">
       <el-form label-width="140px" class="plug-form">
-        <el-form-item label="插件名">
-          <el-input v-model="form.plugName" placeholder="必填（英文大写字母开头）" @blur="titleCase" />
+        <el-form-item label="Plug-in name">
+          <el-input v-model="form.plugName" placeholder="Must -fill (beginning of English uppercase letters)" @blur="titleCase" />
         </el-form-item>
-        <el-form-item label="路由组">
-          <el-input v-model="form.routerGroup" placeholder="将会作为插件路由组使用" />
+        <el-form-item label="Routine group">
+          <el-input v-model="form.routerGroup" placeholder="It will be used as a plug -in routing group" />
         </el-form-item>
-        <el-form-item label="使用全局属性">
+        <el-form-item label="Use global attribute">
           <el-checkbox v-model="form.hasGlobal" />
         </el-form-item>
-        <el-form-item v-if="form.hasGlobal" label="全局属性">
+        <el-form-item v-if="form.hasGlobal" label="Global attribute">
           <div v-for="(i,k) in form.global" :key="k" class="plug-row">
             <span>
-              <el-input v-model="i.key" placeholder="key 必填" />
+              <el-input v-model="i.key" placeholder="key" />
             </span>
             <span>
-              <el-select v-model="i.type" placeholder="type 必填">
+              <el-select v-model="i.type" placeholder="type">
                 <el-option label="string" value="string" />
                 <el-option label="int" value="int" />
                 <el-option label="float32" value="float32" />
@@ -26,7 +26,7 @@
               </el-select>
             </span>
             <span>
-              <el-input v-model="i.desc" placeholder="备注 必填" />
+              <el-input v-model="i.desc" placeholder="Description" />
             </span>
             <span>
               <el-button :icon="Plus" circle @click="addkv(form.global)" />
@@ -36,16 +36,16 @@
             </span>
           </div>
         </el-form-item>
-        <el-form-item label="使用Request">
+        <el-form-item label="Use Request">
           <el-checkbox v-model="form.hasRequest" />
         </el-form-item>
         <el-form-item v-if="form.hasRequest" label="Request">
           <div v-for="(i,k) in form.request" :key="k" class="plug-row">
             <span>
-              <el-input v-model="i.key" placeholder="key 必填" />
+              <el-input v-model="i.key" placeholder="key" />
             </span>
             <span>
-              <el-select v-model="i.type" placeholder="type 必填">
+              <el-select v-model="i.type" placeholder="type">
                 <el-option label="string" value="string" />
                 <el-option label="int" value="int" />
                 <el-option label="float32" value="float32" />
@@ -54,7 +54,7 @@
               </el-select>
             </span>
             <span>
-              <el-input v-model="i.desc" placeholder="备注 必填" />
+              <el-input v-model="i.desc" placeholder="Description" />
             </span>
             <span>
               <el-button :icon="Plus" circle @click="addkv(form.request)" />
@@ -64,16 +64,16 @@
             </span>
           </div>
         </el-form-item>
-        <el-form-item label="使用Response">
+        <el-form-item label="Use Response">
           <el-checkbox v-model="form.hasResponse" />
         </el-form-item>
         <el-form-item v-if="form.hasResponse" label="Response">
           <div v-for="(i,k) in form.response" :key="k" class="plug-row">
             <span>
-              <el-input v-model="i.key" placeholder="key 必填" />
+              <el-input v-model="i.key" placeholder="key" />
             </span>
             <span>
-              <el-select v-model="i.type" placeholder="type 必填">
+              <el-select v-model="i.type" placeholder="type">
                 <el-option label="string" value="string" />
                 <el-option label="int" value="int" />
                 <el-option label="float32" value="float32" />
@@ -82,7 +82,7 @@
               </el-select>
             </span>
             <span>
-              <el-input v-model="i.desc" placeholder="备注 必填" />
+              <el-input v-model="i.desc" placeholder="Description" />
             </span>
             <span>
               <el-button :icon="Plus" circle @click="addkv(form.response)" />
@@ -93,7 +93,7 @@
           </div>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="createPlug">创建</el-button>
+          <el-button type="primary" @click="createPlug">Create</el-button>
         </el-form-item>
       </el-form>
 
