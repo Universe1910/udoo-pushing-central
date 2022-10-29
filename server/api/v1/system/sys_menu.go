@@ -26,13 +26,13 @@ type AuthorityMenuApi struct{}
 func (a *AuthorityMenuApi) GetMenu(c *gin.Context) {
 	menus, err := menuService.GetMenuTree(utils.GetUserAuthorityId(c))
 	if err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Error(err))
-		response.FailWithMessage("获取失败", c)
+		global.GVA_LOG.Error("Fail!", zap.Error(err))
+		response.FailWithMessage("Fail", c)
 	}
 	if menus == nil {
 		menus = []system.SysMenu{}
 	}
-	response.OkWithDetailed(systemRes.SysMenusResponse{Menus: menus}, "获取成功", c)
+	response.OkWithDetailed(systemRes.SysMenusResponse{Menus: menus}, "Successful", c)
 }
 
 // GetBaseMenuTree
@@ -46,11 +46,11 @@ func (a *AuthorityMenuApi) GetMenu(c *gin.Context) {
 func (a *AuthorityMenuApi) GetBaseMenuTree(c *gin.Context) {
 	menus, err := menuService.GetBaseMenuTree()
 	if err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Error(err))
-		response.FailWithMessage("获取失败", c)
+		global.GVA_LOG.Error("Fail!", zap.Error(err))
+		response.FailWithMessage("Fail", c)
 		return
 	}
-	response.OkWithDetailed(systemRes.SysBaseMenusResponse{Menus: menus}, "获取成功", c)
+	response.OkWithDetailed(systemRes.SysBaseMenusResponse{Menus: menus}, "Successful", c)
 }
 
 // AddMenuAuthority
@@ -104,11 +104,11 @@ func (a *AuthorityMenuApi) GetMenuAuthority(c *gin.Context) {
 	}
 	menus, err := menuService.GetMenuAuthority(&param)
 	if err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Error(err))
-		response.FailWithDetailed(systemRes.SysMenusResponse{Menus: menus}, "获取失败", c)
+		global.GVA_LOG.Error("Fail!", zap.Error(err))
+		response.FailWithDetailed(systemRes.SysMenusResponse{Menus: menus}, "Fail", c)
 		return
 	}
-	response.OkWithDetailed(gin.H{"menus": menus}, "获取成功", c)
+	response.OkWithDetailed(gin.H{"menus": menus}, "Successful", c)
 }
 
 // AddBaseMenu
@@ -148,12 +148,12 @@ func (a *AuthorityMenuApi) AddBaseMenu(c *gin.Context) {
 
 // DeleteBaseMenu
 // @Tags      Menu
-// @Summary   删除菜单
+// @Summary   Delete 菜单
 // @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
 // @Param     data  body      request.GetById                true  "菜单id"
-// @Success   200   {object}  response.Response{msg=string}  "删除菜单"
+// @Success   200   {object}  response.Response{msg=string}  "Delete 菜单"
 // @Router    /menu/deleteBaseMenu [post]
 func (a *AuthorityMenuApi) DeleteBaseMenu(c *gin.Context) {
 	var menu request.GetById
@@ -169,11 +169,11 @@ func (a *AuthorityMenuApi) DeleteBaseMenu(c *gin.Context) {
 	}
 	err = baseMenuService.DeleteBaseMenu(menu.ID)
 	if err != nil {
-		global.GVA_LOG.Error("删除失败!", zap.Error(err))
-		response.FailWithMessage("删除失败", c)
+		global.GVA_LOG.Error("failed to delete!", zap.Error(err))
+		response.FailWithMessage("failed to delete", c)
 		return
 	}
-	response.OkWithMessage("删除成功", c)
+	response.OkWithMessage("successfully deleted", c)
 }
 
 // UpdateBaseMenu
@@ -204,11 +204,11 @@ func (a *AuthorityMenuApi) UpdateBaseMenu(c *gin.Context) {
 	}
 	err = baseMenuService.UpdateBaseMenu(menu)
 	if err != nil {
-		global.GVA_LOG.Error("更新失败!", zap.Error(err))
-		response.FailWithMessage("更新失败", c)
+		global.GVA_LOG.Error("Update failure!", zap.Error(err))
+		response.FailWithMessage("Update failure", c)
 		return
 	}
-	response.OkWithMessage("更新成功", c)
+	response.OkWithMessage("update completed", c)
 }
 
 // GetBaseMenuById
@@ -234,11 +234,11 @@ func (a *AuthorityMenuApi) GetBaseMenuById(c *gin.Context) {
 	}
 	menu, err := baseMenuService.GetBaseMenuById(idInfo.ID)
 	if err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Error(err))
-		response.FailWithMessage("获取失败", c)
+		global.GVA_LOG.Error("Fail!", zap.Error(err))
+		response.FailWithMessage("Fail", c)
 		return
 	}
-	response.OkWithDetailed(systemRes.SysBaseMenuResponse{Menu: menu}, "获取成功", c)
+	response.OkWithDetailed(systemRes.SysBaseMenuResponse{Menu: menu}, "Successful", c)
 }
 
 // GetMenuList
@@ -264,8 +264,8 @@ func (a *AuthorityMenuApi) GetMenuList(c *gin.Context) {
 	}
 	menuList, total, err := menuService.GetInfoList()
 	if err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Error(err))
-		response.FailWithMessage("获取失败", c)
+		global.GVA_LOG.Error("Fail!", zap.Error(err))
+		response.FailWithMessage("Fail", c)
 		return
 	}
 	response.OkWithDetailed(response.PageResult{
@@ -273,5 +273,5 @@ func (a *AuthorityMenuApi) GetMenuList(c *gin.Context) {
 		Total:    total,
 		Page:     pageInfo.Page,
 		PageSize: pageInfo.PageSize,
-	}, "获取成功", c)
+	}, "Successful", c)
 }

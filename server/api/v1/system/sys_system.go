@@ -23,11 +23,11 @@ type SystemApi struct{}
 func (s *SystemApi) GetSystemConfig(c *gin.Context) {
 	config, err := systemConfigService.GetSystemConfig()
 	if err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Error(err))
-		response.FailWithMessage("获取失败", c)
+		global.GVA_LOG.Error("Fail!", zap.Error(err))
+		response.FailWithMessage("Fail", c)
 		return
 	}
-	response.OkWithDetailed(systemRes.SysConfigResponse{Config: config}, "获取成功", c)
+	response.OkWithDetailed(systemRes.SysConfigResponse{Config: config}, "Successful", c)
 }
 
 // SetSystemConfig
@@ -81,9 +81,9 @@ func (s *SystemApi) ReloadSystem(c *gin.Context) {
 func (s *SystemApi) GetServerInfo(c *gin.Context) {
 	server, err := systemConfigService.GetServerInfo()
 	if err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Error(err))
-		response.FailWithMessage("获取失败", c)
+		global.GVA_LOG.Error("Fail!", zap.Error(err))
+		response.FailWithMessage("Fail", c)
 		return
 	}
-	response.OkWithDetailed(gin.H{"server": server}, "获取成功", c)
+	response.OkWithDetailed(gin.H{"server": server}, "Successful", c)
 }

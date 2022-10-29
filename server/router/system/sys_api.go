@@ -13,11 +13,11 @@ func (s *ApiRouter) InitApiRouter(Router *gin.RouterGroup) {
 	apiRouterWithoutRecord := Router.Group("api")
 	apiRouterApi := v1.ApiGroupApp.SystemApiGroup.SystemApiApi
 	{
-		apiRouter.POST("createApi", apiRouterApi.CreateApi)               // 创建Api
-		apiRouter.POST("deleteApi", apiRouterApi.DeleteApi)               // 删除Api
+		apiRouter.POST("createApi", apiRouterApi.CreateApi)               // Create Api
+		apiRouter.POST("deleteApi", apiRouterApi.DeleteApi)               // Delete Api
 		apiRouter.POST("getApiById", apiRouterApi.GetApiById)             // 获取单条Api消息
 		apiRouter.POST("updateApi", apiRouterApi.UpdateApi)               // 更新api
-		apiRouter.DELETE("deleteApisByIds", apiRouterApi.DeleteApisByIds) // 删除选中api
+		apiRouter.DELETE("deleteApisByIds", apiRouterApi.DeleteApisByIds) // Delete 选中api
 	}
 	{
 		apiRouterWithoutRecord.POST("getAllApis", apiRouterApi.GetAllApis) // 获取所有api

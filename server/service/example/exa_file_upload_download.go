@@ -13,7 +13,7 @@ import (
 
 //@author: [piexlmax](https://github.com/piexlmax)
 //@function: Upload
-//@description: 创建文件上传记录
+//@description: Create 文件上传记录
 //@param: file model.ExaFileUploadAndDownload
 //@return: error
 
@@ -35,7 +35,7 @@ func (e *FileUploadAndDownloadService) FindFile(id uint) (example.ExaFileUploadA
 
 //@author: [piexlmax](https://github.com/piexlmax)
 //@function: DeleteFile
-//@description: 删除文件记录
+//@description: Delete 文件记录
 //@param: file model.ExaFileUploadAndDownload
 //@return: err error
 
@@ -47,7 +47,7 @@ func (e *FileUploadAndDownloadService) DeleteFile(file example.ExaFileUploadAndD
 	}
 	oss := upload.NewOss()
 	if err = oss.DeleteFile(fileFromDb.Key); err != nil {
-		return errors.New("文件删除失败")
+		return errors.New("文件failed to delete")
 	}
 	err = global.GVA_DB.Where("id = ?", file.ID).Unscoped().Delete(&file).Error
 	return err

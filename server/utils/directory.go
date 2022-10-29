@@ -30,7 +30,7 @@ func PathExists(path string) (bool, error) {
 
 //@author: [piexlmax](https://github.com/piexlmax)
 //@function: CreateDir
-//@description: 批量创建文件夹
+//@description: 批量Create 文件夹
 //@param: dirs ...string
 //@return: err error
 

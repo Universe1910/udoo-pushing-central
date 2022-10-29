@@ -11,7 +11,7 @@ import (
 
 //@author: [piexlmax](https://github.com/piexlmax)
 //@function: DeleteSysDictionary
-//@description: 创建字典数据
+//@description: Create 字典数据
 //@param: sysDictionary model.SysDictionary
 //@return: err error
 
@@ -19,7 +19,7 @@ type DictionaryService struct{}
 
 func (dictionaryService *DictionaryService) CreateSysDictionary(sysDictionary system.SysDictionary) (err error) {
 	if (!errors.Is(global.GVA_DB.First(&system.SysDictionary{}, "type = ?", sysDictionary.Type).Error, gorm.ErrRecordNotFound)) {
-		return errors.New("存在相同的type，不允许创建")
+		return errors.New("存在相同的type，不允许Create ")
 	}
 	err = global.GVA_DB.Create(&sysDictionary).Error
 	return err
@@ -27,7 +27,7 @@ func (dictionaryService *DictionaryService) CreateSysDictionary(sysDictionary sy
 
 //@author: [piexlmax](https://github.com/piexlmax)
 //@function: DeleteSysDictionary
-//@description: 删除字典数据
+//@description: Delete 字典数据
 //@param: sysDictionary model.SysDictionary
 //@return: err error
 
@@ -67,7 +67,7 @@ func (dictionaryService *DictionaryService) UpdateSysDictionary(sysDictionary *s
 	db := global.GVA_DB.Where("id = ?", sysDictionary.ID).First(&dict)
 	if dict.Type != sysDictionary.Type {
 		if !errors.Is(global.GVA_DB.First(&system.SysDictionary{}, "type = ?", sysDictionary.Type).Error, gorm.ErrRecordNotFound) {
-			return errors.New("存在相同的type，不允许创建")
+			return errors.New("存在相同的type，不允许Create ")
 		}
 	}
 	err = db.Updates(sysDictionaryMap).Error
@@ -101,10 +101,10 @@ func (dictionaryService *DictionaryService) GetSysDictionary(Type string, Id uin
 func (dictionaryService *DictionaryService) GetSysDictionaryInfoList(info request.SysDictionarySearch) (list interface{}, total int64, err error) {
 	limit := info.PageSize
 	offset := info.PageSize * (info.Page - 1)
-	// 创建db
+	// Create db
 	db := global.GVA_DB.Model(&system.SysDictionary{})
 	var sysDictionarys []system.SysDictionary
-	// 如果有条件搜索 下方会自动创建搜索语句
+	// 如果有条件搜索 下方会自动Create 搜索语句
 	if info.Name != "" {
 		db = db.Where("`name` LIKE ?", "%"+info.Name+"%")
 	}

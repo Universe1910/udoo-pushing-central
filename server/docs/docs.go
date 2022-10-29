@@ -40,7 +40,7 @@ var doc = `{
                 "tags": [
                     "SysApi"
                 ],
-                "summary": "创建基础api",
+                "summary": "Create 基础api",
                 "parameters": [
                     {
                         "description": "api路径, api中文描述, api组, 方法",
@@ -54,7 +54,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "创建基础api",
+                        "description": "Create 基础api",
                         "schema": {
                             "allOf": [
                                 {
@@ -90,7 +90,7 @@ var doc = `{
                 "tags": [
                     "SysApi"
                 ],
-                "summary": "删除api",
+                "summary": "Delete api",
                 "parameters": [
                     {
                         "description": "ID",
@@ -104,7 +104,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "删除api",
+                        "description": "Delete api",
                         "schema": {
                             "allOf": [
                                 {
@@ -140,7 +140,7 @@ var doc = `{
                 "tags": [
                     "SysApi"
                 ],
-                "summary": "删除选中Api",
+                "summary": "Delete 选中Api",
                 "parameters": [
                     {
                         "description": "ID",
@@ -154,7 +154,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "删除选中Api",
+                        "description": "Delete 选中Api",
                         "schema": {
                             "allOf": [
                                 {
@@ -438,7 +438,7 @@ var doc = `{
                 "tags": [
                     "Authority"
                 ],
-                "summary": "创建角色",
+                "summary": "Create 角色",
                 "parameters": [
                     {
                         "description": "权限id, 权限名, 父角色id",
@@ -452,7 +452,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "创建角色,返回包括系统角色详情",
+                        "description": "Create 角色,返回包括系统角色详情",
                         "schema": {
                             "allOf": [
                                 {
@@ -491,10 +491,10 @@ var doc = `{
                 "tags": [
                     "Authority"
                 ],
-                "summary": "删除角色",
+                "summary": "Delete 角色",
                 "parameters": [
                     {
-                        "description": "删除角色",
+                        "description": "Delete 角色",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -505,7 +505,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "删除角色",
+                        "description": "Delete 角色",
                         "schema": {
                             "allOf": [
                                 {
@@ -700,7 +700,7 @@ var doc = `{
                 "summary": "设置权限按钮",
                 "responses": {
                     "200": {
-                        "description": "删除成功",
+                        "description": "successfully deleted",
                         "schema": {
                             "allOf": [
                                 {
@@ -839,10 +839,10 @@ var doc = `{
                 "tags": [
                     "AutoCode"
                 ],
-                "summary": "创建package",
+                "summary": "Create package",
                 "parameters": [
                     {
-                        "description": "创建package",
+                        "description": "Create package",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -853,7 +853,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "创建package成功",
+                        "description": "Create package成功",
                         "schema": {
                             "allOf": [
                                 {
@@ -950,7 +950,7 @@ var doc = `{
                 "summary": "自动代码模板",
                 "parameters": [
                     {
-                        "description": "创建自动代码",
+                        "description": "Create 自动代码",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -961,7 +961,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "{\"success\":true,\"data\":{},\"msg\":\"创建成功\"}",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"Successful creation\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -985,10 +985,10 @@ var doc = `{
                 "tags": [
                     "AutoCode"
                 ],
-                "summary": "删除package",
+                "summary": "Delete package",
                 "parameters": [
                     {
-                        "description": "创建package",
+                        "description": "Create package",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -999,7 +999,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "删除package成功",
+                        "description": "Delete package成功",
                         "schema": {
                             "allOf": [
                                 {
@@ -1039,7 +1039,7 @@ var doc = `{
                 "tags": [
                     "AutoCode"
                 ],
-                "summary": "删除回滚记录",
+                "summary": "Delete 回滚记录",
                 "parameters": [
                     {
                         "description": "请求参数",
@@ -1053,7 +1053,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "删除回滚记录",
+                        "description": "Delete 回滚记录",
                         "schema": {
                             "allOf": [
                                 {
@@ -1232,7 +1232,7 @@ var doc = `{
                 "summary": "获取package",
                 "responses": {
                     "200": {
-                        "description": "创建package成功",
+                        "description": "Create package成功",
                         "schema": {
                             "allOf": [
                                 {
@@ -1368,10 +1368,10 @@ var doc = `{
                 "tags": [
                     "AutoCode"
                 ],
-                "summary": "预览创建后的代码",
+                "summary": "预览Create 后的代码",
                 "parameters": [
                     {
-                        "description": "预览创建代码",
+                        "description": "预览Create 代码",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -1382,7 +1382,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "预览创建后的代码",
+                        "description": "预览Create 后的代码",
                         "schema": {
                             "allOf": [
                                 {
@@ -1666,7 +1666,7 @@ var doc = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "创建时间",
+                        "description": "Create 时间",
                         "name": "createdAt",
                         "in": "query"
                     },
@@ -1794,7 +1794,7 @@ var doc = `{
                 "tags": [
                     "ExaCustomer"
                 ],
-                "summary": "创建客户",
+                "summary": "Create 客户",
                 "parameters": [
                     {
                         "description": "客户用户名, 客户手机号码",
@@ -1808,7 +1808,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "创建客户",
+                        "description": "Create 客户",
                         "schema": {
                             "allOf": [
                                 {
@@ -1842,7 +1842,7 @@ var doc = `{
                 "tags": [
                     "ExaCustomer"
                 ],
-                "summary": "删除客户",
+                "summary": "Delete 客户",
                 "parameters": [
                     {
                         "description": "客户ID",
@@ -1856,7 +1856,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "删除客户",
+                        "description": "Delete 客户",
                         "schema": {
                             "allOf": [
                                 {
@@ -2213,7 +2213,7 @@ var doc = `{
                 "tags": [
                     "ExaFileUploadAndDownload"
                 ],
-                "summary": "删除文件",
+                "summary": "Delete 文件",
                 "parameters": [
                     {
                         "description": "传入文件里面id即可",
@@ -2227,7 +2227,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "删除文件",
+                        "description": "Delete 文件",
                         "schema": {
                             "allOf": [
                                 {
@@ -2263,7 +2263,7 @@ var doc = `{
                 "tags": [
                     "ExaFileUploadAndDownload"
                 ],
-                "summary": "创建文件",
+                "summary": "Create 文件",
                 "parameters": [
                     {
                         "type": "file",
@@ -2275,7 +2275,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "创建文件,返回包括文件路径",
+                        "description": "Create 文件,返回包括文件路径",
                         "schema": {
                             "allOf": [
                                 {
@@ -2367,11 +2367,11 @@ var doc = `{
                 "tags": [
                     "ExaFileUploadAndDownload"
                 ],
-                "summary": "删除切片",
+                "summary": "Delete 切片",
                 "parameters": [
                     {
                         "type": "file",
-                        "description": "删除缓存切片",
+                        "description": "Delete 缓存切片",
                         "name": "file",
                         "in": "formData",
                         "required": true
@@ -2379,7 +2379,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "删除切片",
+                        "description": "Delete 切片",
                         "schema": {
                             "allOf": [
                                 {
@@ -2682,7 +2682,7 @@ var doc = `{
                 "tags": [
                     "Menu"
                 ],
-                "summary": "删除菜单",
+                "summary": "Delete 菜单",
                 "parameters": [
                     {
                         "description": "菜单id",
@@ -2696,7 +2696,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "删除菜单",
+                        "description": "Delete 菜单",
                         "schema": {
                             "allOf": [
                                 {
@@ -3042,7 +3042,7 @@ var doc = `{
                 "tags": [
                     "SysDictionary"
                 ],
-                "summary": "创建SysDictionary",
+                "summary": "Create SysDictionary",
                 "parameters": [
                     {
                         "description": "SysDictionary模型",
@@ -3056,7 +3056,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "创建SysDictionary",
+                        "description": "Create SysDictionary",
                         "schema": {
                             "allOf": [
                                 {
@@ -3092,7 +3092,7 @@ var doc = `{
                 "tags": [
                     "SysDictionary"
                 ],
-                "summary": "删除SysDictionary",
+                "summary": "Delete SysDictionary",
                 "parameters": [
                     {
                         "description": "SysDictionary模型",
@@ -3106,7 +3106,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "删除SysDictionary",
+                        "description": "Delete SysDictionary",
                         "schema": {
                             "allOf": [
                                 {
@@ -3146,7 +3146,7 @@ var doc = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "创建时间",
+                        "description": "Create 时间",
                         "name": "createdAt",
                         "in": "query"
                     },
@@ -3233,7 +3233,7 @@ var doc = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "创建时间",
+                        "description": "Create 时间",
                         "name": "createdAt",
                         "in": "query"
                     },
@@ -3383,7 +3383,7 @@ var doc = `{
                 "tags": [
                     "SysDictionaryDetail"
                 ],
-                "summary": "创建SysDictionaryDetail",
+                "summary": "Create SysDictionaryDetail",
                 "parameters": [
                     {
                         "description": "SysDictionaryDetail模型",
@@ -3397,7 +3397,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "创建SysDictionaryDetail",
+                        "description": "Create SysDictionaryDetail",
                         "schema": {
                             "allOf": [
                                 {
@@ -3433,7 +3433,7 @@ var doc = `{
                 "tags": [
                     "SysDictionaryDetail"
                 ],
-                "summary": "删除SysDictionaryDetail",
+                "summary": "Delete SysDictionaryDetail",
                 "parameters": [
                     {
                         "description": "SysDictionaryDetail模型",
@@ -3447,7 +3447,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "删除SysDictionaryDetail",
+                        "description": "Delete SysDictionaryDetail",
                         "schema": {
                             "allOf": [
                                 {
@@ -3487,7 +3487,7 @@ var doc = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "创建时间",
+                        "description": "Create 时间",
                         "name": "createdAt",
                         "in": "query"
                     },
@@ -3580,7 +3580,7 @@ var doc = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "创建时间",
+                        "description": "Create 时间",
                         "name": "createdAt",
                         "in": "query"
                     },
@@ -3736,10 +3736,10 @@ var doc = `{
                 "tags": [
                     "SysOperationRecord"
                 ],
-                "summary": "创建SysOperationRecord",
+                "summary": "Create SysOperationRecord",
                 "parameters": [
                     {
-                        "description": "创建SysOperationRecord",
+                        "description": "Create SysOperationRecord",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -3750,7 +3750,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "创建SysOperationRecord",
+                        "description": "Create SysOperationRecord",
                         "schema": {
                             "allOf": [
                                 {
@@ -3786,7 +3786,7 @@ var doc = `{
                 "tags": [
                     "SysOperationRecord"
                 ],
-                "summary": "删除SysOperationRecord",
+                "summary": "Delete SysOperationRecord",
                 "parameters": [
                     {
                         "description": "SysOperationRecord模型",
@@ -3800,7 +3800,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "删除SysOperationRecord",
+                        "description": "Delete SysOperationRecord",
                         "schema": {
                             "allOf": [
                                 {
@@ -3836,10 +3836,10 @@ var doc = `{
                 "tags": [
                     "SysOperationRecord"
                 ],
-                "summary": "批量删除SysOperationRecord",
+                "summary": "批量Delete SysOperationRecord",
                 "parameters": [
                     {
-                        "description": "批量删除SysOperationRecord",
+                        "description": "批量Delete SysOperationRecord",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -3850,7 +3850,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "批量删除SysOperationRecord",
+                        "description": "批量Delete SysOperationRecord",
                         "schema": {
                             "allOf": [
                                 {
@@ -3902,7 +3902,7 @@ var doc = `{
                     },
                     {
                         "type": "string",
-                        "description": "创建时间",
+                        "description": "Create 时间",
                         "name": "createdAt",
                         "in": "query"
                     },
@@ -4025,7 +4025,7 @@ var doc = `{
                     },
                     {
                         "type": "string",
-                        "description": "创建时间",
+                        "description": "Create 时间",
                         "name": "createdAt",
                         "in": "query"
                     },
@@ -4457,7 +4457,7 @@ var doc = `{
                 "tags": [
                     "SysUser"
                 ],
-                "summary": "删除用户",
+                "summary": "Delete 用户",
                 "parameters": [
                     {
                         "description": "用户ID",
@@ -4471,7 +4471,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "删除用户",
+                        "description": "Delete 用户",
                         "schema": {
                             "allOf": [
                                 {
@@ -5444,7 +5444,7 @@ var doc = `{
             "type": "object",
             "properties": {
                 "createdAt": {
-                    "description": "创建时间",
+                    "description": "Create 时间",
                     "type": "string"
                 },
                 "customerName": {
@@ -5484,7 +5484,7 @@ var doc = `{
                     "type": "integer"
                 },
                 "createdAt": {
-                    "description": "创建时间",
+                    "description": "Create 时间",
                     "type": "string"
                 },
                 "exaFileChunk": {
@@ -5519,7 +5519,7 @@ var doc = `{
             "type": "object",
             "properties": {
                 "createdAt": {
-                    "description": "创建时间",
+                    "description": "Create 时间",
                     "type": "string"
                 },
                 "exaFileID": {
@@ -5545,7 +5545,7 @@ var doc = `{
             "type": "object",
             "properties": {
                 "createdAt": {
-                    "description": "创建时间",
+                    "description": "Create 时间",
                     "type": "string"
                 },
                 "id": {
@@ -5781,7 +5781,7 @@ var doc = `{
             "type": "object",
             "properties": {
                 "deleteTable": {
-                    "description": "是否删除表",
+                    "description": "是否Delete 表",
                     "type": "boolean"
                 },
                 "id": {
@@ -5798,7 +5798,7 @@ var doc = `{
                     "type": "string"
                 },
                 "createdAt": {
-                    "description": "创建时间",
+                    "description": "Create 时间",
                     "type": "string"
                 },
                 "desc": {
@@ -5818,7 +5818,7 @@ var doc = `{
                     "type": "string"
                 },
                 "method": {
-                    "description": "方法:创建POST(默认)|查看GET|更新PUT|删除DELETE",
+                    "description": "方法:Create POST(默认)|查看GET|更新PUT|Delete DELETE",
                     "type": "string"
                 },
                 "orderKey": {
@@ -6124,11 +6124,11 @@ var doc = `{
                     "type": "string"
                 },
                 "autoCreateApiToSql": {
-                    "description": "是否自动创建api",
+                    "description": "是否自动Create api",
                     "type": "boolean"
                 },
                 "autoCreateResource": {
-                    "description": "是否自动创建资源标识",
+                    "description": "是否自动Create 资源标识",
                     "type": "boolean"
                 },
                 "autoMoveFile": {
@@ -6230,7 +6230,7 @@ var doc = `{
                     "type": "string"
                 },
                 "createdAt": {
-                    "description": "创建时间",
+                    "description": "Create 时间",
                     "type": "string"
                 },
                 "description": {
@@ -6242,7 +6242,7 @@ var doc = `{
                     "type": "integer"
                 },
                 "method": {
-                    "description": "方法:创建POST(默认)|查看GET|更新PUT|删除DELETE",
+                    "description": "方法:Create POST(默认)|查看GET|更新PUT|Delete DELETE",
                     "type": "string"
                 },
                 "path": {
@@ -6273,7 +6273,7 @@ var doc = `{
                     }
                 },
                 "createdAt": {
-                    "description": "创建时间",
+                    "description": "Create 时间",
                     "type": "string"
                 },
                 "dataAuthorityId": {
@@ -6309,7 +6309,7 @@ var doc = `{
             "type": "object",
             "properties": {
                 "createdAt": {
-                    "description": "创建时间",
+                    "description": "Create 时间",
                     "type": "string"
                 },
                 "desc": {
@@ -6355,7 +6355,7 @@ var doc = `{
                     "type": "string"
                 },
                 "createdAt": {
-                    "description": "创建时间",
+                    "description": "Create 时间",
                     "type": "string"
                 },
                 "defaultMenu": {
@@ -6420,7 +6420,7 @@ var doc = `{
             "type": "object",
             "properties": {
                 "createdAt": {
-                    "description": "创建时间",
+                    "description": "Create 时间",
                     "type": "string"
                 },
                 "desc": {
@@ -6446,7 +6446,7 @@ var doc = `{
             "type": "object",
             "properties": {
                 "createdAt": {
-                    "description": "创建时间",
+                    "description": "Create 时间",
                     "type": "string"
                 },
                 "id": {
@@ -6478,7 +6478,7 @@ var doc = `{
             "type": "object",
             "properties": {
                 "createdAt": {
-                    "description": "创建时间",
+                    "description": "Create 时间",
                     "type": "string"
                 },
                 "desc": {
@@ -6517,7 +6517,7 @@ var doc = `{
             "type": "object",
             "properties": {
                 "createdAt": {
-                    "description": "创建时间",
+                    "description": "Create 时间",
                     "type": "string"
                 },
                 "id": {
@@ -6580,7 +6580,7 @@ var doc = `{
                     "type": "string"
                 },
                 "createdAt": {
-                    "description": "创建时间",
+                    "description": "Create 时间",
                     "type": "string"
                 },
                 "defaultMenu": {
@@ -6656,7 +6656,7 @@ var doc = `{
                     "type": "string"
                 },
                 "createdAt": {
-                    "description": "创建时间",
+                    "description": "Create 时间",
                     "type": "string"
                 },
                 "error_message": {
@@ -6729,7 +6729,7 @@ var doc = `{
                     "type": "string"
                 },
                 "createdAt": {
-                    "description": "创建时间",
+                    "description": "Create 时间",
                     "type": "string"
                 },
                 "email": {

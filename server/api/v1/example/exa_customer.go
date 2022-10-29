@@ -15,12 +15,12 @@ type CustomerApi struct{}
 
 // CreateExaCustomer
 // @Tags      ExaCustomer
-// @Summary   创建客户
+// @Summary   Create 客户
 // @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
 // @Param     data  body      example.ExaCustomer            true  "客户用户名, 客户手机号码"
-// @Success   200   {object}  response.Response{msg=string}  "创建客户"
+// @Success   200   {object}  response.Response{msg=string}  "Create 客户"
 // @Router    /customer/customer [post]
 func (e *CustomerApi) CreateExaCustomer(c *gin.Context) {
 	var customer example.ExaCustomer
@@ -38,21 +38,21 @@ func (e *CustomerApi) CreateExaCustomer(c *gin.Context) {
 	customer.SysUserAuthorityID = utils.GetUserAuthorityId(c)
 	err = customerService.CreateExaCustomer(customer)
 	if err != nil {
-		global.GVA_LOG.Error("创建失败!", zap.Error(err))
-		response.FailWithMessage("创建失败", c)
+		global.GVA_LOG.Error("Failed to create!", zap.Error(err))
+		response.FailWithMessage("Failed to create", c)
 		return
 	}
-	response.OkWithMessage("创建成功", c)
+	response.OkWithMessage("Successful creation", c)
 }
 
 // DeleteExaCustomer
 // @Tags      ExaCustomer
-// @Summary   删除客户
+// @Summary   Delete 客户
 // @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
 // @Param     data  body      example.ExaCustomer            true  "客户ID"
-// @Success   200   {object}  response.Response{msg=string}  "删除客户"
+// @Success   200   {object}  response.Response{msg=string}  "Delete 客户"
 // @Router    /customer/customer [delete]
 func (e *CustomerApi) DeleteExaCustomer(c *gin.Context) {
 	var customer example.ExaCustomer
@@ -68,11 +68,11 @@ func (e *CustomerApi) DeleteExaCustomer(c *gin.Context) {
 	}
 	err = customerService.DeleteExaCustomer(customer)
 	if err != nil {
-		global.GVA_LOG.Error("删除失败!", zap.Error(err))
-		response.FailWithMessage("删除失败", c)
+		global.GVA_LOG.Error("failed to delete!", zap.Error(err))
+		response.FailWithMessage("failed to delete", c)
 		return
 	}
-	response.OkWithMessage("删除成功", c)
+	response.OkWithMessage("successfully deleted", c)
 }
 
 // UpdateExaCustomer
@@ -103,11 +103,11 @@ func (e *CustomerApi) UpdateExaCustomer(c *gin.Context) {
 	}
 	err = customerService.UpdateExaCustomer(&customer)
 	if err != nil {
-		global.GVA_LOG.Error("更新失败!", zap.Error(err))
-		response.FailWithMessage("更新失败", c)
+		global.GVA_LOG.Error("Update failure!", zap.Error(err))
+		response.FailWithMessage("Update failure", c)
 		return
 	}
-	response.OkWithMessage("更新成功", c)
+	response.OkWithMessage("update completed", c)
 }
 
 // GetExaCustomer
@@ -133,11 +133,11 @@ func (e *CustomerApi) GetExaCustomer(c *gin.Context) {
 	}
 	data, err := customerService.GetExaCustomer(customer.ID)
 	if err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Error(err))
-		response.FailWithMessage("获取失败", c)
+		global.GVA_LOG.Error("Fail!", zap.Error(err))
+		response.FailWithMessage("Fail", c)
 		return
 	}
-	response.OkWithDetailed(exampleRes.ExaCustomerResponse{Customer: data}, "获取成功", c)
+	response.OkWithDetailed(exampleRes.ExaCustomerResponse{Customer: data}, "Successful", c)
 }
 
 // GetExaCustomerList
@@ -163,8 +163,8 @@ func (e *CustomerApi) GetExaCustomerList(c *gin.Context) {
 	}
 	customerList, total, err := customerService.GetCustomerInfoList(utils.GetUserAuthorityId(c), pageInfo)
 	if err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Error(err))
-		response.FailWithMessage("获取失败"+err.Error(), c)
+		global.GVA_LOG.Error("Fail!", zap.Error(err))
+		response.FailWithMessage("Fail"+err.Error(), c)
 		return
 	}
 	response.OkWithDetailed(response.PageResult{
@@ -172,5 +172,5 @@ func (e *CustomerApi) GetExaCustomerList(c *gin.Context) {
 		Total:    total,
 		Page:     pageInfo.Page,
 		PageSize: pageInfo.PageSize,
-	}, "获取成功", c)
+	}, "Successful", c)
 }

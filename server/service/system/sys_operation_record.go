@@ -9,7 +9,7 @@ import (
 
 //@author: [granty1](https://github.com/granty1)
 //@function: CreateSysOperationRecord
-//@description: 创建记录
+//@description: Create 记录
 //@param: sysOperationRecord model.SysOperationRecord
 //@return: err error
 
@@ -23,7 +23,7 @@ func (operationRecordService *OperationRecordService) CreateSysOperationRecord(s
 //@author: [granty1](https://github.com/granty1)
 //@author: [piexlmax](https://github.com/piexlmax)
 //@function: DeleteSysOperationRecordByIds
-//@description: 批量删除记录
+//@description: 批量Delete 记录
 //@param: ids request.IdsReq
 //@return: err error
 
@@ -34,7 +34,7 @@ func (operationRecordService *OperationRecordService) DeleteSysOperationRecordBy
 
 //@author: [granty1](https://github.com/granty1)
 //@function: DeleteSysOperationRecord
-//@description: 删除操作记录
+//@description: Delete 操作记录
 //@param: sysOperationRecord model.SysOperationRecord
 //@return: err error
 
@@ -64,10 +64,10 @@ func (operationRecordService *OperationRecordService) GetSysOperationRecord(id u
 func (operationRecordService *OperationRecordService) GetSysOperationRecordInfoList(info systemReq.SysOperationRecordSearch) (list interface{}, total int64, err error) {
 	limit := info.PageSize
 	offset := info.PageSize * (info.Page - 1)
-	// 创建db
+	// Create db
 	db := global.GVA_DB.Model(&system.SysOperationRecord{})
 	var sysOperationRecords []system.SysOperationRecord
-	// 如果有条件搜索 下方会自动创建搜索语句
+	// 如果有条件搜索 下方会自动Create 搜索语句
 	if info.Method != "" {
 		db = db.Where("method = ?", info.Method)
 	}

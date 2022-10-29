@@ -32,17 +32,17 @@ func (a *AutoCodeHistoryApi) First(c *gin.Context) {
 		response.FailWithMessage(err.Error(), c)
 		return
 	}
-	response.OkWithDetailed(gin.H{"meta": data}, "获取成功", c)
+	response.OkWithDetailed(gin.H{"meta": data}, "Successful", c)
 }
 
 // Delete
 // @Tags      AutoCode
-// @Summary   删除回滚记录
+// @Summary   Delete 回滚记录
 // @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
 // @Param     data  body      request.GetById                true  "请求参数"
-// @Success   200   {object}  response.Response{msg=string}  "删除回滚记录"
+// @Success   200   {object}  response.Response{msg=string}  "Delete 回滚记录"
 // @Router    /autoCode/delSysHistory [post]
 func (a *AutoCodeHistoryApi) Delete(c *gin.Context) {
 	var info request.GetById
@@ -53,11 +53,11 @@ func (a *AutoCodeHistoryApi) Delete(c *gin.Context) {
 	}
 	err = autoCodeHistoryService.Delete(&info)
 	if err != nil {
-		global.GVA_LOG.Error("删除失败!", zap.Error(err))
-		response.FailWithMessage("删除失败", c)
+		global.GVA_LOG.Error("failed to delete!", zap.Error(err))
+		response.FailWithMessage("failed to delete", c)
 		return
 	}
-	response.OkWithMessage("删除成功", c)
+	response.OkWithMessage("successfully deleted", c)
 }
 
 // RollBack
@@ -102,8 +102,8 @@ func (a *AutoCodeHistoryApi) GetList(c *gin.Context) {
 	}
 	list, total, err := autoCodeHistoryService.GetList(search.PageInfo)
 	if err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Error(err))
-		response.FailWithMessage("获取失败", c)
+		global.GVA_LOG.Error("Fail!", zap.Error(err))
+		response.FailWithMessage("Fail", c)
 		return
 	}
 	response.OkWithDetailed(response.PageResult{
@@ -111,5 +111,5 @@ func (a *AutoCodeHistoryApi) GetList(c *gin.Context) {
 		Total:    total,
 		Page:     search.Page,
 		PageSize: search.PageSize,
-	}, "获取成功", c)
+	}, "Successful", c)
 }

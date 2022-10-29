@@ -73,7 +73,7 @@ func (t *timer) StopTask(taskName string) {
 	}
 }
 
-// Remove 从taskName 删除指定任务
+// Remove 从taskName Delete 指定任务
 func (t *timer) Remove(taskName string, id int) {
 	t.Lock()
 	defer t.Unlock()

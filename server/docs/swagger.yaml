@@ -456,7 +456,7 @@ definitions:
   example.ExaCustomer:
     properties:
       createdAt:
-        description: 创建时间
+        description: Create 时间
         type: string
       customerName:
         description: 客户名
@@ -485,7 +485,7 @@ definitions:
       chunkTotal:
         type: integer
       createdAt:
-        description: 创建时间
+        description: Create 时间
         type: string
       exaFileChunk:
         items:
@@ -509,7 +509,7 @@ definitions:
   example.ExaFileChunk:
     properties:
       createdAt:
-        description: 创建时间
+        description: Create 时间
         type: string
       exaFileID:
         type: integer
@@ -527,7 +527,7 @@ definitions:
   example.ExaFileUploadAndDownload:
     properties:
       createdAt:
-        description: 创建时间
+        description: Create 时间
         type: string
       id:
         description: 主键ID
@@ -690,7 +690,7 @@ definitions:
   request.RollBack:
     properties:
       deleteTable:
-        description: 是否删除表
+        description: 是否Delete 表
         type: boolean
       id:
         description: 主键ID
@@ -702,7 +702,7 @@ definitions:
         description: api组
         type: string
       createdAt:
-        description: 创建时间
+        description: Create 时间
         type: string
       desc:
         description: 排序方式:升序false(默认)|降序true
@@ -717,7 +717,7 @@ definitions:
         description: 关键字
         type: string
       method:
-        description: 方法:创建POST(默认)|查看GET|更新PUT|删除DELETE
+        description: 方法:Create POST(默认)|查看GET|更新PUT|Delete DELETE
         type: string
       orderKey:
         description: 排序
@@ -918,10 +918,10 @@ definitions:
         description: Struct简称
         type: string
       autoCreateApiToSql:
-        description: 是否自动创建api
+        description: 是否自动Create api
         type: boolean
       autoCreateResource:
-        description: 是否自动创建资源标识
+        description: 是否自动Create 资源标识
         type: boolean
       autoMoveFile:
         description: 是否自动移动文件
@@ -995,7 +995,7 @@ definitions:
         description: api组
         type: string
       createdAt:
-        description: 创建时间
+        description: Create 时间
         type: string
       description:
         description: api中文描述
@@ -1004,7 +1004,7 @@ definitions:
         description: 主键ID
         type: integer
       method:
-        description: 方法:创建POST(默认)|查看GET|更新PUT|删除DELETE
+        description: 方法:Create POST(默认)|查看GET|更新PUT|Delete DELETE
         type: string
       path:
         description: api路径
@@ -1026,7 +1026,7 @@ definitions:
           $ref: '#/definitions/system.SysAuthority'
         type: array
       createdAt:
-        description: 创建时间
+        description: Create 时间
         type: string
       dataAuthorityId:
         items:
@@ -1051,7 +1051,7 @@ definitions:
   system.SysAutoCode:
     properties:
       createdAt:
-        description: 创建时间
+        description: Create 时间
         type: string
       desc:
         type: string
@@ -1083,7 +1083,7 @@ definitions:
         description: 对应前端文件路径
         type: string
       createdAt:
-        description: 创建时间
+        description: Create 时间
         type: string
       defaultMenu:
         description: 是否是基础路由（开发中）
@@ -1130,7 +1130,7 @@ definitions:
   system.SysBaseMenuBtn:
     properties:
       createdAt:
-        description: 创建时间
+        description: Create 时间
         type: string
       desc:
         type: string
@@ -1148,7 +1148,7 @@ definitions:
   system.SysBaseMenuParameter:
     properties:
       createdAt:
-        description: 创建时间
+        description: Create 时间
         type: string
       id:
         description: 主键ID
@@ -1171,7 +1171,7 @@ definitions:
   system.SysDictionary:
     properties:
       createdAt:
-        description: 创建时间
+        description: Create 时间
         type: string
       desc:
         description: 描述
@@ -1199,7 +1199,7 @@ definitions:
   system.SysDictionaryDetail:
     properties:
       createdAt:
-        description: 创建时间
+        description: Create 时间
         type: string
       id:
         description: 主键ID
@@ -1244,7 +1244,7 @@ definitions:
         description: 对应前端文件路径
         type: string
       createdAt:
-        description: 创建时间
+        description: Create 时间
         type: string
       defaultMenu:
         description: 是否是基础路由（开发中）
@@ -1299,7 +1299,7 @@ definitions:
         description: 请求Body
         type: string
       createdAt:
-        description: 创建时间
+        description: Create 时间
         type: string
       error_message:
         description: 错误信息
@@ -1352,7 +1352,7 @@ definitions:
         description: 基础颜色
         type: string
       createdAt:
-        description: 创建时间
+        description: Create 时间
         type: string
       email:
         description: 用户邮箱
@@ -1411,7 +1411,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: 创建基础api
+          description: Create 基础api
           schema:
             allOf:
             - $ref: '#/definitions/response.Response'
@@ -1421,7 +1421,7 @@ paths:
               type: object
       security:
       - ApiKeyAuth: []
-      summary: 创建基础api
+      summary: Create 基础api
       tags:
       - SysApi
   /api/deleteApi:
@@ -1439,7 +1439,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: 删除api
+          description: Delete api
           schema:
             allOf:
             - $ref: '#/definitions/response.Response'
@@ -1449,7 +1449,7 @@ paths:
               type: object
       security:
       - ApiKeyAuth: []
-      summary: 删除api
+      summary: Delete api
       tags:
       - SysApi
   /api/deleteApisByIds:
@@ -1467,7 +1467,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: 删除选中Api
+          description: Delete 选中Api
           schema:
             allOf:
             - $ref: '#/definitions/response.Response'
@@ -1477,7 +1477,7 @@ paths:
               type: object
       security:
       - ApiKeyAuth: []
-      summary: 删除选中Api
+      summary: Delete 选中Api
       tags:
       - SysApi
   /api/getAllApis:
@@ -1634,7 +1634,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: 创建角色,返回包括系统角色详情
+          description: Create 角色,返回包括系统角色详情
           schema:
             allOf:
             - $ref: '#/definitions/response.Response'
@@ -1646,7 +1646,7 @@ paths:
               type: object
       security:
       - ApiKeyAuth: []
-      summary: 创建角色
+      summary: Create 角色
       tags:
       - Authority
   /authority/deleteAuthority:
@@ -1654,7 +1654,7 @@ paths:
       consumes:
       - application/json
       parameters:
-      - description: 删除角色
+      - description: Delete 角色
         in: body
         name: data
         required: true
@@ -1664,7 +1664,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: 删除角色
+          description: Delete 角色
           schema:
             allOf:
             - $ref: '#/definitions/response.Response'
@@ -1674,7 +1674,7 @@ paths:
               type: object
       security:
       - ApiKeyAuth: []
-      summary: 删除角色
+      summary: Delete 角色
       tags:
       - Authority
   /authority/getAuthorityList:
@@ -1773,7 +1773,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: 删除成功
+          description: successfully deleted
           schema:
             allOf:
             - $ref: '#/definitions/response.Response'
@@ -1849,7 +1849,7 @@ paths:
       consumes:
       - application/json
       parameters:
-      - description: 创建package
+      - description: Create package
         in: body
         name: data
         required: true
@@ -1859,7 +1859,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: 创建package成功
+          description: Create package成功
           schema:
             allOf:
             - $ref: '#/definitions/response.Response'
@@ -1872,7 +1872,7 @@ paths:
               type: object
       security:
       - ApiKeyAuth: []
-      summary: 创建package
+      summary: Create package
       tags:
       - AutoCode
   /autoCode/createPlug:
@@ -1911,7 +1911,7 @@ paths:
       consumes:
       - application/json
       parameters:
-      - description: 创建自动代码
+      - description: Create 自动代码
         in: body
         name: data
         required: true
@@ -1921,7 +1921,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: '{"success":true,"data":{},"msg":"创建成功"}'
+          description: '{"success":true,"data":{},"msg":"Successful creation"}'
           schema:
             type: string
       security:
@@ -1934,7 +1934,7 @@ paths:
       consumes:
       - application/json
       parameters:
-      - description: 创建package
+      - description: Create package
         in: body
         name: data
         required: true
@@ -1944,7 +1944,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: 删除package成功
+          description: Delete package成功
           schema:
             allOf:
             - $ref: '#/definitions/response.Response'
@@ -1957,7 +1957,7 @@ paths:
               type: object
       security:
       - ApiKeyAuth: []
-      summary: 删除package
+      summary: Delete package
       tags:
       - AutoCode
   /autoCode/delSysHistory:
@@ -1975,7 +1975,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: 删除回滚记录
+          description: Delete 回滚记录
           schema:
             allOf:
             - $ref: '#/definitions/response.Response'
@@ -1985,7 +1985,7 @@ paths:
               type: object
       security:
       - ApiKeyAuth: []
-      summary: 删除回滚记录
+      summary: Delete 回滚记录
       tags:
       - AutoCode
   /autoCode/getColumn:
@@ -2075,7 +2075,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: 创建package成功
+          description: Create package成功
           schema:
             allOf:
             - $ref: '#/definitions/response.Response'
@@ -2150,7 +2150,7 @@ paths:
       consumes:
       - application/json
       parameters:
-      - description: 预览创建代码
+      - description: 预览Create 代码
         in: body
         name: data
         required: true
@@ -2160,7 +2160,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: 预览创建后的代码
+          description: 预览Create 后的代码
           schema:
             allOf:
             - $ref: '#/definitions/response.Response'
@@ -2173,7 +2173,7 @@ paths:
               type: object
       security:
       - ApiKeyAuth: []
-      summary: 预览创建后的代码
+      summary: 预览Create 后的代码
       tags:
       - AutoCode
   /autoCode/rollback:
@@ -2326,7 +2326,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: 删除客户
+          description: Delete 客户
           schema:
             allOf:
             - $ref: '#/definitions/response.Response'
@@ -2336,14 +2336,14 @@ paths:
               type: object
       security:
       - ApiKeyAuth: []
-      summary: 删除客户
+      summary: Delete 客户
       tags:
       - ExaCustomer
     get:
       consumes:
       - application/json
       parameters:
-      - description: 创建时间
+      - description: Create 时间
         in: query
         name: createdAt
         type: string
@@ -2404,7 +2404,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: 创建客户
+          description: Create 客户
           schema:
             allOf:
             - $ref: '#/definitions/response.Response'
@@ -2414,7 +2414,7 @@ paths:
               type: object
       security:
       - ApiKeyAuth: []
-      summary: 创建客户
+      summary: Create 客户
       tags:
       - ExaCustomer
     put:
@@ -2644,7 +2644,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: 删除文件
+          description: Delete 文件
           schema:
             allOf:
             - $ref: '#/definitions/response.Response'
@@ -2654,7 +2654,7 @@ paths:
               type: object
       security:
       - ApiKeyAuth: []
-      summary: 删除文件
+      summary: Delete 文件
       tags:
       - ExaFileUploadAndDownload
   /fileUploadAndDownload/findFile:
@@ -2671,7 +2671,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: 创建文件,返回包括文件路径
+          description: Create 文件,返回包括文件路径
           schema:
             allOf:
             - $ref: '#/definitions/response.Response'
@@ -2683,7 +2683,7 @@ paths:
               type: object
       security:
       - ApiKeyAuth: []
-      summary: 创建文件
+      summary: Create 文件
       tags:
       - ExaFileUploadAndDownload
   /fileUploadAndDownload/getFileList:
@@ -2721,7 +2721,7 @@ paths:
       consumes:
       - multipart/form-data
       parameters:
-      - description: 删除缓存切片
+      - description: Delete 缓存切片
         in: formData
         name: file
         required: true
@@ -2730,7 +2730,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: 删除切片
+          description: Delete 切片
           schema:
             allOf:
             - $ref: '#/definitions/response.Response'
@@ -2740,7 +2740,7 @@ paths:
               type: object
       security:
       - ApiKeyAuth: []
-      summary: 删除切片
+      summary: Delete 切片
       tags:
       - ExaFileUploadAndDownload
   /fileUploadAndDownload/upload:
@@ -2908,7 +2908,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: 删除菜单
+          description: Delete 菜单
           schema:
             allOf:
             - $ref: '#/definitions/response.Response'
@@ -2918,7 +2918,7 @@ paths:
               type: object
       security:
       - ApiKeyAuth: []
-      summary: 删除菜单
+      summary: Delete 菜单
       tags:
       - Menu
   /menu/getBaseMenuById:
@@ -3111,7 +3111,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: 创建SysDictionary
+          description: Create SysDictionary
           schema:
             allOf:
             - $ref: '#/definitions/response.Response'
@@ -3121,7 +3121,7 @@ paths:
               type: object
       security:
       - ApiKeyAuth: []
-      summary: 创建SysDictionary
+      summary: Create SysDictionary
       tags:
       - SysDictionary
   /sysDictionary/deleteSysDictionary:
@@ -3139,7 +3139,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: 删除SysDictionary
+          description: Delete SysDictionary
           schema:
             allOf:
             - $ref: '#/definitions/response.Response'
@@ -3149,7 +3149,7 @@ paths:
               type: object
       security:
       - ApiKeyAuth: []
-      summary: 删除SysDictionary
+      summary: Delete SysDictionary
       tags:
       - SysDictionary
   /sysDictionary/findSysDictionary:
@@ -3157,7 +3157,7 @@ paths:
       consumes:
       - application/json
       parameters:
-      - description: 创建时间
+      - description: Create 时间
         in: query
         name: createdAt
         type: string
@@ -3210,7 +3210,7 @@ paths:
       consumes:
       - application/json
       parameters:
-      - description: 创建时间
+      - description: Create 时间
         in: query
         name: createdAt
         type: string
@@ -3312,7 +3312,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: 创建SysDictionaryDetail
+          description: Create SysDictionaryDetail
           schema:
             allOf:
             - $ref: '#/definitions/response.Response'
@@ -3322,7 +3322,7 @@ paths:
               type: object
       security:
       - ApiKeyAuth: []
-      summary: 创建SysDictionaryDetail
+      summary: Create SysDictionaryDetail
       tags:
       - SysDictionaryDetail
   /sysDictionaryDetail/deleteSysDictionaryDetail:
@@ -3340,7 +3340,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: 删除SysDictionaryDetail
+          description: Delete SysDictionaryDetail
           schema:
             allOf:
             - $ref: '#/definitions/response.Response'
@@ -3350,7 +3350,7 @@ paths:
               type: object
       security:
       - ApiKeyAuth: []
-      summary: 删除SysDictionaryDetail
+      summary: Delete SysDictionaryDetail
       tags:
       - SysDictionaryDetail
   /sysDictionaryDetail/findSysDictionaryDetail:
@@ -3358,7 +3358,7 @@ paths:
       consumes:
       - application/json
       parameters:
-      - description: 创建时间
+      - description: Create 时间
         in: query
         name: createdAt
         type: string
@@ -3415,7 +3415,7 @@ paths:
       consumes:
       - application/json
       parameters:
-      - description: 创建时间
+      - description: Create 时间
         in: query
         name: createdAt
         type: string
@@ -3511,7 +3511,7 @@ paths:
       consumes:
       - application/json
       parameters:
-      - description: 创建SysOperationRecord
+      - description: Create SysOperationRecord
         in: body
         name: data
         required: true
@@ -3521,7 +3521,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: 创建SysOperationRecord
+          description: Create SysOperationRecord
           schema:
             allOf:
             - $ref: '#/definitions/response.Response'
@@ -3531,7 +3531,7 @@ paths:
               type: object
       security:
       - ApiKeyAuth: []
-      summary: 创建SysOperationRecord
+      summary: Create SysOperationRecord
       tags:
       - SysOperationRecord
   /sysOperationRecord/deleteSysOperationRecord:
@@ -3549,7 +3549,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: 删除SysOperationRecord
+          description: Delete SysOperationRecord
           schema:
             allOf:
             - $ref: '#/definitions/response.Response'
@@ -3559,7 +3559,7 @@ paths:
               type: object
       security:
       - ApiKeyAuth: []
-      summary: 删除SysOperationRecord
+      summary: Delete SysOperationRecord
       tags:
       - SysOperationRecord
   /sysOperationRecord/deleteSysOperationRecordByIds:
@@ -3567,7 +3567,7 @@ paths:
       consumes:
       - application/json
       parameters:
-      - description: 批量删除SysOperationRecord
+      - description: 批量Delete SysOperationRecord
         in: body
         name: data
         required: true
@@ -3577,7 +3577,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: 批量删除SysOperationRecord
+          description: 批量Delete SysOperationRecord
           schema:
             allOf:
             - $ref: '#/definitions/response.Response'
@@ -3587,7 +3587,7 @@ paths:
               type: object
       security:
       - ApiKeyAuth: []
-      summary: 批量删除SysOperationRecord
+      summary: 批量Delete SysOperationRecord
       tags:
       - SysOperationRecord
   /sysOperationRecord/findSysOperationRecord:
@@ -3603,7 +3603,7 @@ paths:
         in: query
         name: body
         type: string
-      - description: 创建时间
+      - description: Create 时间
         in: query
         name: createdAt
         type: string
@@ -3680,7 +3680,7 @@ paths:
         in: query
         name: body
         type: string
-      - description: 创建时间
+      - description: Create 时间
         in: query
         name: createdAt
         type: string
@@ -3941,7 +3941,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: 删除用户
+          description: Delete 用户
           schema:
             allOf:
             - $ref: '#/definitions/response.Response'
@@ -3951,7 +3951,7 @@ paths:
               type: object
       security:
       - ApiKeyAuth: []
-      summary: 删除用户
+      summary: Delete 用户
       tags:
       - SysUser
   /user/getUserInfo:

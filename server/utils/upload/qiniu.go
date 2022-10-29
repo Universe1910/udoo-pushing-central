@@ -39,7 +39,7 @@ func (*Qiniu) UploadFile(file *multipart.FileHeader) (string, string, error) {
 
 		return "", "", errors.New("function file.Open() Filed, err:" + openError.Error())
 	}
-	defer f.Close()                                                  // 创建文件 defer 关闭
+	defer f.Close()                                                  // Create 文件 defer 关闭
 	fileKey := fmt.Sprintf("%d%s", time.Now().Unix(), file.Filename) // 文件名格式 自己可以改 建议保证唯一性
 	putErr := formUploader.Put(context.Background(), &ret, upToken, fileKey, f, file.Size, &putExtra)
 	if putErr != nil {
@@ -54,7 +54,7 @@ func (*Qiniu) UploadFile(file *multipart.FileHeader) (string, string, error) {
 //@author: [SliverHorn](https://github.com/SliverHorn)
 //@object: *Qiniu
 //@function: DeleteFile
-//@description: 删除文件
+//@description: Delete 文件
 //@param: key string
 //@return: error
 

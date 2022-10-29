@@ -12,7 +12,7 @@ type BaseMenuService struct{}
 
 //@author: [piexlmax](https://github.com/piexlmax)
 //@function: DeleteBaseMenu
-//@description: 删除基础路由
+//@description: Delete 基础路由
 //@param: id float64
 //@return: err error
 
@@ -36,7 +36,7 @@ func (baseMenuService *BaseMenuService) DeleteBaseMenu(id int) (err error) {
 			}
 		}
 	} else {
-		return errors.New("此菜单存在子菜单不可删除")
+		return errors.New("此菜单存在子菜单不可Delete ")
 	}
 	return err
 }

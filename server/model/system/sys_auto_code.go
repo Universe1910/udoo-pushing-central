@@ -16,8 +16,8 @@ type AutoCodeStruct struct {
 	HumpPackageName    string   `json:"humpPackageName"`    // go文件名称
 	Abbreviation       string   `json:"abbreviation"`       // Struct简称
 	Description        string   `json:"description"`        // Struct中文名称
-	AutoCreateApiToSql bool     `json:"autoCreateApiToSql"` // 是否自动创建api
-	AutoCreateResource bool     `json:"autoCreateResource"` // 是否自动创建资源标识
+	AutoCreateApiToSql bool     `json:"autoCreateApiToSql"` // 是否自动Create api
+	AutoCreateResource bool     `json:"autoCreateResource"` // 是否自动Create 资源标识
 	AutoMoveFile       bool     `json:"autoMoveFile"`       // 是否自动移动文件
 	BusinessDB         string   `json:"businessDB"`         // 业务数据库
 	Fields             []*Field `json:"fields,omitempty"`
@@ -64,7 +64,7 @@ type Field struct {
 	Clearable       bool   `json:"clearable"`       // 是否可清空
 }
 
-var ErrAutoMove error = errors.New("创建代码成功并移动文件成功")
+var ErrAutoMove error = errors.New("Create 代码成功并移动文件成功")
 
 type SysAutoCode struct {
 	global.GVA_MODEL

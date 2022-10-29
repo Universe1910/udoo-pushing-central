@@ -17,12 +17,12 @@ type AuthorityApi struct{}
 
 // CreateAuthority
 // @Tags      Authority
-// @Summary   创建角色
+// @Summary   Create 角色
 // @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
 // @Param     data  body      system.SysAuthority                                                true  "权限id, 权限名, 父角色id"
-// @Success   200   {object}  response.Response{data=systemRes.SysAuthorityResponse,msg=string}  "创建角色,返回包括系统角色详情"
+// @Success   200   {object}  response.Response{data=systemRes.SysAuthorityResponse,msg=string}  "Create 角色,返回包括系统角色详情"
 // @Router    /authority/createAuthority [post]
 func (a *AuthorityApi) CreateAuthority(c *gin.Context) {
 	var authority system.SysAuthority
@@ -38,12 +38,12 @@ func (a *AuthorityApi) CreateAuthority(c *gin.Context) {
 		return
 	}
 	if authBack, err := authorityService.CreateAuthority(authority); err != nil {
-		global.GVA_LOG.Error("创建失败!", zap.Error(err))
-		response.FailWithMessage("创建失败"+err.Error(), c)
+		global.GVA_LOG.Error("Failed to create!", zap.Error(err))
+		response.FailWithMessage("Failed to create"+err.Error(), c)
 	} else {
 		_ = menuService.AddMenuAuthority(systemReq.DefaultMenu(), authority.AuthorityId)
 		_ = casbinService.UpdateCasbin(authority.AuthorityId, systemReq.DefaultCasbin())
-		response.OkWithDetailed(systemRes.SysAuthorityResponse{Authority: authBack}, "创建成功", c)
+		response.OkWithDetailed(systemRes.SysAuthorityResponse{Authority: authBack}, "Successful creation", c)
 	}
 }
 
@@ -84,12 +84,12 @@ func (a *AuthorityApi) CopyAuthority(c *gin.Context) {
 
 // DeleteAuthority
 // @Tags      Authority
-// @Summary   删除角色
+// @Summary   Delete 角色
 // @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
-// @Param     data  body      system.SysAuthority            true  "删除角色"
-// @Success   200   {object}  response.Response{msg=string}  "删除角色"
+// @Param     data  body      system.SysAuthority            true  "Delete 角色"
+// @Success   200   {object}  response.Response{msg=string}  "Delete 角色"
 // @Router    /authority/deleteAuthority [post]
 func (a *AuthorityApi) DeleteAuthority(c *gin.Context) {
 	var authority system.SysAuthority
@@ -104,12 +104,12 @@ func (a *AuthorityApi) DeleteAuthority(c *gin.Context) {
 		return
 	}
 	err = authorityService.DeleteAuthority(&authority)
-	if err != nil { // 删除角色之前需要判断是否有用户正在使用此角色
-		global.GVA_LOG.Error("删除失败!", zap.Error(err))
-		response.FailWithMessage("删除失败"+err.Error(), c)
+	if err != nil { // Delete 角色之前需要判断是否有用户正在使用此角色
+		global.GVA_LOG.Error("failed to delete!", zap.Error(err))
+		response.FailWithMessage("failed to delete"+err.Error(), c)
 		return
 	}
-	response.OkWithMessage("删除成功", c)
+	response.OkWithMessage("successfully deleted", c)
 }
 
 // UpdateAuthority
@@ -135,11 +135,11 @@ func (a *AuthorityApi) UpdateAuthority(c *gin.Context) {
 	}
 	authority, err := authorityService.UpdateAuthority(auth)
 	if err != nil {
-		global.GVA_LOG.Error("更新失败!", zap.Error(err))
-		response.FailWithMessage("更新失败"+err.Error(), c)
+		global.GVA_LOG.Error("Update failure!", zap.Error(err))
+		response.FailWithMessage("Update failure"+err.Error(), c)
 		return
 	}
-	response.OkWithDetailed(systemRes.SysAuthorityResponse{Authority: authority}, "更新成功", c)
+	response.OkWithDetailed(systemRes.SysAuthorityResponse{Authority: authority}, "update completed", c)
 }
 
 // GetAuthorityList
@@ -165,8 +165,8 @@ func (a *AuthorityApi) GetAuthorityList(c *gin.Context) {
 	}
 	list, total, err := authorityService.GetAuthorityInfoList(pageInfo)
 	if err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Error(err))
-		response.FailWithMessage("获取失败"+err.Error(), c)
+		global.GVA_LOG.Error("Fail!", zap.Error(err))
+		response.FailWithMessage("Fail"+err.Error(), c)
 		return
 	}
 	response.OkWithDetailed(response.PageResult{
@@ -174,7 +174,7 @@ func (a *AuthorityApi) GetAuthorityList(c *gin.Context) {
 		Total:    total,
 		Page:     pageInfo.Page,
 		PageSize: pageInfo.PageSize,
-	}, "获取成功", c)
+	}, "Successful", c)
 }
 
 // SetDataAuthority

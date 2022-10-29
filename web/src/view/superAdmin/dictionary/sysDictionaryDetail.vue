@@ -131,6 +131,7 @@ import { ref } from 'vue'
 import { useRoute, onBeforeRouteUpdate } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { formatBoolean, formatDate } from '@/utils/format'
+
 const route = useRoute()
 
 onBeforeRouteUpdate((to, form) => {

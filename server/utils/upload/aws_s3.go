@@ -36,7 +36,7 @@ func (*AwsS3) UploadFile(file *multipart.FileHeader) (string, string, error) {
 		global.GVA_LOG.Error("function file.Open() Filed", zap.Any("err", openError.Error()))
 		return "", "", errors.New("function file.Open() Filed, err:" + openError.Error())
 	}
-	defer f.Close() // 创建文件 defer 关闭
+	defer f.Close() // Create 文件 defer 关闭
 
 	_, err := uploader.Upload(&s3manager.UploadInput{
 		Bucket: aws.String(global.GVA_CONFIG.AwsS3.Bucket),

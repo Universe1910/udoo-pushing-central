@@ -33,7 +33,7 @@ func (*Local) UploadFile(file *multipart.FileHeader) (string, string, error) {
 	name = utils.MD5V([]byte(name))
 	// 拼接新文件名
 	filename := name + "_" + time.Now().Format("20060102150405") + ext
-	// 尝试创建此路径
+	// 尝试Create 此路径
 	mkdirErr := os.MkdirAll(global.GVA_CONFIG.Local.StorePath, os.ModePerm)
 	if mkdirErr != nil {
 		global.GVA_LOG.Error("function os.MkdirAll() Filed", zap.Any("err", mkdirErr.Error()))
@@ -48,7 +48,7 @@ func (*Local) UploadFile(file *multipart.FileHeader) (string, string, error) {
 		global.GVA_LOG.Error("function file.Open() Filed", zap.Any("err", openError.Error()))
 		return "", "", errors.New("function file.Open() Filed, err:" + openError.Error())
 	}
-	defer f.Close() // 创建文件 defer 关闭
+	defer f.Close() // Create 文件 defer 关闭
 
 	out, createErr := os.Create(p)
 	if createErr != nil {
@@ -56,7 +56,7 @@ func (*Local) UploadFile(file *multipart.FileHeader) (string, string, error) {
 
 		return "", "", errors.New("function os.Create() Filed, err:" + createErr.Error())
 	}
-	defer out.Close() // 创建文件 defer 关闭
+	defer out.Close() // Create 文件 defer 关闭
 
 	_, copyErr := io.Copy(out, f) // 传输（拷贝）文件
 	if copyErr != nil {
@@ -71,7 +71,7 @@ func (*Local) UploadFile(file *multipart.FileHeader) (string, string, error) {
 //@author: [SliverHorn](https://github.com/SliverHorn)
 //@object: *Local
 //@function: DeleteFile
-//@description: 删除文件
+//@description: Delete 文件
 //@param: key string
 //@return: error
 
@@ -79,7 +79,7 @@ func (*Local) DeleteFile(key string) error {
 	p := global.GVA_CONFIG.Local.StorePath + "/" + key
 	if strings.Contains(p, global.GVA_CONFIG.Local.StorePath) {
 		if err := os.Remove(p); err != nil {
-			return errors.New("本地文件删除失败, err:" + err.Error())
+			return errors.New("本地文件failed to delete, err:" + err.Error())
 		}
 	}
 	return nil
