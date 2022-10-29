@@ -8,7 +8,7 @@ import (
 
 //@author: [piexlmax](https://github.com/piexlmax)
 //@function: CreateSysDictionaryDetail
-//@description: 创建字典详情数据
+//@description: Create 字典详情数据
 //@param: sysDictionaryDetail model.SysDictionaryDetail
 //@return: err error
 
@@ -21,7 +21,7 @@ func (dictionaryDetailService *DictionaryDetailService) CreateSysDictionaryDetai
 
 //@author: [piexlmax](https://github.com/piexlmax)
 //@function: DeleteSysDictionaryDetail
-//@description: 删除字典详情数据
+//@description: Delete 字典详情数据
 //@param: sysDictionaryDetail model.SysDictionaryDetail
 //@return: err error
 
@@ -61,10 +61,10 @@ func (dictionaryDetailService *DictionaryDetailService) GetSysDictionaryDetail(i
 func (dictionaryDetailService *DictionaryDetailService) GetSysDictionaryDetailInfoList(info request.SysDictionaryDetailSearch) (list interface{}, total int64, err error) {
 	limit := info.PageSize
 	offset := info.PageSize * (info.Page - 1)
-	// 创建db
+	// Create db
 	db := global.GVA_DB.Model(&system.SysDictionaryDetail{})
 	var sysDictionaryDetails []system.SysDictionaryDetail
-	// 如果有条件搜索 下方会自动创建搜索语句
+	// 如果有条件搜索 下方会自动Create 搜索语句
 	if info.Label != "" {
 		db = db.Where("label LIKE ?", "%"+info.Label+"%")
 	}

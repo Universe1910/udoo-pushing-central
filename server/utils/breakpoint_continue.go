@@ -50,7 +50,7 @@ func CheckMd5(content []byte, chunkMd5 string) (CanUpload bool) {
 
 //@author: [piexlmax](https://github.com/piexlmax)
 //@function: makeFileContent
-//@description: 创建切片内容
+//@description: Create 切片内容
 //@param: content []byte, fileName string, FileDir string, contentNumber int
 //@return: string, error
 
@@ -74,7 +74,7 @@ func makeFileContent(content []byte, fileName string, FileDir string, contentNum
 
 //@author: [piexlmax](https://github.com/piexlmax)
 //@function: makeFileContent
-//@description: 创建切片文件
+//@description: Create 切片文件
 //@param: fileName string, FileMd5 string
 //@return: error, string
 

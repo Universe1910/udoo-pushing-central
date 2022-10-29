@@ -31,13 +31,13 @@ func (b *BaseApi) Captcha(c *gin.Context) {
 	cp := base64Captcha.NewCaptcha(driver, store)
 	id, b64s, err := cp.Generate()
 	if err != nil {
-		global.GVA_LOG.Error("验证码获取失败!", zap.Error(err))
-		response.FailWithMessage("验证码获取失败", c)
+		global.GVA_LOG.Error("验证码Fail!", zap.Error(err))
+		response.FailWithMessage("验证码Fail", c)
 		return
 	}
 	response.OkWithDetailed(systemRes.SysCaptchaResponse{
 		CaptchaId:     id,
 		PicPath:       b64s,
 		CaptchaLength: global.GVA_CONFIG.Captcha.KeyLong,
-	}, "验证码获取成功", c)
+	}, "验证码Successful", c)
 }

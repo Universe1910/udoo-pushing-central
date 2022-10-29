@@ -12,7 +12,7 @@ type FileUploadAndDownloadService struct{}
 
 //@author: [piexlmax](https://github.com/piexlmax)
 //@function: FindOrCreateFile
-//@description: 上传文件时检测当前文件属性，如果没有文件则创建，有则返回文件的当前切片
+//@description: 上传文件时检测当前文件属性，如果没有文件则Create ，有则返回文件的当前切片
 //@param: fileMd5 string, fileName string, chunkTotal int
 //@return: file model.ExaFile, err error
 
@@ -34,7 +34,7 @@ func (e *FileUploadAndDownloadService) FindOrCreateFile(fileMd5 string, fileName
 
 //@author: [piexlmax](https://github.com/piexlmax)
 //@function: CreateFileChunk
-//@description: 创建文件切片记录
+//@description: Create 文件切片记录
 //@param: id uint, fileChunkPath string, fileChunkNumber int
 //@return: error
 
@@ -49,7 +49,7 @@ func (e *FileUploadAndDownloadService) CreateFileChunk(id uint, fileChunkPath st
 
 //@author: [piexlmax](https://github.com/piexlmax)
 //@function: DeleteFileChunk
-//@description: 删除文件切片记录
+//@description: Delete 文件切片记录
 //@param: fileMd5 string, fileName string, filePath string
 //@return: error
 

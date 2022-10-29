@@ -15,7 +15,7 @@ var ErrRoleExistence = errors.New("存在相同角色id")
 
 //@author: [piexlmax](https://github.com/piexlmax)
 //@function: CreateAuthority
-//@description: 创建一个角色
+//@description: Create 一个角色
 //@param: auth model.SysAuthority
 //@return: authority system.SysAuthority, err error
 
@@ -97,7 +97,7 @@ func (authorityService *AuthorityService) UpdateAuthority(auth system.SysAuthori
 
 //@author: [piexlmax](https://github.com/piexlmax)
 //@function: DeleteAuthority
-//@description: 删除角色
+//@description: Delete 角色
 //@param: auth *model.SysAuthority
 //@return: err error
 
@@ -106,13 +106,13 @@ func (authorityService *AuthorityService) DeleteAuthority(auth *system.SysAuthor
 		return errors.New("该角色不存在")
 	}
 	if len(auth.Users) != 0 {
-		return errors.New("此角色有用户正在使用禁止删除")
+		return errors.New("此角色有用户正在使用禁止Delete ")
 	}
 	if !errors.Is(global.GVA_DB.Where("authority_id = ?", auth.AuthorityId).First(&system.SysUser{}).Error, gorm.ErrRecordNotFound) {
-		return errors.New("此角色有用户正在使用禁止删除")
+		return errors.New("此角色有用户正在使用禁止Delete ")
 	}
 	if !errors.Is(global.GVA_DB.Where("parent_id = ?", auth.AuthorityId).First(&system.SysAuthority{}).Error, gorm.ErrRecordNotFound) {
-		return errors.New("此角色存在子角色不允许删除")
+		return errors.New("此角色存在子角色不允许Delete ")
 	}
 	db := global.GVA_DB.Preload("SysBaseMenus").Where("authority_id = ?", auth.AuthorityId).First(auth)
 	err = db.Unscoped().Delete(auth).Error

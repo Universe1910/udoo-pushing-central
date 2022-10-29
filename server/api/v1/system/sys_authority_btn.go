@@ -24,11 +24,11 @@ func (a *AuthorityBtnApi) GetAuthorityBtn(c *gin.Context) {
 	err := c.ShouldBindJSON(&req)
 	res, err := authorityBtnService.GetAuthorityBtn(req)
 	if err != nil {
-		global.GVA_LOG.Error("查询失败!", zap.Error(err))
-		response.FailWithMessage("查询失败", c)
+		global.GVA_LOG.Error("Query Failed", zap.Error(err))
+		response.FailWithMessage("Query Failed", c)
 		return
 	}
-	response.OkWithDetailed(res, "查询成功", c)
+	response.OkWithDetailed(res, "Find Successfully", c)
 }
 
 // SetAuthorityBtn
@@ -62,15 +62,15 @@ func (a *AuthorityBtnApi) SetAuthorityBtn(c *gin.Context) {
 // @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
-// @Success   200  {object}  response.Response{msg=string}  "删除成功"
+// @Success   200  {object}  response.Response{msg=string}  "successfully deleted"
 // @Router    /authorityBtn/canRemoveAuthorityBtn [post]
 func (a *AuthorityBtnApi) CanRemoveAuthorityBtn(c *gin.Context) {
 	id := c.Query("id")
 	err := authorityBtnService.CanRemoveAuthorityBtn(id)
 	if err != nil {
-		global.GVA_LOG.Error("删除失败!", zap.Error(err))
+		global.GVA_LOG.Error("failed to delete!", zap.Error(err))
 		response.FailWithMessage(err.Error(), c)
 		return
 	}
-	response.OkWithMessage("删除成功", c)
+	response.OkWithMessage("successfully deleted", c)
 }

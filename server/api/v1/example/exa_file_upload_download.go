@@ -58,11 +58,11 @@ func (b *FileUploadAndDownloadApi) EditFileName(c *gin.Context) {
 
 // DeleteFile
 // @Tags      ExaFileUploadAndDownload
-// @Summary   删除文件
+// @Summary   Delete 文件
 // @Security  ApiKeyAuth
 // @Produce   application/json
 // @Param     data  body      example.ExaFileUploadAndDownload  true  "传入文件里面id即可"
-// @Success   200   {object}  response.Response{msg=string}     "删除文件"
+// @Success   200   {object}  response.Response{msg=string}     "Delete 文件"
 // @Router    /fileUploadAndDownload/deleteFile [post]
 func (b *FileUploadAndDownloadApi) DeleteFile(c *gin.Context) {
 	var file example.ExaFileUploadAndDownload
@@ -72,11 +72,11 @@ func (b *FileUploadAndDownloadApi) DeleteFile(c *gin.Context) {
 		return
 	}
 	if err := fileUploadAndDownloadService.DeleteFile(file); err != nil {
-		global.GVA_LOG.Error("删除失败!", zap.Error(err))
-		response.FailWithMessage("删除失败", c)
+		global.GVA_LOG.Error("failed to delete!", zap.Error(err))
+		response.FailWithMessage("failed to delete", c)
 		return
 	}
-	response.OkWithMessage("删除成功", c)
+	response.OkWithMessage("successfully deleted", c)
 }
 
 // GetFileList
@@ -97,8 +97,8 @@ func (b *FileUploadAndDownloadApi) GetFileList(c *gin.Context) {
 	}
 	list, total, err := fileUploadAndDownloadService.GetFileRecordInfoList(pageInfo)
 	if err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Error(err))
-		response.FailWithMessage("获取失败", c)
+		global.GVA_LOG.Error("Fail!", zap.Error(err))
+		response.FailWithMessage("Fail", c)
 		return
 	}
 	response.OkWithDetailed(response.PageResult{
@@ -106,5 +106,5 @@ func (b *FileUploadAndDownloadApi) GetFileList(c *gin.Context) {
 		Total:    total,
 		Page:     pageInfo.Page,
 		PageSize: pageInfo.PageSize,
-	}, "获取成功", c)
+	}, "Successful", c)
 }

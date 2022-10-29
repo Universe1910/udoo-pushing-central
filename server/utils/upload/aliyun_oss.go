@@ -25,7 +25,7 @@ func (*AliyunOSS) UploadFile(file *multipart.FileHeader) (string, string, error)
 		global.GVA_LOG.Error("function file.Open() Failed", zap.Any("err", openError.Error()))
 		return "", "", errors.New("function file.Open() Failed, err:" + openError.Error())
 	}
-	defer f.Close() // 创建文件 defer 关闭
+	defer f.Close() // Create 文件 defer 关闭
 	// 上传阿里云路径 文件名格式 自己可以改 建议保证唯一性
 	// yunFileTmpPath := filepath.Join("uploads", time.Now().Format("2006-01-02")) + "/" + file.Filename
 	yunFileTmpPath := global.GVA_CONFIG.AliyunOSS.BasePath + "/" + "uploads" + "/" + time.Now().Format("2006-01-02") + "/" + file.Filename
@@ -47,8 +47,8 @@ func (*AliyunOSS) DeleteFile(key string) error {
 		return errors.New("function AliyunOSS.NewBucket() Failed, err:" + err.Error())
 	}
 
-	// 删除单个文件。objectName表示删除OSS文件时需要指定包含文件后缀在内的完整路径，例如abc/efg/123.jpg。
-	// 如需删除文件夹，请将objectName设置为对应的文件夹名称。如果文件夹非空，则需要将文件夹下的所有object删除后才能删除该文件夹。
+	// Delete 单个文件。objectName表示Delete OSS文件时需要指定包含文件后缀在内的完整路径，例如abc/efg/123.jpg。
+	// 如需Delete 文件夹，请将objectName设置为对应的文件夹名称。如果文件夹非空，则需要将文件夹下的所有objectDelete 后才能Delete 该文件夹。
 	err = bucket.DeleteObject(key)
 	if err != nil {
 		global.GVA_LOG.Error("function bucketManager.Delete() Filed", zap.Any("err", err.Error()))
@@ -59,7 +59,7 @@ func (*AliyunOSS) DeleteFile(key string) error {
 }
 
 func NewBucket() (*oss.Bucket, error) {
-	// 创建OSSClient实例。
+	// Create OSSClient实例。
 	client, err := oss.New(global.GVA_CONFIG.AliyunOSS.Endpoint, global.GVA_CONFIG.AliyunOSS.AccessKeyId, global.GVA_CONFIG.AliyunOSS.AccessKeySecret)
 	if err != nil {
 		return nil, err

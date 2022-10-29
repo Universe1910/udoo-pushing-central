@@ -42,7 +42,7 @@ func (j *JWT) CreateClaims(baseClaims request.BaseClaims) request.CustomClaims {
 	return claims
 }
 
-// 创建一个token
+// Create 一个token
 func (j *JWT) CreateToken(claims request.CustomClaims) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	return token.SignedString(j.SigningKey)

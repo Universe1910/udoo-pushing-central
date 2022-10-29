@@ -201,8 +201,8 @@ func (b *BaseApi) GetUserList(c *gin.Context) {
 	}
 	list, total, err := userService.GetUserInfoList(pageInfo)
 	if err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Error(err))
-		response.FailWithMessage("获取失败", c)
+		global.GVA_LOG.Error("Fail!", zap.Error(err))
+		response.FailWithMessage("Fail", c)
 		return
 	}
 	response.OkWithDetailed(response.PageResult{
@@ -210,7 +210,7 @@ func (b *BaseApi) GetUserList(c *gin.Context) {
 		Total:    total,
 		Page:     pageInfo.Page,
 		PageSize: pageInfo.PageSize,
-	}, "获取成功", c)
+	}, "Successful", c)
 }
 
 // SetUserAuthority
@@ -280,12 +280,12 @@ func (b *BaseApi) SetUserAuthorities(c *gin.Context) {
 
 // DeleteUser
 // @Tags      SysUser
-// @Summary   删除用户
+// @Summary   Delete 用户
 // @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
 // @Param     data  body      request.GetById                true  "用户ID"
-// @Success   200   {object}  response.Response{msg=string}  "删除用户"
+// @Success   200   {object}  response.Response{msg=string}  "Delete 用户"
 // @Router    /user/deleteUser [delete]
 func (b *BaseApi) DeleteUser(c *gin.Context) {
 	var reqId request.GetById
@@ -301,16 +301,16 @@ func (b *BaseApi) DeleteUser(c *gin.Context) {
 	}
 	jwtId := utils.GetUserID(c)
 	if jwtId == uint(reqId.ID) {
-		response.FailWithMessage("删除失败, 自杀失败", c)
+		response.FailWithMessage("failed to delete, 自杀失败", c)
 		return
 	}
 	err = userService.DeleteUser(reqId.ID)
 	if err != nil {
-		global.GVA_LOG.Error("删除失败!", zap.Error(err))
-		response.FailWithMessage("删除失败", c)
+		global.GVA_LOG.Error("failed to delete!", zap.Error(err))
+		response.FailWithMessage("failed to delete", c)
 		return
 	}
-	response.OkWithMessage("删除成功", c)
+	response.OkWithMessage("successfully deleted", c)
 }
 
 // SetUserInfo
@@ -410,11 +410,11 @@ func (b *BaseApi) GetUserInfo(c *gin.Context) {
 	uuid := utils.GetUserUuid(c)
 	ReqUser, err := userService.GetUserInfo(uuid)
 	if err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Error(err))
-		response.FailWithMessage("获取失败", c)
+		global.GVA_LOG.Error("Fail!", zap.Error(err))
+		response.FailWithMessage("Fail", c)
 		return
 	}
-	response.OkWithDetailed(gin.H{"userInfo": ReqUser}, "获取成功", c)
+	response.OkWithDetailed(gin.H{"userInfo": ReqUser}, "Successful", c)
 }
 
 // ResetPassword

@@ -20,14 +20,14 @@ type {{.StructName}}Service struct {
  {{- $db =  printf "global.MustGetGlobalDBByDBName(\"%s\")" .BusinessDB   }}
 {{- end}}
 
-// Create{{.StructName}} 创建{{.StructName}}记录
+// Create{{.StructName}} Create {{.StructName}}记录
 // Author [piexlmax](https://github.com/piexlmax)
 func ({{.Abbreviation}}Service *{{.StructName}}Service) Create{{.StructName}}({{.Abbreviation}} {{.Package}}.{{.StructName}}) (err error) {
 	err = {{$db}}.Create(&{{.Abbreviation}}).Error
 	return err
 }
 
-// Delete{{.StructName}} 删除{{.StructName}}记录
+// Delete{{.StructName}} Delete {{.StructName}}记录
 // Author [piexlmax](https://github.com/piexlmax)
 func ({{.Abbreviation}}Service *{{.StructName}}Service)Delete{{.StructName}}({{.Abbreviation}} {{.Package}}.{{.StructName}}) (err error) {
 	{{- if .AutoCreateResource }}
@@ -46,7 +46,7 @@ func ({{.Abbreviation}}Service *{{.StructName}}Service)Delete{{.StructName}}({{.
 	return err
 }
 
-// Delete{{.StructName}}ByIds 批量删除{{.StructName}}记录
+// Delete{{.StructName}}ByIds 批量Delete {{.StructName}}记录
 // Author [piexlmax](https://github.com/piexlmax)
 func ({{.Abbreviation}}Service *{{.StructName}}Service)Delete{{.StructName}}ByIds(ids request.IdsReq{{- if .AutoCreateResource }},deleted_by uint{{- end}}) (err error) {
 	{{- if .AutoCreateResource }}
@@ -84,10 +84,10 @@ func ({{.Abbreviation}}Service *{{.StructName}}Service)Get{{.StructName}}(id uin
 func ({{.Abbreviation}}Service *{{.StructName}}Service)Get{{.StructName}}InfoList(info {{.Package}}Req.{{.StructName}}Search) (list []{{.Package}}.{{.StructName}}, total int64, err error) {
 	limit := info.PageSize
 	offset := info.PageSize * (info.Page - 1)
-    // 创建db
+    // Create db
 	db := {{$db}}.Model(&{{.Package}}.{{.StructName}}{})
     var {{.Abbreviation}}s []{{.Package}}.{{.StructName}}
-    // 如果有条件搜索 下方会自动创建搜索语句
+    // 如果有条件搜索 下方会自动Create 搜索语句
     if info.StartCreatedAt !=nil && info.EndCreatedAt !=nil {
      db = db.Where("created_at BETWEEN ? AND ?", info.StartCreatedAt, info.EndCreatedAt)
     }

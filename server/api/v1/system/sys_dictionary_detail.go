@@ -14,12 +14,12 @@ type DictionaryDetailApi struct{}
 
 // CreateSysDictionaryDetail
 // @Tags      SysDictionaryDetail
-// @Summary   创建SysDictionaryDetail
+// @Summary   Create SysDictionaryDetail
 // @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
 // @Param     data  body      system.SysDictionaryDetail     true  "SysDictionaryDetail模型"
-// @Success   200   {object}  response.Response{msg=string}  "创建SysDictionaryDetail"
+// @Success   200   {object}  response.Response{msg=string}  "Create SysDictionaryDetail"
 // @Router    /sysDictionaryDetail/createSysDictionaryDetail [post]
 func (s *DictionaryDetailApi) CreateSysDictionaryDetail(c *gin.Context) {
 	var detail system.SysDictionaryDetail
@@ -30,21 +30,21 @@ func (s *DictionaryDetailApi) CreateSysDictionaryDetail(c *gin.Context) {
 	}
 	err = dictionaryDetailService.CreateSysDictionaryDetail(detail)
 	if err != nil {
-		global.GVA_LOG.Error("创建失败!", zap.Error(err))
-		response.FailWithMessage("创建失败", c)
+		global.GVA_LOG.Error("Failed to create!", zap.Error(err))
+		response.FailWithMessage("Failed to create", c)
 		return
 	}
-	response.OkWithMessage("创建成功", c)
+	response.OkWithMessage("Successful creation", c)
 }
 
 // DeleteSysDictionaryDetail
 // @Tags      SysDictionaryDetail
-// @Summary   删除SysDictionaryDetail
+// @Summary   Delete SysDictionaryDetail
 // @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
 // @Param     data  body      system.SysDictionaryDetail     true  "SysDictionaryDetail模型"
-// @Success   200   {object}  response.Response{msg=string}  "删除SysDictionaryDetail"
+// @Success   200   {object}  response.Response{msg=string}  "Delete SysDictionaryDetail"
 // @Router    /sysDictionaryDetail/deleteSysDictionaryDetail [delete]
 func (s *DictionaryDetailApi) DeleteSysDictionaryDetail(c *gin.Context) {
 	var detail system.SysDictionaryDetail
@@ -55,11 +55,11 @@ func (s *DictionaryDetailApi) DeleteSysDictionaryDetail(c *gin.Context) {
 	}
 	err = dictionaryDetailService.DeleteSysDictionaryDetail(detail)
 	if err != nil {
-		global.GVA_LOG.Error("删除失败!", zap.Error(err))
-		response.FailWithMessage("删除失败", c)
+		global.GVA_LOG.Error("failed to delete!", zap.Error(err))
+		response.FailWithMessage("failed to delete", c)
 		return
 	}
-	response.OkWithMessage("删除成功", c)
+	response.OkWithMessage("successfully deleted", c)
 }
 
 // UpdateSysDictionaryDetail
@@ -80,11 +80,11 @@ func (s *DictionaryDetailApi) UpdateSysDictionaryDetail(c *gin.Context) {
 	}
 	err = dictionaryDetailService.UpdateSysDictionaryDetail(&detail)
 	if err != nil {
-		global.GVA_LOG.Error("更新失败!", zap.Error(err))
-		response.FailWithMessage("更新失败", c)
+		global.GVA_LOG.Error("Update failure!", zap.Error(err))
+		response.FailWithMessage("Update failure", c)
 		return
 	}
-	response.OkWithMessage("更新成功", c)
+	response.OkWithMessage("update completed", c)
 }
 
 // FindSysDictionaryDetail
@@ -110,11 +110,11 @@ func (s *DictionaryDetailApi) FindSysDictionaryDetail(c *gin.Context) {
 	}
 	reSysDictionaryDetail, err := dictionaryDetailService.GetSysDictionaryDetail(detail.ID)
 	if err != nil {
-		global.GVA_LOG.Error("查询失败!", zap.Error(err))
-		response.FailWithMessage("查询失败", c)
+		global.GVA_LOG.Error("Query Failed", zap.Error(err))
+		response.FailWithMessage("Query Failed", c)
 		return
 	}
-	response.OkWithDetailed(gin.H{"reSysDictionaryDetail": reSysDictionaryDetail}, "查询成功", c)
+	response.OkWithDetailed(gin.H{"reSysDictionaryDetail": reSysDictionaryDetail}, "Find Successfully", c)
 }
 
 // GetSysDictionaryDetailList
@@ -135,8 +135,8 @@ func (s *DictionaryDetailApi) GetSysDictionaryDetailList(c *gin.Context) {
 	}
 	list, total, err := dictionaryDetailService.GetSysDictionaryDetailInfoList(pageInfo)
 	if err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Error(err))
-		response.FailWithMessage("获取失败", c)
+		global.GVA_LOG.Error("Fail!", zap.Error(err))
+		response.FailWithMessage("Fail", c)
 		return
 	}
 	response.OkWithDetailed(response.PageResult{
@@ -144,5 +144,5 @@ func (s *DictionaryDetailApi) GetSysDictionaryDetailList(c *gin.Context) {
 		Total:    total,
 		Page:     pageInfo.Page,
 		PageSize: pageInfo.PageSize,
-	}, "获取成功", c)
+	}, "Successful", c)
 }

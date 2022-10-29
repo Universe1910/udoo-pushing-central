@@ -17,12 +17,12 @@ type SystemApiApi struct{}
 
 // CreateApi
 // @Tags      SysApi
-// @Summary   创建基础api
+// @Summary   Create 基础api
 // @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
 // @Param     data  body      system.SysApi                  true  "api路径, api中文描述, api组, 方法"
-// @Success   200   {object}  response.Response{msg=string}  "创建基础api"
+// @Success   200   {object}  response.Response{msg=string}  "Create 基础api"
 // @Router    /api/createApi [post]
 func (s *SystemApiApi) CreateApi(c *gin.Context) {
 	var api system.SysApi
@@ -38,21 +38,21 @@ func (s *SystemApiApi) CreateApi(c *gin.Context) {
 	}
 	err = apiService.CreateApi(api)
 	if err != nil {
-		global.GVA_LOG.Error("创建失败!", zap.Error(err))
-		response.FailWithMessage("创建失败", c)
+		global.GVA_LOG.Error("Failed to create!", zap.Error(err))
+		response.FailWithMessage("Failed to create", c)
 		return
 	}
-	response.OkWithMessage("创建成功", c)
+	response.OkWithMessage("Successful creation", c)
 }
 
 // DeleteApi
 // @Tags      SysApi
-// @Summary   删除api
+// @Summary   Delete api
 // @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
 // @Param     data  body      system.SysApi                  true  "ID"
-// @Success   200   {object}  response.Response{msg=string}  "删除api"
+// @Success   200   {object}  response.Response{msg=string}  "Delete api"
 // @Router    /api/deleteApi [post]
 func (s *SystemApiApi) DeleteApi(c *gin.Context) {
 	var api system.SysApi
@@ -68,11 +68,11 @@ func (s *SystemApiApi) DeleteApi(c *gin.Context) {
 	}
 	err = apiService.DeleteApi(api)
 	if err != nil {
-		global.GVA_LOG.Error("删除失败!", zap.Error(err))
-		response.FailWithMessage("删除失败", c)
+		global.GVA_LOG.Error("failed to delete!", zap.Error(err))
+		response.FailWithMessage("failed to delete", c)
 		return
 	}
-	response.OkWithMessage("删除成功", c)
+	response.OkWithMessage("successfully deleted", c)
 }
 
 // GetApiList
@@ -98,8 +98,8 @@ func (s *SystemApiApi) GetApiList(c *gin.Context) {
 	}
 	list, total, err := apiService.GetAPIInfoList(pageInfo.SysApi, pageInfo.PageInfo, pageInfo.OrderKey, pageInfo.Desc)
 	if err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Error(err))
-		response.FailWithMessage("获取失败", c)
+		global.GVA_LOG.Error("Fail!", zap.Error(err))
+		response.FailWithMessage("Fail", c)
 		return
 	}
 	response.OkWithDetailed(response.PageResult{
@@ -107,7 +107,7 @@ func (s *SystemApiApi) GetApiList(c *gin.Context) {
 		Total:    total,
 		Page:     pageInfo.Page,
 		PageSize: pageInfo.PageSize,
-	}, "获取成功", c)
+	}, "Successful", c)
 }
 
 // GetApiById
@@ -133,11 +133,11 @@ func (s *SystemApiApi) GetApiById(c *gin.Context) {
 	}
 	api, err := apiService.GetApiById(idInfo.ID)
 	if err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Error(err))
-		response.FailWithMessage("获取失败", c)
+		global.GVA_LOG.Error("Fail!", zap.Error(err))
+		response.FailWithMessage("Fail", c)
 		return
 	}
-	response.OkWithDetailed(systemRes.SysAPIResponse{Api: api}, "获取成功", c)
+	response.OkWithDetailed(systemRes.SysAPIResponse{Api: api}, "Successful", c)
 }
 
 // UpdateApi
@@ -181,21 +181,21 @@ func (s *SystemApiApi) UpdateApi(c *gin.Context) {
 func (s *SystemApiApi) GetAllApis(c *gin.Context) {
 	apis, err := apiService.GetAllApis()
 	if err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Error(err))
-		response.FailWithMessage("获取失败", c)
+		global.GVA_LOG.Error("Fail!", zap.Error(err))
+		response.FailWithMessage("Fail", c)
 		return
 	}
-	response.OkWithDetailed(systemRes.SysAPIListResponse{Apis: apis}, "获取成功", c)
+	response.OkWithDetailed(systemRes.SysAPIListResponse{Apis: apis}, "Successful", c)
 }
 
 // DeleteApisByIds
 // @Tags      SysApi
-// @Summary   删除选中Api
+// @Summary   Delete 选中Api
 // @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
 // @Param     data  body      request.IdsReq                 true  "ID"
-// @Success   200   {object}  response.Response{msg=string}  "删除选中Api"
+// @Success   200   {object}  response.Response{msg=string}  "Delete 选中Api"
 // @Router    /api/deleteApisByIds [delete]
 func (s *SystemApiApi) DeleteApisByIds(c *gin.Context) {
 	var ids request.IdsReq
@@ -206,9 +206,9 @@ func (s *SystemApiApi) DeleteApisByIds(c *gin.Context) {
 	}
 	err = apiService.DeleteApisByIds(ids)
 	if err != nil {
-		global.GVA_LOG.Error("删除失败!", zap.Error(err))
-		response.FailWithMessage("删除失败", c)
+		global.GVA_LOG.Error("failed to delete!", zap.Error(err))
+		response.FailWithMessage("failed to delete", c)
 		return
 	}
-	response.OkWithMessage("删除成功", c)
+	response.OkWithMessage("successfully deleted", c)
 }

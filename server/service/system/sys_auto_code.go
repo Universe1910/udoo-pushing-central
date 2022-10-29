@@ -146,7 +146,7 @@ var AutoCodeServiceApp = new(AutoCodeService)
 
 //@author: [songzhibin97](https://github.com/songzhibin97)
 //@function: PreviewTemp
-//@description: 预览创建代码
+//@description: 预览Create 代码
 //@param: model.AutoCodeStruct
 //@return: map[string]string, error
 
@@ -167,12 +167,12 @@ func (autoCodeService *AutoCodeService) PreviewTemp(autoCode system.AutoCodeStru
 		return nil, err
 	}
 
-	// 写入文件前，先创建文件夹
+	// 写入文件前，先Create 文件夹
 	if err = utils.CreateDir(needMkdir...); err != nil {
 		return nil, err
 	}
 
-	// 创建map
+	// Create map
 	ret := make(map[string]string)
 
 	// 生成map
@@ -235,7 +235,7 @@ func makeDictTypes(autoCode *system.AutoCodeStruct) {
 
 //@author: [piexlmax](https://github.com/piexlmax)
 //@function: CreateTemp
-//@description: 创建代码
+//@description: Create 代码
 //@param: model.AutoCodeStruct
 //@return: err error
 
@@ -251,7 +251,7 @@ func (autoCodeService *AutoCodeService) CreateTemp(autoCode system.AutoCodeStruc
 			break
 		}
 	}
-	// 增加判断: 重复创建struct
+	// 增加判断: 重复Create struct
 	if autoCode.AutoMoveFile && AutoCodeHistoryServiceApp.Repeat(autoCode.BusinessDB, autoCode.StructName, autoCode.Package) {
 		return RepeatErr
 	}
@@ -260,7 +260,7 @@ func (autoCodeService *AutoCodeService) CreateTemp(autoCode system.AutoCodeStruc
 		return err
 	}
 	meta, _ := json.Marshal(autoCode)
-	// 写入文件前，先创建文件夹
+	// 写入文件前，先Create 文件夹
 	if err = utils.CreateDir(needMkdir...); err != nil {
 		return err
 	}
@@ -449,7 +449,7 @@ func (autoCodeService *AutoCodeService) addAutoMoveFile(data *tplData) {
 //@author: [piexlmax](https://github.com/piexlmax)
 //@author: [SliverHorn](https://github.com/SliverHorn)
 //@function: CreateApi
-//@description: 自动创建api数据,
+//@description: 自动Create api数据,
 //@param: a *model.AutoCodeStruct
 //@return: err error
 
@@ -463,13 +463,13 @@ func (autoCodeService *AutoCodeService) AutoCreateApi(a *system.AutoCodeStruct) 
 		},
 		{
 			Path:        "/" + a.Abbreviation + "/" + "delete" + a.StructName,
-			Description: "删除" + a.Description,
+			Description: "Delete " + a.Description,
 			ApiGroup:    a.Abbreviation,
 			Method:      "DELETE",
 		},
 		{
 			Path:        "/" + a.Abbreviation + "/" + "delete" + a.StructName + "ByIds",
-			Description: "批量删除" + a.Description,
+			Description: "批量Delete " + a.Description,
 			ApiGroup:    a.Abbreviation,
 			Method:      "DELETE",
 		},
@@ -646,7 +646,7 @@ func (autoCodeService *AutoCodeService) CreatePackageTemp(packageName string) er
 			return err
 		}
 	}
-	// 创建完成后在对应的位置插入结构代码
+	// Create 完成后在对应的位置插入结构代码
 	for _, v := range pendingTemp {
 		meta := packageInjectionMap[v.name]
 		if err := ImportReference(meta.path, fmt.Sprintf(meta.importCodeF, v.name, packageName), fmt.Sprintf(meta.structNameF, caser.String(packageName)), fmt.Sprintf(meta.packageNameF, packageName), meta.groupName); err != nil {
@@ -822,7 +822,7 @@ func ImportReference(filepath, importCode, structName, packageName, groupName st
 	return os.WriteFile(filepath, buffer.Bytes(), 0o600)
 }
 
-// CreatePlug 自动创建插件模板
+// CreatePlug 自动Create 插件模板
 func (autoCodeService *AutoCodeService) CreatePlug(plug system.AutoPlugReq) error {
 	// 检查列表参数是否有效
 	plug.CheckList()

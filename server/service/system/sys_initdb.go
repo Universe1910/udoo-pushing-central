@@ -84,7 +84,7 @@ func RegisterInit(order int, i SubInitializer) {
 
 type InitDBService struct{}
 
-// InitDB 创建数据库并初始化 总入口
+// InitDB Create 数据库并初始化 总入口
 func (initDBService *InitDBService) InitDB(conf request.InitDB) (err error) {
 	ctx := context.TODO()
 	if len(initializers) == 0 {
@@ -129,7 +129,7 @@ func (initDBService *InitDBService) InitDB(conf request.InitDB) (err error) {
 	return nil
 }
 
-// createDatabase 创建数据库（ EnsureDB() 中调用 ）
+// createDatabase Create 数据库（ EnsureDB() 中调用 ）
 func createDatabase(dsn string, driver string, createSql string) error {
 	db, err := sql.Open(driver, dsn)
 	if err != nil {
@@ -148,7 +148,7 @@ func createDatabase(dsn string, driver string, createSql string) error {
 	return err
 }
 
-// createTables 创建表（默认 dbInitHandler.initTables 行为）
+// createTables Create 表（默认 dbInitHandler.initTables 行为）
 func createTables(ctx context.Context, inits initSlice) error {
 	next, cancel := context.WithCancel(ctx)
 	defer func(c func()) { c() }(cancel)

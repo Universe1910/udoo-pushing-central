@@ -12,7 +12,7 @@ type CustomerService struct{}
 
 //@author: [piexlmax](https://github.com/piexlmax)
 //@function: CreateExaCustomer
-//@description: 创建客户
+//@description: Create 客户
 //@param: e model.ExaCustomer
 //@return: err error
 
@@ -23,7 +23,7 @@ func (exa *CustomerService) CreateExaCustomer(e example.ExaCustomer) (err error)
 
 //@author: [piexlmax](https://github.com/piexlmax)
 //@function: DeleteFileChunk
-//@description: 删除客户
+//@description: Delete 客户
 //@param: e model.ExaCustomer
 //@return: err error
 

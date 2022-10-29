@@ -74,7 +74,7 @@ func (i *initUser) InitializeData(ctx context.Context) (next context.Context, er
 	next = context.WithValue(ctx, i.InitializerName(), entities)
 	authorityEntities, ok := ctx.Value(initAuthority{}.InitializerName()).([]sysModel.SysAuthority)
 	if !ok {
-		return next, errors.Wrap(system.ErrMissingDependentContext, "创建 [用户-权限] 关联失败, 未找到权限表初始化数据")
+		return next, errors.Wrap(system.ErrMissingDependentContext, "Create  [用户-权限] 关联失败, 未找到权限表初始化数据")
 	}
 	if err = db.Model(&entities[0]).Association("Authorities").Replace(authorityEntities); err != nil {
 		return next, err

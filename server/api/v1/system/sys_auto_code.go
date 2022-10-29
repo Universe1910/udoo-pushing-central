@@ -24,12 +24,12 @@ var caser = cases.Title(language.English)
 
 // PreviewTemp
 // @Tags      AutoCode
-// @Summary   预览创建后的代码
+// @Summary   预览Create 后的代码
 // @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
-// @Param     data  body      system.AutoCodeStruct                                      true  "预览创建代码"
-// @Success   200   {object}  response.Response{data=map[string]interface{},msg=string}  "预览创建后的代码"
+// @Param     data  body      system.AutoCodeStruct                                      true  "预览Create 代码"
+// @Success   200   {object}  response.Response{data=map[string]interface{},msg=string}  "预览Create 后的代码"
 // @Router    /autoCode/preview [post]
 func (autoApi *AutoCodeApi) PreviewTemp(c *gin.Context) {
 	var a system.AutoCodeStruct
@@ -55,8 +55,8 @@ func (autoApi *AutoCodeApi) PreviewTemp(c *gin.Context) {
 // @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
-// @Param     data  body      system.AutoCodeStruct  true  "创建自动代码"
-// @Success   200   {string}  string                 "{"success":true,"data":{},"msg":"创建成功"}"
+// @Param     data  body      system.AutoCodeStruct  true  "Create 自动代码"
+// @Success   200   {string}  string                 "{"success":true,"data":{},"msg":"Successful creation"}"
 // @Router    /autoCode/createTemp [post]
 func (autoApi *AutoCodeApi) CreateTemp(c *gin.Context) {
 	var a system.AutoCodeStruct
@@ -69,9 +69,9 @@ func (autoApi *AutoCodeApi) CreateTemp(c *gin.Context) {
 	var apiIds []uint
 	if a.AutoCreateApiToSql {
 		if ids, err := autoCodeService.AutoCreateApi(&a); err != nil {
-			global.GVA_LOG.Error("自动化创建失败!请自行清空垃圾数据!", zap.Error(err))
+			global.GVA_LOG.Error("自动化Failed to create!请自行清空垃圾数据!", zap.Error(err))
 			c.Writer.Header().Add("success", "false")
-			c.Writer.Header().Add("msg", url.QueryEscape("自动化创建失败!请自行清空垃圾数据!"))
+			c.Writer.Header().Add("msg", url.QueryEscape("自动化Failed to create!请自行清空垃圾数据!"))
 			return
 		} else {
 			apiIds = ids
@@ -118,10 +118,10 @@ func (autoApi *AutoCodeApi) GetDB(c *gin.Context) {
 		dbList = append(dbList, item)
 	}
 	if err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Error(err))
-		response.FailWithMessage("获取失败", c)
+		global.GVA_LOG.Error("Fail!", zap.Error(err))
+		response.FailWithMessage("Fail", c)
 	} else {
-		response.OkWithDetailed(gin.H{"dbs": dbs, "dbList": dbList}, "获取成功", c)
+		response.OkWithDetailed(gin.H{"dbs": dbs, "dbList": dbList}, "Successful", c)
 	}
 }
 
@@ -141,7 +141,7 @@ func (autoApi *AutoCodeApi) GetTables(c *gin.Context) {
 		global.GVA_LOG.Error("查询table失败!", zap.Error(err))
 		response.FailWithMessage("查询table失败", c)
 	} else {
-		response.OkWithDetailed(gin.H{"tables": tables}, "获取成功", c)
+		response.OkWithDetailed(gin.H{"tables": tables}, "Successful", c)
 	}
 }
 
@@ -159,21 +159,21 @@ func (autoApi *AutoCodeApi) GetColumn(c *gin.Context) {
 	tableName := c.Query("tableName")
 	columns, err := autoCodeService.Database(businessDB).GetColumn(businessDB, tableName, dbName)
 	if err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Error(err))
-		response.FailWithMessage("获取失败", c)
+		global.GVA_LOG.Error("Fail!", zap.Error(err))
+		response.FailWithMessage("Fail", c)
 	} else {
-		response.OkWithDetailed(gin.H{"columns": columns}, "获取成功", c)
+		response.OkWithDetailed(gin.H{"columns": columns}, "Successful", c)
 	}
 }
 
 // CreatePackage
 // @Tags      AutoCode
-// @Summary   创建package
+// @Summary   Create package
 // @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
-// @Param     data  body      system.SysAutoCode                                         true  "创建package"
-// @Success   200   {object}  response.Response{data=map[string]interface{},msg=string}  "创建package成功"
+// @Param     data  body      system.SysAutoCode                                         true  "Create package"
+// @Success   200   {object}  response.Response{data=map[string]interface{},msg=string}  "Create package成功"
 // @Router    /autoCode/createPackage [post]
 func (autoApi *AutoCodeApi) CreatePackage(c *gin.Context) {
 	var a system.SysAutoCode
@@ -185,10 +185,10 @@ func (autoApi *AutoCodeApi) CreatePackage(c *gin.Context) {
 	err := autoCodeService.CreateAutoCode(&a)
 	if err != nil {
 
-		global.GVA_LOG.Error("创建成功!", zap.Error(err))
-		response.FailWithMessage("创建失败", c)
+		global.GVA_LOG.Error("Successful creation!", zap.Error(err))
+		response.FailWithMessage("Failed to create", c)
 	} else {
-		response.OkWithMessage("创建成功", c)
+		response.OkWithMessage("Successful creation", c)
 	}
 }
 
@@ -198,47 +198,47 @@ func (autoApi *AutoCodeApi) CreatePackage(c *gin.Context) {
 // @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
-// @Success   200  {object}  response.Response{data=map[string]interface{},msg=string}  "创建package成功"
+// @Success   200  {object}  response.Response{data=map[string]interface{},msg=string}  "Create package成功"
 // @Router    /autoCode/getPackage [post]
 func (autoApi *AutoCodeApi) GetPackage(c *gin.Context) {
 	pkgs, err := autoCodeService.GetPackage()
 	if err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Error(err))
-		response.FailWithMessage("获取失败", c)
+		global.GVA_LOG.Error("Fail!", zap.Error(err))
+		response.FailWithMessage("Fail", c)
 	} else {
-		response.OkWithDetailed(gin.H{"pkgs": pkgs}, "获取成功", c)
+		response.OkWithDetailed(gin.H{"pkgs": pkgs}, "Successful", c)
 	}
 }
 
 // DelPackage
 // @Tags      AutoCode
-// @Summary   删除package
+// @Summary   Delete package
 // @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
-// @Param     data  body      system.SysAutoCode                                         true  "创建package"
-// @Success   200   {object}  response.Response{data=map[string]interface{},msg=string}  "删除package成功"
+// @Param     data  body      system.SysAutoCode                                         true  "Create package"
+// @Success   200   {object}  response.Response{data=map[string]interface{},msg=string}  "Delete package成功"
 // @Router    /autoCode/delPackage [post]
 func (autoApi *AutoCodeApi) DelPackage(c *gin.Context) {
 	var a system.SysAutoCode
 	_ = c.ShouldBindJSON(&a)
 	err := autoCodeService.DelPackage(a)
 	if err != nil {
-		global.GVA_LOG.Error("删除失败!", zap.Error(err))
-		response.FailWithMessage("删除失败", c)
+		global.GVA_LOG.Error("failed to delete!", zap.Error(err))
+		response.FailWithMessage("failed to delete", c)
 	} else {
-		response.OkWithMessage("删除成功", c)
+		response.OkWithMessage("successfully deleted", c)
 	}
 }
 
 // AutoPlug
 // @Tags      AutoCode
-// @Summary   创建插件模板
+// @Summary   Create 插件模板
 // @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
-// @Param     data  body      system.SysAutoCode                                         true  "创建插件模板"
-// @Success   200   {object}  response.Response{data=map[string]interface{},msg=string}  "创建插件模板成功"
+// @Param     data  body      system.SysAutoCode                                         true  "Create 插件模板"
+// @Success   200   {object}  response.Response{data=map[string]interface{},msg=string}  "Create 插件模板成功"
 // @Router    /autoCode/createPlug [post]
 func (autoApi *AutoCodeApi) AutoPlug(c *gin.Context) {
 	var a system.AutoPlugReq

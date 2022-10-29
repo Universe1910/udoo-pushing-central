@@ -3,11 +3,12 @@ package system
 import (
 	"errors"
 	"fmt"
-	systemReq "github.com/flipped-aurora/gin-vue-admin/server/model/system/request"
 	"path/filepath"
 	"strconv"
 	"strings"
 	"time"
+
+	systemReq "github.com/flipped-aurora/gin-vue-admin/server/model/system/request"
 
 	"github.com/flipped-aurora/gin-vue-admin/server/model/system/response"
 
@@ -19,13 +20,13 @@ import (
 	"go.uber.org/zap"
 )
 
-var RepeatErr = errors.New("重复创建")
+var RepeatErr = errors.New("重复Create ")
 
 type AutoCodeHistoryService struct{}
 
 var AutoCodeHistoryServiceApp = new(AutoCodeHistoryService)
 
-// CreateAutoCodeHistory 创建代码生成器历史记录
+// CreateAutoCodeHistory Create 代码生成器历史记录
 // RouterPath : RouterPath@RouterString;RouterPath2@RouterString2
 // Author [SliverHorn](https://github.com/SliverHorn)
 // Author [songzhibin97](https://github.com/songzhibin97)
@@ -82,13 +83,13 @@ func (autoCodeHistoryService *AutoCodeHistoryService) RollBack(info *systemReq.R
 	if err != nil {
 		global.GVA_LOG.Error("ClearTag DeleteApiByIds:", zap.Error(err))
 	}
-	// 删除表
+	// Delete 表
 	if info.DeleteTable {
 		if err = AutoCodeServiceApp.DropTable(md.BusinessDB, md.TableName); err != nil {
 			global.GVA_LOG.Error("ClearTag DropTable:", zap.Error(err))
 		}
 	}
-	// 删除文件
+	// Delete 文件
 
 	for _, path := range strings.Split(md.AutoCodePath, ";") {
 
@@ -124,7 +125,7 @@ func (autoCodeHistoryService *AutoCodeHistoryService) RollBack(info *systemReq.R
 	return global.GVA_DB.Save(&md).Error
 }
 
-// Delete 删除历史数据
+// Delete Delete 历史数据
 // Author [SliverHorn](https://github.com/SliverHorn)
 // Author [songzhibin97](https://github.com/songzhibin97)
 func (autoCodeHistoryService *AutoCodeHistoryService) Delete(info *request.GetById) error {

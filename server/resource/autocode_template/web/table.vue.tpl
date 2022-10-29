@@ -2,7 +2,7 @@
   <div>
     <div class="gva-search-box">
       <el-form :inline="true" :model="searchInfo" class="demo-form-inline">
-      <el-form-item label="创建时间">
+      <el-form-item label="Create 时间">
       <el-date-picker v-model="searchInfo.startCreatedAt" type="datetime" placeholder="开始时间"></el-date-picker>
        —
       <el-date-picker v-model="searchInfo.endCreatedAt" type="datetime" placeholder="结束时间"></el-date-picker>
@@ -69,13 +69,13 @@
         <div class="gva-btn-list">
             <el-button size="small" type="primary" icon="plus" @click="openDialog">新增</el-button>
             <el-popover v-model:visible="deleteVisible" placement="top" width="160">
-            <p>确定要删除吗？</p>
+            <p>确定要Delete 吗？</p>
             <div style="text-align: right; margin-top: 8px;">
                 <el-button size="small" type="primary" link @click="deleteVisible = false">取消</el-button>
                 <el-button size="small" type="primary" @click="onDelete">确定</el-button>
             </div>
             <template #reference>
-                <el-button icon="delete" size="small" style="margin-left: 10px;" :disabled="!multipleSelection.length" @click="deleteVisible = true">删除</el-button>
+                <el-button icon="delete" size="small" style="margin-left: 10px;" :disabled="!multipleSelection.length" @click="deleteVisible = true">Delete </el-button>
             </template>
             </el-popover>
         </div>
@@ -113,7 +113,7 @@
         <el-table-column align="left" label="按钮组">
             <template #default="scope">
             <el-button type="primary" link icon="edit" size="small" class="table-button" @click="update{{.StructName}}Func(scope.row)">变更</el-button>
-            <el-button type="primary" link icon="delete" size="small" @click="deleteRow(scope.row)">删除</el-button>
+            <el-button type="primary" link icon="delete" size="small" @click="deleteRow(scope.row)">Delete </el-button>
             </template>
         </el-table-column>
         </el-table>
@@ -301,9 +301,9 @@ const handleSelectionChange = (val) => {
     multipleSelection.value = val
 }
 
-// 删除行
+// Delete 行
 const deleteRow = (row) => {
-    ElMessageBox.confirm('确定要删除吗?', '提示', {
+    ElMessageBox.confirm('确定要Delete 吗?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
@@ -313,16 +313,16 @@ const deleteRow = (row) => {
     }
 
 
-// 批量删除控制标记
+// 批量Delete 控制标记
 const deleteVisible = ref(false)
 
-// 多选删除
+// 多选Delete 
 const onDelete = async() => {
       const ids = []
       if (multipleSelection.value.length === 0) {
         ElMessage({
           type: 'warning',
-          message: '请选择要删除的数据'
+          message: '请选择要Delete 的数据'
         })
         return
       }
@@ -334,7 +334,7 @@ const onDelete = async() => {
       if (res.code === 0) {
         ElMessage({
           type: 'success',
-          message: '删除成功'
+          message: 'successfully deleted'
         })
         if (tableData.value.length === ids.length && page.value > 1) {
           page.value--
@@ -358,13 +358,13 @@ const update{{.StructName}}Func = async(row) => {
 }
 
 
-// 删除行
+// Delete 行
 const delete{{.StructName}}Func = async (row) => {
     const res = await delete{{.StructName}}({ ID: row.ID })
     if (res.code === 0) {
         ElMessage({
                 type: 'success',
-                message: '删除成功'
+                message: 'successfully deleted'
             })
             if (tableData.value.length === 1 && page.value > 1) {
             page.value--
@@ -424,7 +424,7 @@ const enterDialog = async () => {
               if (res.code === 0) {
                 ElMessage({
                   type: 'success',
-                  message: '创建/更改成功'
+                  message: 'Create /更改成功'
                 })
                 closeDialog()
                 getTableData()
