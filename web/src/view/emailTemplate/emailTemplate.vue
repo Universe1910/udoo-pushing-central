@@ -37,7 +37,7 @@
         <el-table-column align="left" label="Name" prop="name" width="120" />
         <!-- <el-table-column align="left" label="Content" prop="content" width="120" /> -->
         <el-table-column align="left" label="Subject" prop="subject" width="120" />
-        <el-table-column align="left" label="CreatedBy" prop="createdBy" width="120" />
+        <el-table-column align="left" label="Created" prop="createdObject.nickName" width="120" />
         <el-table-column align="left" label="Action">
           <template #default="scope">
             <el-button type="primary" link icon="edit" size="small" class="table-button"
@@ -116,7 +116,7 @@ const formData = ref({
   name: '',
   // content: '',
   subject: '',
-  createdBy: 0,
+  createdBy: 1,
 })
 
 const selectedUser = ref(0);
@@ -124,12 +124,13 @@ const options = ref([]);
 
 
 const getUsers = async () => {
-  if (!options.value) {
+  
     const table = await getUserList({ page: 1, pageSize: 100 })
-    if (table.code === 0) {
+    if(table.code === 0){
       options.value = table.data.list
-    }
-  }
+
+    }    
+    console.log(options.value);
 
 }
 
@@ -138,8 +139,6 @@ const rule = reactive({
 })
 
 const elFormRef = ref()
-
-const users = ref()
 
 // =========== 表格控制部分 ===========
 const page = ref(1)
@@ -177,19 +176,9 @@ const getTableData = async () => {
   
   const table = await getEmailTemplateList({ page: page.value, pageSize: pageSize.value, ...searchInfo.value })
   if (table.code === 0) {
-    var prepareList = table.data.list.map((e) => {
-      var userObject = options.value.filter((o) => o.ID == e.createdBy);
-      if (userObject[0]) {
-        e.createdBy = userObject[0].nickName;
-      } else {
-        e.createdBy = '';
-      }
-
-      return e;
-    })
-    // tableData.value = table.data.list
-    tableData.value = prepareList;
-
+    tableData.value = table.data.list
+    debugger;
+      console.log(tableData.value)
     total.value = table.data.total
     page.value = table.data.page
     pageSize.value = table.data.pageSize
@@ -313,7 +302,7 @@ const closeDialog = () => {
     name: '',
     content: '',
     subject: '',
-    createdBy: 0,
+    createdBy: 1,
   }
 }
 // 弹窗确定
@@ -322,6 +311,7 @@ const enterDialog = async () => {
   elFormRef.value?.validate(async (valid) => {
     if (!valid) return
     let res
+    debugger;
     formData.value.createdBy = selectedUser.value;
     switch (type.value) {
       case 'create':
