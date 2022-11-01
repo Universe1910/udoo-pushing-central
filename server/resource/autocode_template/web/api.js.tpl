@@ -37,7 +37,7 @@ export const delete{{.StructName}} = (data) => {
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data body request.IdsReq true "批量Delete {{.StructName}}"
+// @Param data body request.IdsReq true "Batch delete {{.StructName}}"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"successfully deleted"}"
 // @Router /{{.Abbreviation}}/delete{{.StructName}} [delete]
 export const delete{{.StructName}}ByIds = (data) => {
@@ -49,11 +49,11 @@ export const delete{{.StructName}}ByIds = (data) => {
 }
 
 // @Tags {{.StructName}}
-// @Summary 更新{{.StructName}}
+// @Summary Update{{.StructName}}
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data body model.{{.StructName}} true "更新{{.StructName}}"
+// @Param data body model.{{.StructName}} true "Update{{.StructName}}"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"update completed"}"
 // @Router /{{.Abbreviation}}/update{{.StructName}} [put]
 export const update{{.StructName}} = (data) => {
@@ -65,11 +65,11 @@ export const update{{.StructName}} = (data) => {
 }
 
 // @Tags {{.StructName}}
-// @Summary 用id查询{{.StructName}}
+// @Summary Get by ID{{.StructName}}
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data query model.{{.StructName}} true "用id查询{{.StructName}}"
+// @Param data query model.{{.StructName}} true "Get by ID{{.StructName}}"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"Find Successfully"}"
 // @Router /{{.Abbreviation}}/find{{.StructName}} [get]
 export const find{{.StructName}} = (params) => {
@@ -81,11 +81,11 @@ export const find{{.StructName}} = (params) => {
 }
 
 // @Tags {{.StructName}}
-// @Summary 分页获取{{.StructName}}列表
+// @Summary get{{.StructName}}List
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data query request.PageInfo true "分页获取{{.StructName}}列表"
+// @Param data query request.PageInfo true "get{{.StructName}}List"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"Successful"}"
 // @Router /{{.Abbreviation}}/get{{.StructName}}List [get]
 export const get{{.StructName}}List = (params) => {

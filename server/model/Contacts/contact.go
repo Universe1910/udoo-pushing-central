@@ -22,6 +22,8 @@ type Contact struct {
 	State     string    `json:"state" form:"state" gorm:"column:state;comment:;"`
 	Zipcode   string    `json:"zipcode" form:"zipcode" gorm:"column:zipcode;comment:;"`
 	Country   string    `json:"country" form:"country" gorm:"column:country;comment:;"`
+	TagsId    []int     `json:"tagsId" form:"tagsId" gorm:"column:tags_id;comment:;"`
+	Tags      []Tags    `json:"tags" gorm:"foreignKey:TagsId"`
 }
 
 // TableName Contact 表名

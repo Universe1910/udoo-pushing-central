@@ -116,13 +116,13 @@ func ({{.Abbreviation}}Api *{{.StructName}}Api) Delete{{.StructName}}ByIds(c *gi
 	}
 }
 
-// Update{{.StructName}} 更新{{.StructName}}
+// Update{{.StructName}} Update{{.StructName}}
 // @Tags {{.StructName}}
-// @Summary 更新{{.StructName}}
+// @Summary Update{{.StructName}}
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data body {{.Package}}.{{.StructName}} true "更新{{.StructName}}"
+// @Param data body {{.Package}}.{{.StructName}} true "Update{{.StructName}}"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"update completed"}"
 // @Router /{{.Abbreviation}}/update{{.StructName}} [put]
 func ({{.Abbreviation}}Api *{{.StructName}}Api) Update{{.StructName}}(c *gin.Context) {
@@ -156,13 +156,13 @@ func ({{.Abbreviation}}Api *{{.StructName}}Api) Update{{.StructName}}(c *gin.Con
 	}
 }
 
-// Find{{.StructName}} 用id查询{{.StructName}}
+// Find{{.StructName}} GetByID{{.StructName}}
 // @Tags {{.StructName}}
-// @Summary 用id查询{{.StructName}}
+// @Summary GetByID{{.StructName}}
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data query {{.Package}}.{{.StructName}} true "用id查询{{.StructName}}"
+// @Param data query {{.Package}}.{{.StructName}} true "GetByID{{.StructName}}"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"Find Successfully"}"
 // @Router /{{.Abbreviation}}/find{{.StructName}} [get]
 func ({{.Abbreviation}}Api *{{.StructName}}Api) Find{{.StructName}}(c *gin.Context) {
@@ -180,13 +180,13 @@ func ({{.Abbreviation}}Api *{{.StructName}}Api) Find{{.StructName}}(c *gin.Conte
 	}
 }
 
-// Get{{.StructName}}List 分页获取{{.StructName}}列表
+// Get{{.StructName}}List Get {{.Structname}} list
 // @Tags {{.StructName}}
-// @Summary 分页获取{{.StructName}}列表
+// @Summary Get {{.Structname}} list
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data query {{.Package}}Req.{{.StructName}}Search true "分页获取{{.StructName}}列表"
+// @Param data query {{.Package}}Req.{{.StructName}}Search true "Get {{.Structname}} list"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"Successful"}"
 // @Router /{{.Abbreviation}}/get{{.StructName}}List [get]
 func ({{.Abbreviation}}Api *{{.StructName}}Api) Get{{.StructName}}List(c *gin.Context) {
