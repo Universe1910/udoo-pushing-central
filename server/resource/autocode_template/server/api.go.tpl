@@ -116,13 +116,13 @@ func ({{.Abbreviation}}Api *{{.StructName}}Api) Delete{{.StructName}}ByIds(c *gi
 	}
 }
 
-// Update{{.StructName}} Update{{.StructName}}
+// Update{{.StructName}} 更新{{.StructName}}
 // @Tags {{.StructName}}
-// @Summary Update{{.StructName}}
+// @Summary 更新{{.StructName}}
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data body {{.Package}}.{{.StructName}} true "Update{{.StructName}}"
+// @Param data body {{.Package}}.{{.StructName}} true "更新{{.StructName}}"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"update completed"}"
 // @Router /{{.Abbreviation}}/update{{.StructName}} [put]
 func ({{.Abbreviation}}Api *{{.StructName}}Api) Update{{.StructName}}(c *gin.Context) {
@@ -156,13 +156,13 @@ func ({{.Abbreviation}}Api *{{.StructName}}Api) Update{{.StructName}}(c *gin.Con
 	}
 }
 
-// Find{{.StructName}} GetByID{{.StructName}}
+// Find{{.StructName}} 用id查询{{.StructName}}
 // @Tags {{.StructName}}
-// @Summary GetByID{{.StructName}}
+// @Summary 用id查询{{.StructName}}
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data query {{.Package}}.{{.StructName}} true "GetByID{{.StructName}}"
+// @Param data query {{.Package}}.{{.StructName}} true "用id查询{{.StructName}}"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"Find Successfully"}"
 // @Router /{{.Abbreviation}}/find{{.StructName}} [get]
 func ({{.Abbreviation}}Api *{{.StructName}}Api) Find{{.StructName}}(c *gin.Context) {
@@ -180,13 +180,13 @@ func ({{.Abbreviation}}Api *{{.StructName}}Api) Find{{.StructName}}(c *gin.Conte
 	}
 }
 
-// Get{{.StructName}}List Get {{.Structname}} list
+// Get{{.StructName}}List 分页获取{{.StructName}}列表
 // @Tags {{.StructName}}
-// @Summary Get {{.Structname}} list
+// @Summary 分页获取{{.StructName}}列表
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data query {{.Package}}Req.{{.StructName}}Search true "Get {{.Structname}} list"
+// @Param data query {{.Package}}Req.{{.StructName}}Search true "分页获取{{.StructName}}列表"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"Successful"}"
 // @Router /{{.Abbreviation}}/get{{.StructName}}List [get]
 func ({{.Abbreviation}}Api *{{.StructName}}Api) Get{{.StructName}}List(c *gin.Context) {
