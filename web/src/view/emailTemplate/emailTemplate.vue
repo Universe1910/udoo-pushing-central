@@ -177,8 +177,8 @@ const getTableData = async () => {
   const table = await getEmailTemplateList({ page: page.value, pageSize: pageSize.value, ...searchInfo.value })
   if (table.code === 0) {
     tableData.value = table.data.list
-    debugger;
-      console.log(tableData.value)
+    // debugger;
+    //   console.log(tableData.value)
     total.value = table.data.total
     page.value = table.data.page
     pageSize.value = table.data.pageSize

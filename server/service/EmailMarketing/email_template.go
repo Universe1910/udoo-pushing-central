@@ -42,7 +42,7 @@ func (email_templateService *EmailTemplateService) UpdateEmailTemplate(email_tem
 // Author [piexlmax](https://github.com/piexlmax)
 func (email_templateService *EmailTemplateService) GetEmailTemplate(id uint) (email_template EmailMarketing.EmailTemplate, err error) {
 	//err = global.GVA_DB.Where("id = ?", id).First(&email_template).Error
-	err = global.GVA_DB.Where("id = ?", id).Preload("SysUser").First(&email_template).Error
+	err = global.GVA_DB.Where("id = ?", id).Preload("CreatedObject").First(&email_template).Error
 
 	return
 }
@@ -63,6 +63,6 @@ func (email_templateService *EmailTemplateService) GetEmailTemplateInfoList(info
 	if err != nil {
 		return
 	}
-	err = db.Limit(limit).Offset(offset).Preload("SysUser").Find(&email_templates).Error
+	err = db.Limit(limit).Offset(offset).Preload("CreatedObject").Find(&email_templates).Error
 	return email_templates, total, err
 }
