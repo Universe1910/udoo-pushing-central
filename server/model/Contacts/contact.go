@@ -19,6 +19,7 @@ type Contact struct {
 	Address   string    `json:"address" form:"address" gorm:"column:address;comment:;"`
 	City      string    `json:"city" form:"city" gorm:"column:city;comment:;"`
 	State     string    `json:"state" form:"state" gorm:"column:state;comment:;"`
+	Province  string    `json:"province" form:"province" gorm:"column:province;comment:;"`
 	Zipcode   string    `json:"zipcode" form:"zipcode" gorm:"column:zipcode;comment:;"`
 	Country   string    `json:"country" form:"country" gorm:"column:country;comment:;"`
 	Tags      []*Tags   `json:"tags" gorm:"many2many:contact_tags;foreignKey:ID;joinForeignKey:ContactID;References:ID;joinReferences:TagID;"`

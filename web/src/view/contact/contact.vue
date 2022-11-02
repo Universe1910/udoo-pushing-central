@@ -97,6 +97,9 @@
         <el-form-item label="State:" prop="state">
           <el-input v-model="formData.state" :clearable="true" placeholder=" Please enter" />
         </el-form-item>
+        <el-form-item label="Provice:" prop="state">
+          <el-input v-model="formData.province" :clearable="true" placeholder=" Please enter" />
+        </el-form-item>
         <el-form-item label="Zipcode:" prop="zipcode">
           <el-input v-model="formData.zipcode" :clearable="true" placeholder=" Please enter" />
         </el-form-item>
@@ -147,6 +150,7 @@ const formData = ref({
   address: '',
   city: '',
   state: '',
+  province: '',
   zipcode: '',
   country: '',
 })
