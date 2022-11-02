@@ -5,7 +5,7 @@ import (
 	"github.com/flipped-aurora/gin-vue-admin/server/model/Contacts"
 	ContactsReq "github.com/flipped-aurora/gin-vue-admin/server/model/Contacts/request"
 	"github.com/flipped-aurora/gin-vue-admin/server/model/common/request"
-	uuid "github.com/satori/go.uuid"
+	// uuid "github.com/satori/go.uuid"
 )
 
 type ContactService struct {
@@ -14,7 +14,7 @@ type ContactService struct {
 // CreateContact Create Contact记录
 // Author [piexlmax](https://github.com/piexlmax)
 func (contactService *ContactService) CreateContact(contact Contacts.Contact) (err error) {
-	contact.Uid = uuid.NewV4()
+	// contact.UUID = uuid.NewV4()
 	err = global.GVA_DB.Create(&contact).Error
 	return err
 }

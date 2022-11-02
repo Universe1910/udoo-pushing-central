@@ -39,19 +39,19 @@ func (b *BaseApi) Login(c *gin.Context) {
 		u := &system.SysUser{Username: l.Username, Password: l.Password}
 		user, err := userService.Login(u)
 		if err != nil {
-			global.GVA_LOG.Error("登陆失败! 用户名不存在或者密码错误!", zap.Error(err))
-			response.FailWithMessage("用户名不存在或者密码错误", c)
+			global.GVA_LOG.Error("Login fails! There is no user name or a password error!", zap.Error(err))
+			response.FailWithMessage("Username does not exist or password errors", c)
 			return
 		}
 		if user.Enable != 1 {
-			global.GVA_LOG.Error("登陆失败! 用户被禁止登录!")
-			response.FailWithMessage("用户被禁止登录", c)
+			global.GVA_LOG.Error("Login failed! Users are prohibited from logging in!")
+			response.FailWithMessage("Users are prohibited from logging in", c)
 			return
 		}
 		b.TokenNext(c, *user)
 		return
 	}
-	response.FailWithMessage("验证码错误", c)
+	response.FailWithMessage("Verification code error	", c)
 }
 
 // TokenNext 登录以后签发jwt
