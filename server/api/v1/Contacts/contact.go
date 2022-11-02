@@ -9,6 +9,7 @@ import (
 	"github.com/flipped-aurora/gin-vue-admin/server/service"
 	"github.com/flipped-aurora/gin-vue-admin/server/utils"
 	"github.com/gin-gonic/gin"
+	uuid "github.com/satori/go.uuid"
 	"go.uber.org/zap"
 )
 
@@ -23,12 +24,12 @@ var contactService = service.ServiceGroupApp.ContactsServiceGroup.ContactService
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data body Contacts.Contact true "Create Contact"
+// @Param data body Contacts.ContactRegister true "Create Contact"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"Successful"}"
 // @Router /contact/createContact [post]
 func (contactApi *ContactApi) CreateContact(c *gin.Context) {
-	var contact Contacts.Contact
-	err := c.ShouldBindJSON(&contact)
+	var reg Contacts.ContactRegister
+	err := c.ShouldBindJSON(&reg)
 	if err != nil {
 		response.FailWithMessage(err.Error(), c)
 		return
@@ -38,10 +39,25 @@ func (contactApi *ContactApi) CreateContact(c *gin.Context) {
 		"Email": {utils.NotEmpty()},
 		"Phone": {utils.NotEmpty()},
 	}
-	if err := utils.Verify(contact, verify); err != nil {
+	if err := utils.Verify(reg, verify); err != nil {
 		response.FailWithMessage(err.Error(), c)
 		return
 	}
+	contact := Contacts.Contact{
+		Firstname: reg.Firstname,
+		Lastname:  reg.Lastname,
+		Email:     reg.Email,
+		Phone:     reg.Phone,
+		Fbid:      reg.Fbid,
+		Zid:       reg.Zid,
+		Address:   reg.Address,
+		City:      reg.City,
+		State:     reg.State,
+		Zipcode:   reg.Zipcode,
+		Country:   reg.Country,
+	}
+
+	contact.UUID = uuid.NewV4()
 	if err := contactService.CreateContact(contact); err != nil {
 		global.GVA_LOG.Error("Failed to create!", zap.Error(err))
 		response.FailWithMessage("Failed to create", c)

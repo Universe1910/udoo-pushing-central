@@ -317,7 +317,6 @@ const openDialog = () => {
 const closeDialog = () => {
   dialogFormVisible.value = false
   formData.value = {
-    uuid: '',
     firstname: '',
     lastname: '',
     email: '',
@@ -333,11 +332,11 @@ const closeDialog = () => {
 }
 // 弹窗确定
 const enterDialog = async () => {
+  debugger;
   elFormRef.value?.validate(async (valid) => {
     if (!valid) return
     let res
-    //tao uuid;
-    // formData.value.uuid = '';
+    debugger;
     switch (type.value) {
       case 'create':
         res = await createContact(formData.value)

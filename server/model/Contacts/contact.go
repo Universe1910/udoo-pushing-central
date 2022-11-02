@@ -9,8 +9,7 @@ import (
 // Contact 结构体
 type Contact struct {
 	global.GVA_MODEL
-	//Uid  string `json:"uid" form:"uid" gorm:"column:uid;comment:;"`
-	Uid       uuid.UUID `json:"uuid" gorm:"index;comment:用户UUID"`
+	UUID      uuid.UUID `json:"uuid" gorm:"index;comment:用户UUID"`
 	Firstname string    `json:"firstname" form:"firstname" gorm:"column:firstname;comment:;"`
 	Lastname  string    `json:"lastname" form:"lastname" gorm:"column:lastname;comment:;"`
 	Email     string    `json:"email" form:"email" gorm:"column:email;comment:;"`
@@ -22,6 +21,7 @@ type Contact struct {
 	State     string    `json:"state" form:"state" gorm:"column:state;comment:;"`
 	Zipcode   string    `json:"zipcode" form:"zipcode" gorm:"column:zipcode;comment:;"`
 	Country   string    `json:"country" form:"country" gorm:"column:country;comment:;"`
+	Tags      []*Tags   `json:"tags" gorm:"many2many:contact_tags;foreignKey:ID;joinForeignKey:ContactID;References:ID;joinReferences:TagID;"`
 }
 
 // TableName Contact 表名
