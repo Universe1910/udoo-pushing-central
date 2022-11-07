@@ -198,7 +198,7 @@ func (authorityService *AuthorityService) SetMenuAuthority(auth *system.SysAutho
 
 //@author: [piexlmax](https://github.com/piexlmax)
 //@function: findChildrenAuthority
-//@description: 查询子角色
+//@description: Search子角色
 //@param: authority *model.SysAuthority
 //@return: err error
 

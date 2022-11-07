@@ -65,12 +65,12 @@ export const updateEmailTemplate = (data) => {
 }
 
 // @Tags EmailTemplate
-// @Summary 用id查询EmailTemplate
+// @Summary 用idSearchEmailTemplate
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data query model.EmailTemplate true "用id查询EmailTemplate"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"查询成功"}"
+// @Param data query model.EmailTemplate true "用idSearchEmailTemplate"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"Search成功"}"
 // @Router /email_template/findEmailTemplate [get]
 export const findEmailTemplate = (params) => {
   return service({

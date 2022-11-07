@@ -51,7 +51,7 @@ const total = ref(0)
 const pageSize = ref(999)
 const tableData = ref([])
 
-// 查询
+// Search
 const getTableData = async(f = () => {}) => {
   const table = await f({ page: page.value, pageSize: pageSize.value })
   if (table.code === 0) {

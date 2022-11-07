@@ -65,11 +65,11 @@ export const update{{.StructName}} = (data) => {
 }
 
 // @Tags {{.StructName}}
-// @Summary 用id查询{{.StructName}}
+// @Summary 用idSearch{{.StructName}}
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data query model.{{.StructName}} true "用id查询{{.StructName}}"
+// @Param data query model.{{.StructName}} true "用idSearch{{.StructName}}"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"Find Successfully"}"
 // @Router /{{.Abbreviation}}/find{{.StructName}} [get]
 export const find{{.StructName}} = (params) => {

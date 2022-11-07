@@ -3,24 +3,24 @@
     <div class="gva-search-box">
       <el-form :inline="true" :model="searchInfo" class="demo-form-inline">
       <el-form-item label="Create 时间">
-      <el-date-picker v-model="searchInfo.startCreatedAt" type="datetime" placeholder="开始时间"></el-date-picker>
+      <el-date-picker v-model="searchInfo.startCreatedAt" type="datetime" placeholder="Start"></el-date-picker>
        —
-      <el-date-picker v-model="searchInfo.endCreatedAt" type="datetime" placeholder="结束时间"></el-date-picker>
+      <el-date-picker v-model="searchInfo.endCreatedAt" type="datetime" placeholder="End"></el-date-picker>
       </el-form-item>
         <el-form-item>
-          <el-button size="small" type="primary" icon="search" @click="onSubmit">查询</el-button>
-          <el-button size="small" icon="refresh" @click="onReset">重置</el-button>
+          <el-button size="small" type="primary" icon="search" @click="onSubmit">Search</el-button>
+          <el-button size="small" icon="refresh" @click="onReset">Reset</el-button>
         </el-form-item>
       </el-form>
     </div>
     <div class="gva-table-box">
         <div class="gva-btn-list">
-            <el-button size="small" type="primary" icon="plus" @click="openDialog">新增</el-button>
+            <el-button size="small" type="primary" icon="plus" @click="openDialog">Add new</el-button>
             <el-popover v-model:visible="deleteVisible" placement="top" width="160">
-            <p>确定要Delete 吗？</p>
+            <p>Are you sure want to delete it?</p>
             <div style="text-align: right; margin-top: 8px;">
-                <el-button size="small" type="primary" link @click="deleteVisible = false">取消</el-button>
-                <el-button size="small" type="primary" @click="onDelete">确定</el-button>
+                <el-button size="small" type="primary" link @click="deleteVisible = false">Cancel</el-button>
+                <el-button size="small" type="primary" @click="onDelete">Delete</el-button>
             </div>
             <template #reference>
                 <el-button icon="delete" size="small" style="margin-left: 10px;" :disabled="!multipleSelection.length" @click="deleteVisible = true">Delete </el-button>
@@ -41,9 +41,9 @@
         </el-table-column>
         <el-table-column align="left" label="Contact ID" prop="contactID" width="120" />
         <el-table-column align="left" label="TagID" prop="tagID" width="120" />
-        <el-table-column align="left" label="按钮组">
+        <el-table-column align="left" label="Action">
             <template #default="scope">
-            <el-button type="primary" link icon="edit" size="small" class="table-button" @click="updateContactTagsFunc(scope.row)">变更</el-button>
+            <el-button type="primary" link icon="edit" size="small" class="table-button" @click="updateContactTagsFunc(scope.row)">Edit</el-button>
             <el-button type="primary" link icon="delete" size="small" @click="deleteRow(scope.row)">Delete </el-button>
             </template>
         </el-table-column>
@@ -60,19 +60,19 @@
             />
         </div>
     </div>
-    <el-dialog v-model="dialogFormVisible" :before-close="closeDialog" title="弹窗操作">
+    <el-dialog v-model="dialogFormVisible" :before-close="closeDialog" title="Add new">
       <el-form :model="formData" label-position="right" ref="elFormRef" :rules="rule" label-width="80px">
         <el-form-item label="Contact ID:"  prop="contactID" >
-          <el-input v-model.number="formData.contactID" :clearable="false" placeholder="请输入" />
+          <el-input v-model.number="formData.contactID" :clearable="false" placeholder="Please enter" />
         </el-form-item>
         <el-form-item label="TagID:"  prop="tagID" >
-          <el-input v-model.number="formData.tagID" :clearable="false" placeholder="请输入" />
+          <el-input v-model.number="formData.tagID" :clearable="false" placeholder="Please enter" />
         </el-form-item>
       </el-form>
       <template #footer>
         <div class="dialog-footer">
-          <el-button size="small" @click="closeDialog">取 消</el-button>
-          <el-button size="small" type="primary" @click="enterDialog">确 定</el-button>
+          <el-button size="small" @click="closeDialog">Cancel</el-button>
+          <el-button size="small" type="primary" @click="enterDialog">Save</el-button>
         </div>
       </template>
     </el-dialog>
@@ -130,7 +130,7 @@ const pageSize = ref(10)
 const tableData = ref([])
 const searchInfo = ref({})
 
-// 重置
+// Reset
 const onReset = () => {
   searchInfo.value = {}
 }
@@ -154,7 +154,7 @@ const handleCurrentChange = (val) => {
   getTableData()
 }
 
-// 查询
+// Search
 const getTableData = async() => {
   const table = await getContactTagsList({ page: page.value, pageSize: pageSize.value, ...searchInfo.value })
   if (table.code === 0) {
@@ -186,9 +186,9 @@ const handleSelectionChange = (val) => {
 
 // Delete 行
 const deleteRow = (row) => {
-    ElMessageBox.confirm('确定要Delete 吗?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+    ElMessageBox.confirm('Delete要Delete 吗?', '提示', {
+        confirmButtonText: 'Delete',
+        cancelButtonText: 'Cancel',
         type: 'warning'
     }).then(() => {
             deleteContactTagsFunc(row)
@@ -205,7 +205,7 @@ const onDelete = async() => {
       if (multipleSelection.value.length === 0) {
         ElMessage({
           type: 'warning',
-          message: '请选择要Delete 的数据'
+          message: 'Please select the data to delete'
         })
         return
       }
@@ -273,7 +273,7 @@ const closeDialog = () => {
         tagID: 0,
         }
 }
-// 弹窗确定
+// 弹窗Delete
 const enterDialog = async () => {
      elFormRef.value?.validate( async (valid) => {
              if (!valid) return
@@ -292,7 +292,7 @@ const enterDialog = async () => {
               if (res.code === 0) {
                 ElMessage({
                   type: 'success',
-                  message: 'Create /更改成功'
+                  message: 'Create /Update successfully'
                 })
                 closeDialog()
                 getTableData()

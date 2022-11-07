@@ -13,7 +13,12 @@ const routes = [{
   path: '/login',
   name: 'Login',
   component: () => import('@/view/login/index.vue')
-}
+},
+// {
+//   path: '/zaloAuthentication',
+//   name: 'zaloAuthentication',
+//   component: () => import('@/view/zaloApplication/zaloApplicationAuth.vue')
+// }
 ]
 
 const router = createRouter({

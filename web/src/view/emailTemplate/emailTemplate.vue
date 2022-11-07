@@ -147,7 +147,7 @@ const pageSize = ref(10)
 const tableData = ref([])
 const searchInfo = ref({})
 
-// 重置
+// Reset
 const onReset = () => {
   searchInfo.value = {}
 }
@@ -171,14 +171,12 @@ const handleCurrentChange = (val) => {
   getTableData()
 }
 
-// 查询
+// Search
 const getTableData = async () => {
   
   const table = await getEmailTemplateList({ page: page.value, pageSize: pageSize.value, ...searchInfo.value })
   if (table.code === 0) {
     tableData.value = table.data.list
-    // debugger;
-    //   console.log(tableData.value)
     total.value = table.data.total
     page.value = table.data.page
     pageSize.value = table.data.pageSize
@@ -305,7 +303,7 @@ const closeDialog = () => {
     createdBy: 1,
   }
 }
-// 弹窗确定
+// 弹窗Delete
 const enterDialog = async () => {
 
   elFormRef.value?.validate(async (valid) => {
@@ -330,7 +328,7 @@ const enterDialog = async () => {
         message: 'Create/change success'
       })
       closeDialog()
-      getTableData()
+      // getTableData()
     }
   })
 }

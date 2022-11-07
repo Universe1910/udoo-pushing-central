@@ -1272,7 +1272,7 @@ var doc = `{
                 "tags": [
                     "AutoCode"
                 ],
-                "summary": "查询回滚记录",
+                "summary": "Search回滚记录",
                 "parameters": [
                     {
                         "description": "请求参数",
@@ -1286,7 +1286,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "查询回滚记录,返回包括列表,总数,页码,每页数量",
+                        "description": "Search回滚记录,返回包括列表,总数,页码,每页数量",
                         "schema": {
                             "allOf": [
                                 {
@@ -3142,7 +3142,7 @@ var doc = `{
                 "tags": [
                     "SysDictionary"
                 ],
-                "summary": "用id查询SysDictionary",
+                "summary": "用idSearchSysDictionary",
                 "parameters": [
                     {
                         "type": "string",
@@ -3189,7 +3189,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "用id查询SysDictionary",
+                        "description": "用idSearchSysDictionary",
                         "schema": {
                             "allOf": [
                                 {
@@ -3483,7 +3483,7 @@ var doc = `{
                 "tags": [
                     "SysDictionaryDetail"
                 ],
-                "summary": "用id查询SysDictionaryDetail",
+                "summary": "用idSearchSysDictionaryDetail",
                 "parameters": [
                     {
                         "type": "string",
@@ -3536,7 +3536,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "用id查询SysDictionaryDetail",
+                        "description": "用idSearchSysDictionaryDetail",
                         "schema": {
                             "allOf": [
                                 {
@@ -3886,7 +3886,7 @@ var doc = `{
                 "tags": [
                     "SysOperationRecord"
                 ],
-                "summary": "用id查询SysOperationRecord",
+                "summary": "用idSearchSysOperationRecord",
                 "parameters": [
                     {
                         "type": "string",
@@ -3969,7 +3969,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "用id查询SysOperationRecord",
+                        "description": "用idSearchSysOperationRecord",
                         "schema": {
                             "allOf": [
                                 {

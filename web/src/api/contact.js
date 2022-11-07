@@ -65,11 +65,11 @@ export const updateContact = (data) => {
 }
 
 // @Tags Contact
-// @Summary 用id查询Contact
+// @Summary 用idSearchContact
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data query model.Contact true "用id查询Contact"
+// @Param data query model.Contact true "用idSearchContact"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"Find Successfully"}"
 // @Router /contact/findContact [get]
 export const findContact = (params) => {

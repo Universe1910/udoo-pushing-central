@@ -65,12 +65,12 @@ export const updateUdooEmail = (data) => {
 }
 
 // @Tags UdooEmail
-// @Summary 用id查询UdooEmail
+// @Summary 用idSearchUdooEmail
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data query model.UdooEmail true "用id查询UdooEmail"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"查询成功"}"
+// @Param data query model.UdooEmail true "用idSearchUdooEmail"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"Search成功"}"
 // @Router /udooEmail/findUdooEmail [get]
 export const findUdooEmail = (params) => {
   return service({

@@ -3,40 +3,40 @@
     <div class="gva-form-box">
       <el-form :model="formData" ref="elFormRef" label-position="right" :rules="rule" label-width="80px">
         <el-form-item label="UID:" prop="uid">
-          <el-input v-model="formData.uid" :clearable="false" placeholder="请输入" />
+          <el-input v-model="formData.uid" :clearable="false" placeholder="Please enter" />
         </el-form-item>
         <el-form-item label="Firstname:" prop="firstname">
-          <el-input v-model="formData.firstname" :clearable="true" placeholder="请输入" />
+          <el-input v-model="formData.firstname" :clearable="true" placeholder="Please enter" />
         </el-form-item>
         <el-form-item label="Lastname:" prop="lastname">
-          <el-input v-model="formData.lastname" :clearable="true" placeholder="请输入" />
+          <el-input v-model="formData.lastname" :clearable="true" placeholder="Please enter" />
         </el-form-item>
         <el-form-item label="Email:" prop="email">
-          <el-input v-model="formData.email" :clearable="false" placeholder="请输入" />
+          <el-input v-model="formData.email" :clearable="false" placeholder="Please enter" />
         </el-form-item>
         <el-form-item label="Phone:" prop="phone">
-          <el-input v-model="formData.phone" :clearable="false" placeholder="请输入" />
+          <el-input v-model="formData.phone" :clearable="false" placeholder="Please enter" />
         </el-form-item>
         <el-form-item label="FB ID:" prop="fbid">
-          <el-input v-model="formData.fbid" :clearable="true" placeholder="请输入" />
+          <el-input v-model="formData.fbid" :clearable="true" placeholder="Please enter" />
         </el-form-item>
         <el-form-item label="Zalo ID:" prop="zid">
-          <el-input v-model="formData.zid" :clearable="true" placeholder="请输入" />
+          <el-input v-model="formData.zid" :clearable="true" placeholder="Please enter" />
         </el-form-item>
         <el-form-item label="Address:" prop="address">
-          <el-input v-model="formData.address" :clearable="true" placeholder="请输入" />
+          <el-input v-model="formData.address" :clearable="true" placeholder="Please enter" />
         </el-form-item>
         <el-form-item label="City:" prop="city">
-          <el-input v-model="formData.city" :clearable="true" placeholder="请输入" />
+          <el-input v-model="formData.city" :clearable="true" placeholder="Please enter" />
         </el-form-item>
         <el-form-item label="State:" prop="state">
-          <el-input v-model="formData.state" :clearable="true" placeholder="请输入" />
+          <el-input v-model="formData.state" :clearable="true" placeholder="Please enter" />
         </el-form-item>
         <el-form-item label="Zipcode:" prop="zipcode">
-          <el-input v-model="formData.zipcode" :clearable="true" placeholder="请输入" />
+          <el-input v-model="formData.zipcode" :clearable="true" placeholder="Please enter" />
         </el-form-item>
         <el-form-item label="Country:" prop="country">
-          <el-input v-model="formData.country" :clearable="true" placeholder="请输入" />
+          <el-input v-model="formData.country" :clearable="true" placeholder="Please enter" />
         </el-form-item>
         <el-form-item>
           <el-button size="small" type="primary" @click="save">保存</el-button>
@@ -106,7 +106,7 @@ const elFormRef = ref()
 
 // 初始化方法
 const init = async () => {
- // 建议通过url传参获取目标数据ID 调用 find方法进行查询数据操作 从而决定本页面是create还是update 以下为id作为url参数示例
+ // 建议通过url传参获取目标数据ID 调用 find方法进行Search数据操作 从而决定本页面是create还是update 以下为id作为url参数示例
     if (route.query.id) {
       const res = await findContact({ ID: route.query.id })
       if (res.code === 0) {
@@ -138,7 +138,7 @@ const save = async() => {
            if (res.code === 0) {
              ElMessage({
                type: 'success',
-               message: 'Create /更改成功'
+               message: 'Create /Update successfully'
              })
            }
        })

@@ -171,7 +171,7 @@
     <el-dialog v-model="changePhoneFlag" title="绑定手机" width="600px">
       <el-form :model="phoneForm">
         <el-form-item label="手机号" label-width="120px">
-          <el-input v-model="phoneForm.phone" placeholder="请输入手机号" autocomplete="off" />
+          <el-input v-model="phoneForm.phone" placeholder="Please enter手机号" autocomplete="off" />
         </el-form-item>
         <el-form-item label="验证码" label-width="120px">
           <div class="code-box">
@@ -198,7 +198,7 @@
     <el-dialog v-model="changeEmailFlag" title="绑定邮箱" width="600px">
       <el-form :model="emailForm">
         <el-form-item label="邮箱" label-width="120px">
-          <el-input v-model="emailForm.email" placeholder="请输入邮箱" autocomplete="off" />
+          <el-input v-model="emailForm.email" placeholder="Please enter邮箱" autocomplete="off" />
         </el-form-item>
         <el-form-item label="验证码" label-width="120px">
           <div class="code-box">
@@ -241,15 +241,15 @@ const path = ref(import.meta.env.VITE_BASE_API + '/')
 const activeName = ref('second')
 const rules = reactive({
   password: [
-    { required: true, message: '请输入密码', trigger: 'blur' },
+    { required: true, message: 'Please enter密码', trigger: 'blur' },
     { min: 6, message: '最少6个字符', trigger: 'blur' },
   ],
   newPassword: [
-    { required: true, message: '请输入新密码', trigger: 'blur' },
+    { required: true, message: 'Please enter新密码', trigger: 'blur' },
     { min: 6, message: '最少6个字符', trigger: 'blur' },
   ],
   confirmPassword: [
-    { required: true, message: '请输入确认密码', trigger: 'blur' },
+    { required: true, message: 'Please enter确认密码', trigger: 'blur' },
     { min: 6, message: '最少6个字符', trigger: 'blur' },
     {
       validator: (rule, value, callback) => {

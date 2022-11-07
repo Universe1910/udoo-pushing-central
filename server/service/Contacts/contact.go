@@ -43,7 +43,7 @@ func (contactService *ContactService) UpdateContact(contact Contacts.Contact) (e
 // GetContact 根据id获取Contact记录
 // Author [piexlmax](https://github.com/piexlmax)
 func (contactService *ContactService) GetContact(id uint) (contact Contacts.Contact, err error) {
-	err = global.GVA_DB.Where("id = ?", id).First(&contact).Error
+	err = global.GVA_DB.Where("id = ?", id).Preload("Tags").First(&contact).Error
 	return
 }
 
@@ -66,6 +66,6 @@ func (contactService *ContactService) GetContactInfoList(info ContactsReq.Contac
 	if err != nil {
 		return
 	}
-	err = db.Limit(limit).Offset(offset).Find(&contacts).Error
+	err = db.Limit(limit).Offset(offset).Preload("Tags").Find(&contacts).Error
 	return contacts, total, err
 }

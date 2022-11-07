@@ -126,7 +126,7 @@ const pageSize = ref(999)
 const tableData = ref([])
 const searchInfo = ref({})
 
-// 查询
+// Search
 const getTableData = async () => {
   const table = await getAuthorityList({ page: page.value, pageSize: pageSize.value, ...searchInfo.value })
   if (table.code === 0) {

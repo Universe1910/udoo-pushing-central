@@ -65,11 +65,11 @@ export const updateTags = (data) => {
 }
 
 // @Tags Tags
-// @Summary 用id查询Tags
+// @Summary 用idSearchTags
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data query model.Tags true "用id查询Tags"
+// @Param data query model.Tags true "用idSearchTags"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"Find Successfully"}"
 // @Router /tags/findTags [get]
 export const findTags = (params) => {

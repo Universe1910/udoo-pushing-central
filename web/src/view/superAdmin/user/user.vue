@@ -201,7 +201,7 @@ const handleCurrentChange = (val) => {
   getTableData()
 }
 
-// 查询
+// Search
 const getTableData = async() => {
   const table = await getUserList({ page: page.value, pageSize: pageSize.value })
   if (table.code === 0) {

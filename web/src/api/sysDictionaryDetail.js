@@ -48,12 +48,12 @@ export const updateSysDictionaryDetail = (data) => {
 }
 
 // @Tags SysDictionaryDetail
-// @Summary 用id查询SysDictionaryDetail
+// @Summary 用idSearchSysDictionaryDetail
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data body model.SysDictionaryDetail true "用id查询SysDictionaryDetail"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"查询成功"}"
+// @Param data body model.SysDictionaryDetail true "用idSearchSysDictionaryDetail"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"Search成功"}"
 // @Router /sysDictionaryDetail/findSysDictionaryDetail [get]
 export const findSysDictionaryDetail = (params) => {
   return service({

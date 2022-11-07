@@ -206,7 +206,7 @@ const sortChange = ({ prop, order }) => {
   getTableData()
 }
 
-// 查询
+// Search
 const getTableData = async () => {
   const table = await getApiList({ page: page.value, pageSize: pageSize.value, ...searchInfo.value })
   if (table.code === 0) {

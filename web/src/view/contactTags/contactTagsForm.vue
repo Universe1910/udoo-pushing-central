@@ -3,10 +3,10 @@
     <div class="gva-form-box">
       <el-form :model="formData" ref="elFormRef" label-position="right" :rules="rule" label-width="80px">
         <el-form-item label="Contact ID:" prop="contactID">
-          <el-input v-model.number="formData.contactID" :clearable="false" placeholder="请输入" />
+          <el-input v-model.number="formData.contactID" :clearable="false" placeholder="Please enter" />
         </el-form-item>
         <el-form-item label="TagID:" prop="tagID">
-          <el-input v-model.number="formData.tagID" :clearable="false" placeholder="请输入" />
+          <el-input v-model.number="formData.tagID" :clearable="false" placeholder="Please enter" />
         </el-form-item>
         <el-form-item>
           <el-button size="small" type="primary" @click="save">保存</el-button>
@@ -61,7 +61,7 @@ const elFormRef = ref()
 
 // 初始化方法
 const init = async () => {
- // 建议通过url传参获取目标数据ID 调用 find方法进行查询数据操作 从而决定本页面是create还是update 以下为id作为url参数示例
+ // 建议通过url传参获取目标数据ID 调用 find方法进行Search数据操作 从而决定本页面是create还是update 以下为id作为url参数示例
     if (route.query.id) {
       const res = await findContactTags({ ID: route.query.id })
       if (res.code === 0) {
@@ -93,7 +93,7 @@ const save = async() => {
            if (res.code === 0) {
              ElMessage({
                type: 'success',
-               message: 'Create /更改成功'
+               message: 'Create /Update successfully'
              })
            }
        })

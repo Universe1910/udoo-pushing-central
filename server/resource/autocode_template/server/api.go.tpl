@@ -156,13 +156,13 @@ func ({{.Abbreviation}}Api *{{.StructName}}Api) Update{{.StructName}}(c *gin.Con
 	}
 }
 
-// Find{{.StructName}} 用id查询{{.StructName}}
+// Find{{.StructName}} 用idSearch{{.StructName}}
 // @Tags {{.StructName}}
-// @Summary 用id查询{{.StructName}}
+// @Summary 用idSearch{{.StructName}}
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data query {{.Package}}.{{.StructName}} true "用id查询{{.StructName}}"
+// @Param data query {{.Package}}.{{.StructName}} true "用idSearch{{.StructName}}"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"Find Successfully"}"
 // @Router /{{.Abbreviation}}/find{{.StructName}} [get]
 func ({{.Abbreviation}}Api *{{.StructName}}Api) Find{{.StructName}}(c *gin.Context) {

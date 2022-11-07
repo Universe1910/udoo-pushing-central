@@ -14,7 +14,7 @@ import (
 )
 
 type LimitConfig struct {
-	// GenerationKey 根据业务生成key 下面CheckOrMark查询生成
+	// GenerationKey 根据业务生成key 下面CheckOrMarkSearch生成
 	GenerationKey func(c *gin.Context) string
 	// 检查函数,用户可修改具体逻辑,更加灵活
 	CheckOrMark func(key string, expire int, limit int) error

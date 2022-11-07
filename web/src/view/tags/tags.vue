@@ -135,7 +135,7 @@ const searchInfo = ref({})
 
 const selectedUser = ref(1);
 
-// 重置
+// Reset
 const onReset = () => {
   searchInfo.value = {}
 }
@@ -159,7 +159,7 @@ const handleCurrentChange = (val) => {
   getTableData()
 }
 
-// 查询
+// Search
 const getTableData = async() => {
   const table = await getTagsList({ page: page.value, pageSize: pageSize.value, ...searchInfo.value })
   if (table.code === 0) {
@@ -209,9 +209,9 @@ const handleSelectionChange = (val) => {
 
 // Delete 行
 const deleteRow = (row) => {
-    ElMessageBox.confirm('确定要Delete 吗?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+    ElMessageBox.confirm('Delete要Delete 吗?', '提示', {
+        confirmButtonText: 'Delete',
+        cancelButtonText: 'Cancel',
         type: 'warning'
     }).then(() => {
             deleteTagsFunc(row)
@@ -228,7 +228,7 @@ const onDelete = async() => {
       if (multipleSelection.value.length === 0) {
         ElMessage({
           type: 'warning',
-          message: '请选择要Delete 的数据'
+          message: 'Please select the data to delete'
         })
         return
       }
@@ -296,7 +296,7 @@ const closeDialog = () => {
         createdBy: 0,
         }
 }
-// 弹窗确定
+// 弹窗Delete
 const enterDialog = async () => {
      elFormRef.value?.validate( async (valid) => {
              if (!valid) return

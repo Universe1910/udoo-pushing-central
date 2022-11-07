@@ -138,8 +138,8 @@ func (autoApi *AutoCodeApi) GetTables(c *gin.Context) {
 	businessDB := c.Query("businessDB")
 	tables, err := autoCodeService.Database(businessDB).GetTables(businessDB, dbName)
 	if err != nil {
-		global.GVA_LOG.Error("查询table失败!", zap.Error(err))
-		response.FailWithMessage("查询table失败", c)
+		global.GVA_LOG.Error("Searchtable失败!", zap.Error(err))
+		response.FailWithMessage("Searchtable失败", c)
 	} else {
 		response.OkWithDetailed(gin.H{"tables": tables}, "Successful", c)
 	}

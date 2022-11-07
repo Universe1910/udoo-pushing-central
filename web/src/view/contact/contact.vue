@@ -181,7 +181,7 @@ const searchInfo = ref({})
 
 // const uuuid = ref({})
 
-// 重置
+// Reset
 const onReset = () => {
   searchInfo.value = {}
 }
@@ -205,7 +205,7 @@ const handleCurrentChange = (val) => {
   getTableData()
 }
 
-// 查询
+// Search
 const getTableData = async () => {
   const table = await getContactList({ page: page.value, pageSize: pageSize.value, ...searchInfo.value })
   if (table.code === 0) {
@@ -334,7 +334,7 @@ const closeDialog = () => {
     country: '',
   }
 }
-// 弹窗确定
+// 弹窗Delete
 const enterDialog = async () => {
   debugger;
   elFormRef.value?.validate(async (valid) => {

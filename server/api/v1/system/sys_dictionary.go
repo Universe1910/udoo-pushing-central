@@ -89,12 +89,12 @@ func (s *DictionaryApi) UpdateSysDictionary(c *gin.Context) {
 
 // FindSysDictionary
 // @Tags      SysDictionary
-// @Summary   用id查询SysDictionary
+// @Summary   用idSearchSysDictionary
 // @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
 // @Param     data  query     system.SysDictionary                                       true  "ID或字典英名"
-// @Success   200   {object}  response.Response{data=map[string]interface{},msg=string}  "用id查询SysDictionary"
+// @Success   200   {object}  response.Response{data=map[string]interface{},msg=string}  "用idSearchSysDictionary"
 // @Router    /sysDictionary/findSysDictionary [get]
 func (s *DictionaryApi) FindSysDictionary(c *gin.Context) {
 	var dictionary system.SysDictionary

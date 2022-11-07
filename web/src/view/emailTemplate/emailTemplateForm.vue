@@ -3,16 +3,16 @@
     <div class="gva-form-box">
       <el-form :model="formData" ref="elFormRef" label-position="right" :rules="rule" label-width="80px">
         <el-form-item label="Name:" prop="name">
-          <el-input v-model="formData.name" :clearable="true" placeholder="请输入" />
+          <el-input v-model="formData.name" :clearable="true" placeholder="Please enter" />
         </el-form-item>
         <el-form-item label="Content HTML:" prop="content">
-          <el-input v-model="formData.content" :clearable="true" placeholder="请输入" />
+          <el-input v-model="formData.content" :clearable="true" placeholder="Please enter" />
         </el-form-item>
         <el-form-item label="Subject:" prop="subject">
-          <el-input v-model="formData.subject" :clearable="true" placeholder="请输入" />
+          <el-input v-model="formData.subject" :clearable="true" placeholder="Please enter" />
         </el-form-item>
         <el-form-item label="User create email:" prop="createdBy">
-          <el-input v-model.number="formData.createdBy" :clearable="true" placeholder="请输入" />
+          <el-input v-model.number="formData.createdBy" :clearable="true" placeholder="Please enter" />
         </el-form-item>
         <el-form-item>
           <el-button size="small" type="primary" @click="save">保存</el-button>
@@ -59,7 +59,7 @@ const elFormRef = ref()
 
 // 初始化方法
 const init = async () => {
- // 建议通过url传参获取目标数据ID 调用 find方法进行查询数据操作 从而决定本页面是create还是update 以下为id作为url参数示例
+ // 建议通过url传参获取目标数据ID 调用 find方法进行Search数据操作 从而决定本页面是create还是update 以下为id作为url参数示例
     if (route.query.id) {
       const res = await findEmailTemplate({ ID: route.query.id })
       if (res.code === 0) {

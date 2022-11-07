@@ -40,8 +40,7 @@
             </div>
             <div class="gva-top-card-left-item">
               Udoo Work
-              <a style="color:#409EFF" target="view_window"
-                href="https://udoo.work">https://udoo.work</a>
+              <a style="color:#409EFF" target="view_window" href="https://udoo.work">https://udoo.work</a>
             </div>
           </div>
         </div>
@@ -151,6 +150,25 @@ const toTarget = (name) => {
   router.push({ name })
 }
 
+
+// const listenerZaloAuthentication = () => {
+//   let uri = window.location.search.substring(1);
+//   let params = new URLSearchParams(uri);
+//   console.log(params.get("oa_id"));
+//   console.log(params.get("code"));
+//   if (params.get("code")) {
+//     router.push({
+//       name: 'zaloAuth',
+//       params: {
+//         id: 1,
+//         code: params.get("code"),
+//         appId: params.get("appId")
+//       }
+//     })
+//   }
+// }
+
+// listenerZaloAuthentication()
 </script>
 <script>
 export default {

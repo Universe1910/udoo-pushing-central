@@ -268,12 +268,12 @@ import { reactive, ref } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 
 const rules = reactive({
-  path: [{ required: true, message: '请输入菜单name', trigger: 'blur' }],
+  path: [{ required: true, message: 'Please enter菜单name', trigger: 'blur' }],
   component: [
-    { required: true, message: '请输入文件路径', trigger: 'blur' }
+    { required: true, message: 'Please enter文件路径', trigger: 'blur' }
   ],
   'meta.title': [
-    { required: true, message: '请输入菜单展示名称', trigger: 'blur' }
+    { required: true, message: 'Please enter菜单展示名称', trigger: 'blur' }
   ]
 })
 
@@ -282,7 +282,7 @@ const total = ref(0)
 const pageSize = ref(999)
 const tableData = ref([])
 const searchInfo = ref({})
-// 查询
+// Search
 const getTableData = async() => {
   const table = await getMenuList({ page: page.value, pageSize: pageSize.value, ...searchInfo.value })
   if (table.code === 0) {

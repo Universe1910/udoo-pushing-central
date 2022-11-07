@@ -36,7 +36,7 @@ func (apiService *ApiService) CreateApi(api system.SysApi) (err error) {
 
 func (apiService *ApiService) DeleteApi(api system.SysApi) (err error) {
 	var entity system.SysApi
-	err = global.GVA_DB.Where("id = ?", api.ID).First(&entity).Error // 根据id查询api记录
+	err = global.GVA_DB.Where("id = ?", api.ID).First(&entity).Error // 根据idSearchapi记录
 	if errors.Is(err, gorm.ErrRecordNotFound) {                      // api记录不存在
 		return err
 	}

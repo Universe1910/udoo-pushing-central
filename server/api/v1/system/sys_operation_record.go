@@ -90,12 +90,12 @@ func (s *OperationRecordApi) DeleteSysOperationRecordByIds(c *gin.Context) {
 
 // FindSysOperationRecord
 // @Tags      SysOperationRecord
-// @Summary   用id查询SysOperationRecord
+// @Summary   用idSearchSysOperationRecord
 // @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
 // @Param     data  query     system.SysOperationRecord                                  true  "Id"
-// @Success   200   {object}  response.Response{data=map[string]interface{},msg=string}  "用id查询SysOperationRecord"
+// @Success   200   {object}  response.Response{data=map[string]interface{},msg=string}  "用idSearchSysOperationRecord"
 // @Router    /sysOperationRecord/findSysOperationRecord [get]
 func (s *OperationRecordApi) FindSysOperationRecord(c *gin.Context) {
 	var sysOperationRecord system.SysOperationRecord

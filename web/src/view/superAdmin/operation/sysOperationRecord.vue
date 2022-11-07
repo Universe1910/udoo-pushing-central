@@ -158,7 +158,7 @@ const handleCurrentChange = (val) => {
   getTableData()
 }
 
-// 查询
+// Search
 const getTableData = async() => {
   const table = await getSysOperationRecordList({
     page: page.value,

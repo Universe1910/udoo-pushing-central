@@ -112,13 +112,13 @@ func (email_templateApi *EmailTemplateApi) UpdateEmailTemplate(c *gin.Context) {
 	}
 }
 
-// FindEmailTemplate 用id查询EmailTemplate
+// FindEmailTemplate 用idSearchEmailTemplate
 // @Tags EmailTemplate
-// @Summary 用id查询EmailTemplate
+// @Summary 用idSearchEmailTemplate
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data query EmailMarketing.EmailTemplate true "用id查询EmailTemplate"
+// @Param data query EmailMarketing.EmailTemplate true "用idSearchEmailTemplate"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"Find Successfully"}"
 // @Router /email_template/findEmailTemplate [get]
 func (email_templateApi *EmailTemplateApi) FindEmailTemplate(c *gin.Context) {

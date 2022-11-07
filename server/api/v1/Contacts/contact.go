@@ -147,13 +147,13 @@ func (contactApi *ContactApi) UpdateContact(c *gin.Context) {
 	}
 }
 
-// FindContact 用id查询Contact
+// FindContact 用idSearchContact
 // @Tags Contact
-// @Summary 用id查询Contact
+// @Summary 用idSearchContact
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data query Contacts.Contact true "用id查询Contact"
+// @Param data query Contacts.Contact true "用idSearchContact"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"Find Successfully"}"
 // @Router /contact/findContact [get]
 func (contactApi *ContactApi) FindContact(c *gin.Context) {
