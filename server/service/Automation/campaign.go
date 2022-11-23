@@ -1,7 +1,11 @@
 package Automation
 
 import (
+	"encoding/json"
+	"fmt"
+
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
+	"github.com/flipped-aurora/gin-vue-admin/server/model/Action"
 	"github.com/flipped-aurora/gin-vue-admin/server/model/Automation"
 	AutomationReq "github.com/flipped-aurora/gin-vue-admin/server/model/Automation/request"
 	"github.com/flipped-aurora/gin-vue-admin/server/model/common/request"
@@ -34,6 +38,9 @@ func (campaignService *CampaignService) DeleteCampaignByIds(ids request.IdsReq) 
 // UpdateCampaign 更新Campaign记录
 // Author [piexlmax](https://github.com/piexlmax)
 func (campaignService *CampaignService) UpdateCampaign(campaign Automation.Campaign) (err error) {
+	// db.Model(&job).Association('Skills').Replace(&job.Skills
+	// delete(campaign, "Contacts")
+
 	err = global.GVA_DB.Save(&campaign).Error
 	return err
 }
@@ -41,7 +48,7 @@ func (campaignService *CampaignService) UpdateCampaign(campaign Automation.Campa
 // GetCampaign 根据id获取Campaign记录
 // Author [piexlmax](https://github.com/piexlmax)
 func (campaignService *CampaignService) GetCampaign(id uint) (campaign Automation.Campaign, err error) {
-	err = global.GVA_DB.Where("id = ?", id).Preload("Contacts").First(&campaign).Error
+	err = global.GVA_DB.Where("id = ?", id).Preload("Contacts").Preload("TriggerObject").Preload("ZaloApplication").First(&campaign).Error
 	return
 }
 
@@ -61,6 +68,47 @@ func (campaignService *CampaignService) GetCampaignInfoList(info AutomationReq.C
 	if err != nil {
 		return
 	}
-	err = db.Limit(limit).Offset(offset).Preload("Contacts").Find(&campaigns).Error
+	err = db.Limit(limit).Offset(offset).Preload("Contacts").Preload("TriggerObject").Preload("ZaloApplication").Find(&campaigns).Error
 	return campaigns, total, err
 }
+
+func (CampaignService *CampaignService) DebugCampaign(id uint) (err error) {
+	var campaign Automation.Campaign
+	err = global.GVA_DB.Where("id = ?", id).Preload("Contacts").Preload("TriggerObject").Preload("ZaloApplication").First(&campaign).Error
+	if err != nil {
+		return err
+	}
+	var triggerFlow []map[string]interface{}
+	err = json.Unmarshal([]byte(campaign.TriggerObject.Data), &triggerFlow)
+	if err != nil {
+		fmt.Println(err)
+	}
+	for _, v := range triggerFlow {
+		nexts := v["nexts"].([]interface{})
+		for _, next := range nexts {
+			trigger := next.(map[string]interface{})
+			node := trigger["node"].(map[string]interface{})
+			actionNode := Action.ActionNode{
+				Label:      node["label"].(string),
+				ActionName: node["actionName"].(string),
+				ID:         node["id"].(string),
+				Type:       node["type"].(string),
+				Data:       node["data"],
+			}
+			if actionNode.ActionName == "action-send-zns" {
+				znsTemplate := actionNode.Data
+				fmt.Println(znsTemplate)
+				//handle Zalo Service
+				// CampaignService.ActionSendZNS()
+			}
+		}
+	}
+	return
+}
+
+// func (CampaignService *CampaignService) ActionSendZNS() (err error) {
+// 	zaloApplication, err := Social.GetZaloActiveApplication()
+// 	fmt.Println(zaloApplication)
+
+// 	return nil
+// }

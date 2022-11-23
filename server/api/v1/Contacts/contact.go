@@ -2,6 +2,7 @@ package Contacts
 
 import (
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
+	"github.com/flipped-aurora/gin-vue-admin/server/model/Automation"
 	"github.com/flipped-aurora/gin-vue-admin/server/model/Contacts"
 	ContactsReq "github.com/flipped-aurora/gin-vue-admin/server/model/Contacts/request"
 	"github.com/flipped-aurora/gin-vue-admin/server/model/common/request"
@@ -17,6 +18,7 @@ type ContactApi struct {
 }
 
 var contactService = service.ServiceGroupApp.ContactsServiceGroup.ContactService
+var contactCampaignService = service.ServiceGroupApp.AutomationServiceGroup.ContactCampaignService
 
 // CreateContact Create Contact
 // @Tags Contact
@@ -58,11 +60,23 @@ func (contactApi *ContactApi) CreateContact(c *gin.Context) {
 	}
 
 	contact.UUID = uuid.NewV4()
-	if err := contactService.CreateContact(contact); err != nil {
+	if err := contactService.CreateContact(&contact); err != nil {
 		global.GVA_LOG.Error("Failed to create!", zap.Error(err))
 		response.FailWithMessage("Failed to create", c)
 	} else {
-		response.OkWithMessage("Successful creation", c)
+		if reg.CampaignID != nil {
+			contactCampaign := Automation.ContactCampaign{
+				ContactId:  contact.ID,
+				CampaignId: reg.CampaignID,
+			}
+			if err := contactCampaignService.CreateContactCampaign(contactCampaign); err != nil {
+				global.GVA_LOG.Error("Canot add contact to campaign!", zap.Error(err))
+				response.FailWithMessage("Canot add contact to campaign", c)
+			} else {
+				response.OkWithMessage("Successful creation", c)
+			}
+		}
+
 	}
 }
 

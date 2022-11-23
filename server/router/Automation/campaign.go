@@ -1,7 +1,7 @@
 package Automation
 
 import (
-	"github.com/flipped-aurora/gin-vue-admin/server/api/v1"
+	v1 "github.com/flipped-aurora/gin-vue-admin/server/api/v1"
 	"github.com/flipped-aurora/gin-vue-admin/server/middleware"
 	"github.com/gin-gonic/gin"
 )
@@ -15,13 +15,14 @@ func (s *CampaignRouter) InitCampaignRouter(Router *gin.RouterGroup) {
 	campaignRouterWithoutRecord := Router.Group("campaign")
 	var campaignApi = v1.ApiGroupApp.AutomationApiGroup.CampaignApi
 	{
-		campaignRouter.POST("createCampaign", campaignApi.CreateCampaign)   // 新建Campaign
-		campaignRouter.DELETE("deleteCampaign", campaignApi.DeleteCampaign) // Delete Campaign
+		campaignRouter.POST("createCampaign", campaignApi.CreateCampaign)             // 新建Campaign
+		campaignRouter.DELETE("deleteCampaign", campaignApi.DeleteCampaign)           // Delete Campaign
 		campaignRouter.DELETE("deleteCampaignByIds", campaignApi.DeleteCampaignByIds) // 批量Delete Campaign
-		campaignRouter.PUT("updateCampaign", campaignApi.UpdateCampaign)    // 更新Campaign
+		campaignRouter.PUT("updateCampaign", campaignApi.UpdateCampaign)              // 更新Campaign
 	}
 	{
-		campaignRouterWithoutRecord.GET("findCampaign", campaignApi.FindCampaign)        // 根据ID获取Campaign
-		campaignRouterWithoutRecord.GET("getCampaignList", campaignApi.GetCampaignList)  // 获取Campaign列表
+		campaignRouterWithoutRecord.POST("debugCampaign", campaignApi.DebugCampaign)
+		campaignRouterWithoutRecord.GET("findCampaign", campaignApi.FindCampaign)       // 根据ID获取Campaign
+		campaignRouterWithoutRecord.GET("getCampaignList", campaignApi.GetCampaignList) // 获取Campaign列表
 	}
 }

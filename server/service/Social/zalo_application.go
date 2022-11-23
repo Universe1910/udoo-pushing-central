@@ -1,10 +1,16 @@
 package Social
 
 import (
+	"errors"
+	"fmt"
+
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
 	"github.com/flipped-aurora/gin-vue-admin/server/model/Social"
 	SocialReq "github.com/flipped-aurora/gin-vue-admin/server/model/Social/request"
 	"github.com/flipped-aurora/gin-vue-admin/server/model/common/request"
+	"github.com/flipped-aurora/gin-vue-admin/server/service/zalo"
+	"go.uber.org/zap"
+	// "github.com/flipped-aurora/gin-vue-admin/server/service/zalo"
 )
 
 type ZaloApplicationService struct {
@@ -33,7 +39,7 @@ func (zaloApplicationService *ZaloApplicationService) DeleteZaloApplicationByIds
 
 // UpdateZaloApplication 更新ZaloApplication记录
 // Author [piexlmax](https://github.com/piexlmax)
-func (zaloApplicationService *ZaloApplicationService) UpdateZaloApplication(zaloApplication Social.ZaloApplication) (err error) {
+func (zaloApplicationService *ZaloApplicationService) UpdateZaloApplication(zaloApplication *Social.ZaloApplication) (err error) {
 	err = global.GVA_DB.Save(&zaloApplication).Error
 	return err
 }
@@ -83,4 +89,36 @@ func (zaloApplicationService *ZaloApplicationService) GetZaloApplicationActiveIn
 	}
 	err = db.Limit(limit).Offset(offset).Find(&zaloApplications).Error
 	return zaloApplications, total, err
+}
+
+// GetZaloActiveApplication 根据id获取ZaloApplication记录
+// Author [piexlmax](https://github.com/piexlmax)
+func (zaloApplicationService *ZaloApplicationService) GetZaloActiveApplication() (zaloApplication Social.ZaloApplication, err error) {
+	err = global.GVA_DB.Where("default_app = ? AND status = ?", "TRUE", "TRUE").First(&zaloApplication).Error
+	return
+}
+
+func (zaloApplicationService *ZaloApplicationService) FetchAccessToken(zaloApplication *Social.ZaloApplication) (res map[string]interface{}, err error) {
+	var zoApi zalo.ZaloOfficalAPI
+	zoApi.InitializeAPI()
+	res, err = zoApi.GetAccessTokenAPI(zaloApplication.SecretKey, zaloApplication.CodeAuthorization, zaloApplication.ApplicationID, zaloApplication.CodeVerifier)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	if res["error_name"] == "Authorized code expired" {
+		res, err = zoApi.RefrestTokenAPI(zaloApplication.SecretKey, zaloApplication.RefreshToken, zaloApplication.ApplicationID)
+		fmt.Println(res)
+	}
+	if res["error_name"] != nil {
+		return nil, errors.New(fmt.Sprintf("Zalo: %s", res["error_name"].(string)))
+	}
+	zaloApplication.AccessToken = res["access_token"].(string)
+	zaloApplication.RefreshToken = res["refresh_token"].(string)
+	zaloApplication.ExpiresIn = res["expires_in"].(string)
+	if err := zaloApplicationService.UpdateZaloApplication(zaloApplication); err != nil {
+		global.GVA_LOG.Error("Query Failed", zap.Error(err))
+		return res, err
+	}
+	return
 }

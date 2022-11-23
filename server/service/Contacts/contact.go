@@ -13,7 +13,7 @@ type ContactService struct {
 
 // CreateContact Create Contact记录
 // Author [piexlmax](https://github.com/piexlmax)
-func (contactService *ContactService) CreateContact(contact Contacts.Contact) (err error) {
+func (contactService *ContactService) CreateContact(contact *Contacts.Contact) (err error) {
 	// contact.UUID = uuid.NewV4()
 	err = global.GVA_DB.Create(&contact).Error
 	return err

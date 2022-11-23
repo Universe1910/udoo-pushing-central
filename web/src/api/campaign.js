@@ -1,4 +1,4 @@
-import service from '@/utils/request'
+import service from "@/utils/request";
 
 // @Tags Campaign
 // @Summary Create Campaign
@@ -10,11 +10,11 @@ import service from '@/utils/request'
 // @Router /campaign/createCampaign [post]
 export const createCampaign = (data) => {
   return service({
-    url: '/campaign/createCampaign',
-    method: 'post',
-    data
-  })
-}
+    url: "/campaign/createCampaign",
+    method: "post",
+    data,
+  });
+};
 
 // @Tags Campaign
 // @Summary Delete Campaign
@@ -26,11 +26,27 @@ export const createCampaign = (data) => {
 // @Router /campaign/deleteCampaign [delete]
 export const deleteCampaign = (data) => {
   return service({
-    url: '/campaign/deleteCampaign',
-    method: 'delete',
-    data
-  })
-}
+    url: "/campaign/deleteCampaign",
+    method: "delete",
+    data,
+  });
+};
+
+// @Tags Campaign
+// @Summary Debug Campaign
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body model.Campaign true "Debug Campaign"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"successfully Debug"}"
+// @Router /campaign/debugCampaign [post]
+export const debugCampaign = (data) => {
+  return service({
+    url: "/campaign/debugCampaign",
+    method: "post",
+    data,
+  });
+};
 
 // @Tags Campaign
 // @Summary Delete Campaign
@@ -42,11 +58,11 @@ export const deleteCampaign = (data) => {
 // @Router /campaign/deleteCampaign [delete]
 export const deleteCampaignByIds = (data) => {
   return service({
-    url: '/campaign/deleteCampaignByIds',
-    method: 'delete',
-    data
-  })
-}
+    url: "/campaign/deleteCampaignByIds",
+    method: "delete",
+    data,
+  });
+};
 
 // @Tags Campaign
 // @Summary 更新Campaign
@@ -58,11 +74,11 @@ export const deleteCampaignByIds = (data) => {
 // @Router /campaign/updateCampaign [put]
 export const updateCampaign = (data) => {
   return service({
-    url: '/campaign/updateCampaign',
-    method: 'put',
-    data
-  })
-}
+    url: "/campaign/updateCampaign",
+    method: "put",
+    data,
+  });
+};
 
 // @Tags Campaign
 // @Summary 用idSearchCampaign
@@ -74,11 +90,11 @@ export const updateCampaign = (data) => {
 // @Router /campaign/findCampaign [get]
 export const findCampaign = (params) => {
   return service({
-    url: '/campaign/findCampaign',
-    method: 'get',
-    params
-  })
-}
+    url: "/campaign/findCampaign",
+    method: "get",
+    params,
+  });
+};
 
 // @Tags Campaign
 // @Summary 分页获取Campaign列表
@@ -90,8 +106,8 @@ export const findCampaign = (params) => {
 // @Router /campaign/getCampaignList [get]
 export const getCampaignList = (params) => {
   return service({
-    url: '/campaign/getCampaignList',
-    method: 'get',
-    params
-  })
-}
+    url: "/campaign/getCampaignList",
+    method: "get",
+    params,
+  });
+};

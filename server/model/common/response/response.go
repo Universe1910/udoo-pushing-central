@@ -34,6 +34,10 @@ func OkWithMessage(message string, c *gin.Context) {
 	Result(SUCCESS, map[string]interface{}{}, message, c)
 }
 
+func OkWithMessageAndData(message string, data interface{}, c *gin.Context) {
+	Result(SUCCESS, data, message, c)
+}
+
 func OkWithData(data interface{}, c *gin.Context) {
 	Result(SUCCESS, data, "Find Successfully", c)
 }

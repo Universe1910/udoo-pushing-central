@@ -105,8 +105,8 @@ func (s *DictionaryApi) FindSysDictionary(c *gin.Context) {
 	}
 	sysDictionary, err := dictionaryService.GetSysDictionary(dictionary.Type, dictionary.ID, dictionary.Status)
 	if err != nil {
-		global.GVA_LOG.Error("字典未Create 或未开启!", zap.Error(err))
-		response.FailWithMessage("字典未Create 或未开启", c)
+		global.GVA_LOG.Error("Dictionary is not create or not opened!", zap.Error(err))
+		response.FailWithMessage("Dictionary is not create or not opened", c)
 		return
 	}
 	response.OkWithDetailed(gin.H{"resysDictionary": sysDictionary}, "Find Successfully", c)

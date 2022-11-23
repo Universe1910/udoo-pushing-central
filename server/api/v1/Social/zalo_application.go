@@ -9,8 +9,8 @@ import (
 	"github.com/flipped-aurora/gin-vue-admin/server/model/common/request"
 	"github.com/flipped-aurora/gin-vue-admin/server/model/common/response"
 	"github.com/flipped-aurora/gin-vue-admin/server/service"
+	"github.com/flipped-aurora/gin-vue-admin/server/service/zalo"
 	"github.com/flipped-aurora/gin-vue-admin/server/utils"
-	"github.com/flipped-aurora/gin-vue-admin/server/utils/zalo"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )
@@ -19,6 +19,7 @@ type ZaloApplicationApi struct {
 }
 
 var zaloApplicationService = service.ServiceGroupApp.SocialServiceGroup.ZaloApplicationService
+var zaloNotificationServiceAPI zalo.ZaloNotificationServiceAPI
 
 // CreateZaloApplication Create ZaloApplication
 // @Tags ZaloApplication
@@ -126,7 +127,7 @@ func (zaloApplicationApi *ZaloApplicationApi) UpdateZaloApplication(c *gin.Conte
 		response.FailWithMessage(err.Error(), c)
 		return
 	}
-	if err := zaloApplicationService.UpdateZaloApplication(zaloApplication); err != nil {
+	if err := zaloApplicationService.UpdateZaloApplication(&zaloApplication); err != nil {
 		global.GVA_LOG.Error("Update failure!", zap.Error(err))
 		response.FailWithMessage("Update failure", c)
 	} else {
@@ -219,4 +220,82 @@ func (zaloApplicationApi *ZaloApplicationApi) GetZaloApplicationActiveList(c *gi
 			PageSize: pageInfo.PageSize,
 		}, "Successful", c)
 	}
+}
+
+// GetZaloNotificationTemplate
+// @Tags ZaloApplication
+// @Summary GetZaloNotificationTemplate
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data query Social.ZaloApplication true "用idSearchZaloApplication"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"Find Successfully"}"
+// @Router /zaloApplication/getZaloNotificationTemplate [get]
+func (zaloApplicationApi *ZaloApplicationApi) GetZaloNotificationTemplate(c *gin.Context) {
+	var zaloApplication Social.ZaloApplication
+	err := c.ShouldBindQuery(&zaloApplication)
+	if err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+	var res map[string]interface{}
+	_, err = zaloApplicationService.FetchAccessToken(&zaloApplication)
+	if err != nil {
+		global.GVA_LOG.Error("Fail!", zap.Error(err))
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+	zaloNotificationServiceAPI.InitializeAPI()
+	res, err = zaloNotificationServiceAPI.GetTemplateList(zaloApplication.AccessToken)
+	if err != nil {
+		global.GVA_LOG.Error("Fail!", zap.Error(err))
+		fmt.Println(err.Error())
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+	// fmt.Println(res)
+	if res["message"] != "Success" {
+		global.GVA_LOG.Error("Fail!", zap.Error(err))
+		response.FailWithDetailed(res, "Zalo: Error", c)
+		return
+	}
+	templates := res["data"].([]interface{})
+	var results []map[string]interface{}
+	for _, t := range templates {
+		mia := t.(map[string]interface{})
+		id := mia["templateId"].(float64)
+		res, err = zaloNotificationServiceAPI.GetTemplateDetail(zaloApplication.AccessToken, id)
+		if err != nil {
+			fmt.Println(err.Error())
+			continue
+		}
+		if res["message"] != "Success" {
+			fmt.Println(err.Error())
+			continue
+		}
+
+		data := res["data"].(map[string]interface{})
+		var templateData []map[string]string
+		listParams := data["listParams"].([]interface{})
+		for _, p := range listParams {
+			params := p.(map[string]interface{})
+			templateData = append(templateData, map[string]string{
+				"replaceKey": params["name"].(string),
+				"replaceVal": "",
+			})
+		}
+
+		results = append(results, map[string]interface{}{
+			"name":       data["templateName"],
+			"id":         id,
+			"data":       templateData,
+			"previewUrl": data["previewUrl"],
+			"price":      data["price"],
+			"timeout":    data["timeout"],
+		})
+
+	}
+
+	response.OkWithData(results, c)
+
 }

@@ -95,3 +95,20 @@ export const getZaloApplicationList = (params) => {
     params
   })
 }
+
+// @Tags getZaloNotificationTemplate
+// @Summary getZaloNotificationTemplate
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data query model.ZaloApplication true "getZaloNotificationTemplate"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"Find Successfully"}"
+// @Router /zaloApplication/getZaloNotificationTemplate [get]
+export const getZaloNotificationTemplate = (params) => {
+  return service({
+    url: '/zaloApplication/getZaloNotificationTemplate',
+    method: 'get',
+    params
+  })
+}
+// getZaloNotificationTemplate

@@ -24,5 +24,6 @@ func (s *ZaloApplicationRouter) InitZaloApplicationRouter(Router *gin.RouterGrou
 		zaloApplicationRouterWithoutRecord.GET("findZaloApplication", zaloApplicationApi.FindZaloApplication)                   // 根据ID获取ZaloApplication
 		zaloApplicationRouterWithoutRecord.GET("getZaloApplicationList", zaloApplicationApi.GetZaloApplicationList)             // 获取ZaloApplication列表
 		zaloApplicationRouterWithoutRecord.GET("getZaloApplicationActiveList", zaloApplicationApi.GetZaloApplicationActiveList) // ZaloApplication Active
+		zaloApplicationRouterWithoutRecord.GET("getZaloNotificationTemplate", zaloApplicationApi.GetZaloNotificationTemplate)
 	}
 }
