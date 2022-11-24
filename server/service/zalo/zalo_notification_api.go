@@ -49,3 +49,13 @@ func (api *ZaloNotificationServiceAPI) GetTemplateDetail(accessToken string, tem
 	res, err = ExecuteRequest(builder)
 	return
 }
+
+func (api *ZaloNotificationServiceAPI) SendZaloNotification(accessToken string, body map[string]interface{}) (res map[string]interface{}, err error) {
+	builder := make(map[string]interface{})
+	builder["endpoint"] = fmt.Sprintf("%s/message/template", api.openApiUrl)
+	builder["method"] = "POST"
+	builder["body"] = body
+	builder["header"] = api.GetHeader(accessToken)
+	res, err = ExecuteRequest(builder)
+	return
+}

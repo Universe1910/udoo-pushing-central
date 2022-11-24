@@ -57,13 +57,12 @@ const getCampaign = async () => {
 
 getCampaign()
 
-const getZnsTemplates = async()=>{
+const getZnsTemplates = async () => {
   var res = await getZaloNotificationTemplate(campaigndata.value.zaloApplication)
-  if(res.code ===0 ){
+  if (res.code === 0) {
     ZNSTemplateOptions.value = res.data
     console.log(ZNSTemplateOptions.value)
   }
-
 }
 
 const getId = () => {
@@ -262,33 +261,7 @@ const currentSelectedNodeId = ref()
 const znsTemplateSelected = ref()
 
 const ZNSTemplateOptions = ref([
-  // {
-  //   name: 'Template 1',
-  //   id: 1,
-  //   data: [
-  //     {
-  //       replaceKey: 'customer_name',
-  //       replaceVal: ''
-  //     },
-  //     {
-  //       replaceKey: 'course_name',
-  //       replaceVal: ''
-  //     },
-  //     {
-  //       replaceKey: 'order_no',
-  //       replaceVal: ''
-  //     }
-  //     ,
-  //     {
-  //       replaceKey: 'order_time',
-  //       replaceVal: ''
-  //     }
-  //     , {
-  //       replaceKey: 'course_time',
-  //       replaceVal: ''
-  //     }
-  //   ]
-  // },
+
   // {
   //   name: 'Template 2',
   //   id: 2,
@@ -310,14 +283,9 @@ const ZNSTemplateOptions = ref([
 ])
 
 const saveSendZNSConfig = () => {
-
   var nodeId = currentSelectedNodeId.value;
-  // console.log(nodeId)
-  // console.log(znsTemplateSelected.value)
-  debugger
   var newUpdate = getZNSTemplateById(znsCurrentTemplateData.value.id)
   newUpdate.data = znsCurrentTemplateData.value.data
-  // console.log(newUpdate)
   updateNodeData(newUpdate, nodeId)
   dialogDataActionSendZNSVisible.value = false;
 
@@ -329,17 +297,11 @@ const getZNSTemplateById = (id) => {
 }
 
 const updateNodeData = (data, nodeId) => {
-
-  console.log('updateNodeData: ' + nodeId)
   const node = findNode(nodeId)
-  // debugger
-  // console.log(data.value)
   node.data = data
-  console.log(node)
 }
 
 const znsChangeTemplate = (value) => {
-  console.log('value change:  ' + value)
   var newTemplate = getZNSTemplateById(value);
   znsCurrentTemplateData.value.data = newTemplate.data
 
@@ -349,6 +311,15 @@ const closeDialog = () => {
   dialogDataActionSendZNSVisible.value = false;
 }
 
+
+const variables = ref(
+[
+"__CID__","__LASTNAME__","__FIRSTNAME__", "__PHONE__", "__EMAIL__",
+"__CAMPAIGN_NAME__", "__CAMPAIGN_START__", "__CAMPAIGN_END__",
+"__ZALO_PHONE__", "__FB_ID__", "__ADDRESS__", "__CITY__", "__STATE__", "__ZIPCODE__", "__COUNTRY__",
+"__DATE__", "__TIME__"
+]
+)
 </script>
 
 <template>
@@ -365,19 +336,27 @@ const closeDialog = () => {
   <!-- dialog note send ZNS -->
   <el-dialog v-model="dialogDataActionSendZNSVisible" :before-close="closeDialog" title="Pop-up">
     <el-form :model="znsCurrentTemplateData" label-position="right" ref="elFormRef" :rules="rule" label-width="120px">
+
       <el-form-item label="Template:" prop="id">
         <el-select v-model="znsCurrentTemplateData.id" @change="znsChangeTemplate" clearable placeholder="Select">
           <el-option v-for="item in ZNSTemplateOptions" :key="item.id" :label="item.name" :value="item.id" />
         </el-select>
       </el-form-item>
-      <el-form-item>
+      <el-form-item label="Variables">
+        <div class="flex justify-space-between mb-4 flex-wrap gap-4">
+          <el-tag class="el-tag-margin-4" v-for="variable in variables" :key="variable" :type="variable" text bg>{{ variable }}
+          </el-tag>
+        </div>
+
+      </el-form-item>
+      <el-form-item label="Template Data">
         <el-table :data="znsCurrentTemplateData.data" style="width: 100%">
           <el-table-column label="Key">
             <template #default="scope">
               <el-input type="text" readonly v-model="scope.row.replaceKey"></el-input>
             </template>
           </el-table-column>
-          <el-table-column label="Replace">
+          <el-table-column label="Value">
             <template #default="scope">
               <el-input type="text" v-model="scope.row.replaceVal"></el-input>
             </template>
@@ -461,5 +440,9 @@ const closeDialog = () => {
     flex-direction: row;
     gap: 5px
   }
+}
+.el-tag-margin-4{
+  padding: 8px;
+  margin: 4px;
 }
 </style>

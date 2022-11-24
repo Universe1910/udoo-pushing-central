@@ -295,7 +295,6 @@ func (zaloApplicationApi *ZaloApplicationApi) GetZaloNotificationTemplate(c *gin
 		})
 
 	}
-
 	response.OkWithData(results, c)
 
 }

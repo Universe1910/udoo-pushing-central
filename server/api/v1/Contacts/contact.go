@@ -19,6 +19,7 @@ type ContactApi struct {
 
 var contactService = service.ServiceGroupApp.ContactsServiceGroup.ContactService
 var contactCampaignService = service.ServiceGroupApp.AutomationServiceGroup.ContactCampaignService
+var campaignService = service.ServiceGroupApp.AutomationServiceGroup.CampaignService
 
 // CreateContact Create Contact
 // @Tags Contact
@@ -73,6 +74,11 @@ func (contactApi *ContactApi) CreateContact(c *gin.Context) {
 				global.GVA_LOG.Error("Canot add contact to campaign!", zap.Error(err))
 				response.FailWithMessage("Canot add contact to campaign", c)
 			} else {
+				err := campaignService.RunTrigger(*reg.CampaignID, contact)
+				if err != nil {
+					global.GVA_LOG.Error("Add success but trigger run fail!", zap.Error(err))
+					response.FailWithMessage("Add success but trigger run fail", c)
+				}
 				response.OkWithMessage("Successful creation", c)
 			}
 		}
