@@ -31,14 +31,16 @@
       <el-table ref="multipleTable" style="width: 100%" tooltip-effect="dark" :data="tableData" row-key="ID"
         @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55" />
-        <el-table-column align="left" label="ID" prop="ID" />
+        <!-- <el-table-column align="left" label="ID" prop="ID" /> -->
         <el-table-column align="left" label="Application ID" prop="applicationID" />
         <el-table-column align="left" label="Name" prop="applicationName" />
-        <el-table-column align="left" label="Secret Key" prop="secretKey" />
-        <el-table-column align="left" label="Status" prop="status" width="80">
+        <el-table-column align="left" label="Development Mode" prop="developmentMode">
+          <template #default="scope">{{ formatBoolean(scope.row.developmentMode) }}</template>
+        </el-table-column>
+        <el-table-column align="left" label="Status" prop="status">
           <template #default="scope">{{ formatBoolean(scope.row.status) }}</template>
         </el-table-column>
-        <el-table-column align="left" label="Date" width="180">
+        <el-table-column align="left" label="Date">
           <template #default="scope">{{ formatDate(scope.row.CreatedAt) }}</template>
         </el-table-column>
         <el-table-column align="left" label="Action">
@@ -66,10 +68,10 @@
           <el-input v-model="formData.applicationID" :clearable="false" placeholder="Please enter" />
         </el-form-item>
         <el-form-item label="Secret Key:" prop="secretKey">
-          <el-input v-model="formData.secretKey" :clearable="false" placeholder="Please enter" />
+          <el-input type="password" v-model="formData.secretKey" :clearable="false" placeholder="Please enter" />
         </el-form-item>
         <el-form-item label="Code Verifier:" prop="codeVerifier">
-          <el-input v-model="formData.codeVerifier" :clearable="false" placeholder="Please enter" />
+          <el-input type="password" v-model="formData.codeVerifier" :clearable="false" placeholder="Please enter" />
         </el-form-item>
         <el-form-item label="Callback URL:" prop="callbackURL">
           <el-input v-model="formData.callbackURL" :clearable="false" placeholder="Please enter" />
@@ -80,6 +82,10 @@
         </el-form-item>
         <el-form-item label="Default App:" prop="defaultApp">
           <el-switch v-model="formData.defaultApp" active-color="#13ce66" inactive-color="#ff4949" active-text="Active"
+            inactive-text="Inactive" clearable></el-switch>
+        </el-form-item>
+        <el-form-item label="Development Mode:" prop="developmentMode">
+          <el-switch v-model="formData.developmentMode" active-color="#13ce66" inactive-color="#ff4949" active-text="Active"
             inactive-text="Inactive" clearable></el-switch>
         </el-form-item>
       </el-form>
@@ -127,7 +133,8 @@ const formData = ref({
   status: false,
   callbackURL: '',
   defaultApp: '',
-  codeVerifier: ''
+  codeVerifier: '',
+  developmentMode: false
 })
 
 // 验证规则

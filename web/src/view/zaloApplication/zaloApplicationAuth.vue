@@ -16,7 +16,7 @@
       </el-col>
       <el-col :span="12" class="grid-cell">
         <el-form-item label="Code Challenge" label-width="120px" prop="codeChallenge">
-          <el-input v-model="zaloBuilderForm.codeChallenge"   type="text" clearable>
+          <el-input type="password" v-model="zaloBuilderForm.codeChallenge"   show-password clearable>
           </el-input>
         </el-form-item>
       </el-col>
@@ -29,7 +29,7 @@
       </el-col>
       <el-col :span="12" class="grid-cell">
         <el-form-item label="Code Verifier" label-width="120px" prop="codeVerifier">
-          <el-input v-model="zaloBuilderForm.codeVerifier"   type="text" clearable>
+          <el-input v-model="zaloBuilderForm.codeVerifier"   type="password" show-password clearable>
           </el-input>
         </el-form-item>
       </el-col>
