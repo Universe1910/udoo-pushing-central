@@ -58,19 +58,19 @@
           <el-col :span="4" :xs="8">
             <div class="box-stats-container contact">
               <div class="box-stats-label">Contacts</div>
-              <div class="box-stats-number">{{totalContact}}</div>
+              <div class="box-stats-number">{{ formatNumber(totalContact) }}</div>
             </div>
           </el-col>
           <el-col :span="4" :xs="8" class="box-stats">
             <div class="box-stats-container campaign">
               <div class="box-stats-label">Campaigns</div>
-              <div class="box-stats-number">{{totalCampaign}}</div>
+              <div class="box-stats-number">{{ formatNumber(totalCampaign) }}</div>
             </div>
           </el-col>
           <el-col :span="4" :xs="8" class="box-stats">
             <div class="box-stats-container event">
               <div class="box-stats-label">Events</div>
-              <div class="box-stats-number">{{totalEvents}}</div>
+              <div class="box-stats-number">{{ formatNumber(totalEvents) }}</div>
             </div>
           </el-col>
         </el-row>
@@ -140,20 +140,20 @@ import {
 } from '@/api/campaignLog'
 
 const totalContact = ref(0)
-const totalCampaign= ref(0)
+const totalCampaign = ref(0)
 const totalEvents = ref(0)
 
 const getTotalContact = async () => {
-  var res = await  getContactList()
-  if(res.code == 0){
+  var res = await getContactList()
+  if (res.code == 0) {
     totalContact.value = res.data.total
   }
 }
 getTotalContact()
 
 const getTotalCampaign = async () => {
-  var res = await  getCampaignList()
-  if(res.code == 0){
+  var res = await getCampaignList()
+  if (res.code == 0) {
     totalCampaign.value = res.data.total
   }
 }
@@ -161,14 +161,24 @@ const getTotalCampaign = async () => {
 getTotalCampaign()
 
 const getTotalEvents = async () => {
-  var res = await  getCampaignLogList()
-  if(res.code == 0){
+  var res = await getCampaignLogList()
+  if (res.code == 0) {
     totalEvents.value = res.data.total
   }
 }
 getTotalEvents()
 
-const weatherInfo = useWeatherInfo()
+
+const formatNumber = (total) => {
+  if (total <= 1000) {
+    return total;
+  } else if (total >= 1000 && total <= 1000000) {
+    return `${total / 1000}k`
+  } else if (total >= 1000000 && total <= 1000000000) {
+    return `${total / 1000000}m`
+  }
+}
+
 
 const toolCards = ref([
   {

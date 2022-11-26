@@ -12,7 +12,6 @@ export const useWeatherInfo = () => {
 
 export const ip = async() => {
   // key换成你自己的 https://console.amap.com/dev/index
-  debugger;
   if (amapKey === '') {
     return false
   }
