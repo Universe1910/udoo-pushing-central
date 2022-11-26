@@ -12,8 +12,8 @@ type ZaloApplication struct {
 	ApplicationID     string `json:"applicationID" form:"applicationID" gorm:"column:application_id;comment:;"`
 	SecretKey         string `json:"secretKey" form:"secretKey" gorm:"column:secret_key;comment:;"`
 	CodeVerifier      string `json:"codeVerifier" form:"codeVerifier" gorm:code_verifier" gorm:"column:code_verifier;comment:;"`
-	Status            *bool  `json:"status" form:"status" gorm:"column:status;comment:;"`
-	DevelopmentMode   *bool  `json:"developmentMode" form:"developmentMode" gorm:"column:development_mode;comment:;"`
+	Status            bool   `json:"status" form:"status" gorm:"column:status;comment:;"`
+	DevelopmentMode   bool   `json:"developmentMode" form:"developmentMode" gorm:"column:development_mode;comment:;"`
 	DefaultApp        *bool  `json:"defaultApp" form:"defaultApp" gorm:"column:default_app;comment:;"`
 	CallbackURL       string `json:"callbackURL" form:"callbackURL" gorm:"column:call_back_url;comment:;"`
 	AuthorizationURL  string `json:"authorizationURL"`

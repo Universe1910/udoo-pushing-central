@@ -198,12 +198,16 @@ func (campaignApi *CampaignApi) DebugCampaign(c *gin.Context) {
 	err := c.ShouldBindJSON(&campaign)
 	if err != nil {
 		response.FailWithMessage(err.Error(), c)
-		return
 	}
-	if err := campaignService.DebugCampaign(campaign.ID); err != nil {
+	if res, err := campaignService.DebugCampaign(campaign.ID); err != nil {
 		global.GVA_LOG.Error("failed to debug!", zap.Error(err))
 		response.FailWithMessage("failed to debug", c)
 	} else {
+		if res["error"] == 0 {
+			global.GVA_LOG.Error(res["message"].(string), zap.Error(err))
+			response.FailWithMessage(res["message"].(string), c)
+			return
+		}
 		response.OkWithMessage("successfully debuged", c)
 	}
 }
@@ -232,7 +236,6 @@ func (campaignApi *CampaignApi) FindZaloTemplate(c *gin.Context) {
 	} else {
 
 		//handle việc lấy dữ liệu
-		
 
 		response.OkWithData(gin.H{"recampaign": recampaign}, c)
 

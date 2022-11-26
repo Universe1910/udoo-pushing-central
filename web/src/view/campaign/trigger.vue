@@ -65,12 +65,14 @@ const getZnsTemplates = async () => {
   }
 }
 
-const getId = () => {
+const getId = () => { 
+  debugger;
   var len = nodes.value.length;
   if (typeof len == "undefined") {
     len = 0;
   }
-  return `dndnode_${len++}`
+  var nextId = len  +1
+  return `dndnode_${nextId}`
 }
 
 
@@ -99,6 +101,9 @@ const flowSetEvent = () => {
         currentSelectedNodeId.value = element.id
         if (element.actionName == 'action-send-zns') {
           openDialogSetDataActionSendZNS(element.data)
+        }
+        if (element.actionName == "utils-wait") {
+          openDialogSetDataUtils(element.data)
         }
       },
     }
@@ -143,6 +148,9 @@ const onDrop = (event) => {
         if (actionName == 'action-send-zns') {
           openDialogSetDataActionSendZNS()
         }
+        if (actionName == "utils-wait") {
+          openDialogSetDataUtils()
+        }
       },
     }
   }
@@ -168,18 +176,12 @@ const onDrop = (event) => {
 }
 
 const convertFlowObjectToFlowData = () => {
-
   var tf = JSON.stringify(toObject())
   var flow = tf.length > 0 ? JSON.parse(tf) : null
-
   var dataObject = makeTriggerActions(flow.edges)
-  console.log("dataObject: ")
-  console.log(dataObject)
   return dataObject;
 
 }
-
-
 
 const saveTrigger = async () => {
   console.log('save trigger')
@@ -205,14 +207,11 @@ const saveTrigger = async () => {
     console.log('create Trigger');
     res = await createTrigger(triggerData)
   } else {
-    //them casc field khac
     var triggerObjectUpdate = campaigndata.value.triggerObject
     triggerObjectUpdate.flow = JSON.stringify(flowObject)
     triggerObjectUpdate.data = JSON.stringify(dataObject)
     res = await updateTrigger(triggerObjectUpdate)
-    console.log('update Trigger');
   }
-  console.log(res);
   if (res.code === 0) {
     campaigndata.value.triggerId = res.data.ID
     var updateCampaingRes = await updateCampaign(campaigndata.value)
@@ -221,22 +220,16 @@ const saveTrigger = async () => {
         type: 'success',
         message: 'Create /Update successfully'
       })
-    } else {
-
     }
-
-  } else {
-
   }
 
   closeDialog()
-
-
 }
 
 const type = ref('')
 
 const dialogDataActionSendZNSVisible = ref(false)
+const dialogDataUtilsWaitVisible = ref(false)
 
 const actionSendZNSData = ref(
   {
@@ -251,36 +244,27 @@ const openDialogSetDataActionSendZNS = (data) => {
   } else {
     znsCurrentTemplateData.value = data
   }
-
   dialogDataActionSendZNSVisible.value = true
-
 }
+
+const openDialogSetDataUtils = (data) => {
+  if (typeof data == "undefined") {
+    waitData.value.time = 0
+  } else {
+    waitData.value = data
+  }
+  dialogDataUtilsWaitVisible.value = true
+}
+
 const znsCurrentTemplateData = ref()
+const waitData = ref({
+  time: 0
+})
 
 const currentSelectedNodeId = ref()
 const znsTemplateSelected = ref()
 
-const ZNSTemplateOptions = ref([
-
-  // {
-  //   name: 'Template 2',
-  //   id: 2,
-  //   data: [
-  //     {
-  //       replaceKey: 'customer_name_2',
-  //       replaceVal: ''
-  //     },
-  //     {
-  //       replaceKey: 'course_name_2',
-  //       replaceVal: ''
-  //     },
-  //     {
-  //       replaceKey: 'order_no_2',
-  //       replaceVal: ''
-  //     }
-  //   ]
-  // }
-])
+const ZNSTemplateOptions = ref([])
 
 const saveSendZNSConfig = () => {
   var nodeId = currentSelectedNodeId.value;
@@ -288,7 +272,12 @@ const saveSendZNSConfig = () => {
   newUpdate.data = znsCurrentTemplateData.value.data
   updateNodeData(newUpdate, nodeId)
   dialogDataActionSendZNSVisible.value = false;
+}
 
+const saveUtilsWait = () => {
+  var nodeId = currentSelectedNodeId.value;
+  updateNodeData(waitData.value, nodeId)
+  dialogDataUtilsWaitVisible.value = false;
 }
 
 const getZNSTemplateById = (id) => {
@@ -309,23 +298,24 @@ const znsChangeTemplate = (value) => {
 
 const closeDialog = () => {
   dialogDataActionSendZNSVisible.value = false;
+  dialogDataUtilsWaitVisible.value = false;
 }
 
 
 const variables = ref(
-[
-"__CID__","__LASTNAME__","__FIRSTNAME__", "__PHONE__", "__EMAIL__",
-"__CAMPAIGN_NAME__", "__CAMPAIGN_START__", "__CAMPAIGN_END__",
-"__ZALO_PHONE__", "__FB_ID__", "__ADDRESS__", "__CITY__", "__STATE__", "__ZIPCODE__", "__COUNTRY__",
-"__DATE__", "__TIME__"
-]
+  [
+    "__CID__", "__LASTNAME__", "__FIRSTNAME__", "__PHONE__", "__EMAIL__",
+    "__CAMPAIGN_NAME__", "__CAMPAIGN_START__", "__CAMPAIGN_END__",
+    "__ZALO_PHONE__", "__FB_ID__", "__ADDRESS__", "__CITY__", "__STATE__", "__ZIPCODE__", "__COUNTRY__",
+    "__DATE__", "__TIME__", "__CREATED_AT__"
+  ]
 )
 </script>
 
 <template>
   <div class="actions">
     <div class="action-item">
-      <el-button type="primary" class="save" @click="saveTrigger">Save Trigger</el-button>
+      <el-button type="primary" class="save padding-8" @click="saveTrigger">Save Trigger</el-button>
     </div>
   </div>
   <div class="dndflow" @drop="onDrop">
@@ -344,8 +334,8 @@ const variables = ref(
       </el-form-item>
       <el-form-item label="Variables">
         <div class="flex justify-space-between mb-4 flex-wrap gap-4">
-          <el-tag class="el-tag-margin-4" v-for="variable in variables" :key="variable" :type="variable" text bg>{{ variable }}
-          </el-tag>
+          <el-tag class="el-tag-margin-4" v-for="variable in variables" :key="variable" :type="variable" text bg>
+            {{ variable }}</el-tag>
         </div>
 
       </el-form-item>
@@ -368,6 +358,23 @@ const variables = ref(
       <div class="dialog-footer">
         <el-button size="small" @click="closeDialog">Cancel</el-button>
         <el-button size="small" type="primary" @click="saveSendZNSConfig">Save</el-button>
+      </div>
+    </template>
+
+    //Wait dialog
+  </el-dialog>
+  <el-dialog v-model="dialogDataUtilsWaitVisible" :before-close="closeDialog" title="Pop-up">
+    <el-form :model="waitData" label-position="right" :rules="rule" label-width="120px">
+      <el-form-item label="Time to wait:">
+        <el-input v-model="waitData.time" type="number" placeholder="Please input">
+          <template #append>second</template>
+        </el-input>
+      </el-form-item>
+    </el-form>
+    <template #footer>
+      <div class="dialog-footer">
+        <el-button size="small" @click="closeDialog">Cancel</el-button>
+        <el-button size="small" type="primary" @click="saveUtilsWait">Save</el-button>
       </div>
     </template>
   </el-dialog>
@@ -441,8 +448,17 @@ const variables = ref(
     gap: 5px
   }
 }
-.el-tag-margin-4{
+
+.el-tag-margin-4 {
   padding: 8px;
   margin: 4px;
+}
+
+.padding-8 {
+  padding: 8px;
+}
+
+.save {
+  margin-bottom: 12px;
 }
 </style>

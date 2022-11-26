@@ -18,9 +18,10 @@
         <el-form-item label="End" prop="startDate">
           <el-date-picker is-range v-model="formData.endAt" class="full-width-input" clearable></el-date-picker>
         </el-form-item>
-        <el-form-item label="Zalo Application" prop="zaloApplicationID" >
+        <el-form-item label="Zalo Application" prop="zaloApplicationID">
           <el-select v-model="formData.zaloApplicationID" clearable placeholder="Select">
-            <el-option v-for="item in zaloApplicationOptions" :key="item.ID" :label="item.applicationName" :value="item.ID" />
+            <el-option v-for="item in zaloApplicationOptions" :key="item.ID" :label="item.applicationName"
+              :value="item.ID" />
           </el-select>
         </el-form-item>
         <el-form-item label="Decription" prop="description">
@@ -29,7 +30,7 @@
         <el-row>
           <el-col :span="12" class="grid-cell">
             <div class="static-content-item">
-              <el-button type="primary" @click="addTrigger">Add Trigger</el-button>
+              <el-button type="primary" @click="addTrigger">{{ textData.trigger }}</el-button>
             </div>
           </el-col>
           <el-col :span="12" class="grid-cell">
@@ -60,6 +61,7 @@
           <div class="gva-table-box">
             <el-table style="width: 100%" tooltip-effect="dark" :data="formData.Contacts" row-key="ID"
               @selection-change="handleSelectionChange">
+              <el-table-column align="left" label="ID" prop="ID" width="80" />
               <el-table-column align="left" label="Firstname" prop="firstname" />
               <el-table-column align="left" label="Lastname" prop="lastname" />
               <el-table-column align="left" label="Phone" prop="phone" />
@@ -81,6 +83,20 @@
         <el-tab-pane name="sequenceTab" label="Sequence">
         </el-tab-pane>
         <el-tab-pane name="errorLogTab" label="Error Log">
+          <el-button class="excel-btn" size="small" type="primary" icon="download" @click="handleExcelExportLog()">
+            Export</el-button>
+          <div class="gva-table-box">
+            <el-table style="width: 100%" tooltip-effect="dark" :data="formData.Logs" row-key="ID"
+              :row-class-name="logRowClassName" class="error-table">
+              <el-table-column align="left" label="Action" prop="action" width="200" />
+              <el-table-column align="left" label="Type" prop="type" width="100" />
+              <el-table-column align="left" label="Message" prop="message" />
+              <el-table-column align="left" label="Contact ID" prop="contactID" width="100" />
+              <el-table-column align="left" label="Date" width="180">
+          <template #default="scope">{{ formatDate(scope.row.CreatedAt) }}</template>
+        </el-table-column>
+            </el-table>
+          </div>
         </el-tab-pane>
         <el-tab-pane name="activityTab" label="Activity">
         </el-tab-pane>
@@ -99,6 +115,7 @@ export default {
 <script setup>
 import { reactive, ref, nextTick, watch, } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
+import { getDictFunc, formatDate, formatBoolean, filterDict } from '@/utils/format'
 import {
   updateCampaign,
   findCampaign,
@@ -109,6 +126,16 @@ import {
   getZaloApplicationList
 } from '@/api/zaloApplication'
 
+import {
+  deleteCampaignLog,
+  deleteCampaignLogByIds,
+  getCampaignLogList,
+  findCampaignLogByCampaign,
+} from '@/api/campaignLog'
+
+import exportFromJSON from "export-from-json";
+
+
 import { VueFlow, useVueFlow } from '@vue-flow/core'
 
 import { useRoute, useRouter } from 'vue-router'
@@ -118,8 +145,13 @@ const { findNode, onConnect, setNodes, setEdges, dimensions, setTransform, nodes
   ],
 })
 
+
+
 onConnect((params) => addEdges([params]))
 
+const textData = ref({
+  "trigger": "Add Trigger"
+})
 const onRestore = (flow) => {
   if (flow) {
     const [x = 0, y = 0] = flow.position
@@ -128,6 +160,7 @@ const onRestore = (flow) => {
     // flowSetEvent(flow.nodes)
     setEdges(flow.edges)
     setTransform({ x, y, zoom: flow.zoom || 0 })
+    textData.value.trigger = "Edit Trigger"
   }
 
 }
@@ -141,6 +174,8 @@ const onDragOver = (event) => {
 }
 
 const actionTabs = ref('contactTab')
+
+
 const router = useRouter()
 
 const route = useRoute()
@@ -151,7 +186,6 @@ const getCampaign = async () => {
 
   var id = searchInfo.value.campaignID
   var res = await findCampaign({ ID: id })
-  console.log(res);
   if (res.code === 0) {
     formData.value = res.data.recampaign
     if (res.code === 0) {
@@ -165,6 +199,16 @@ const getCampaign = async () => {
 
 getCampaign()
 
+
+const campaingLogs = ref([])
+const getCampaignAllLog = async () => {
+  var id = formData.value.ID
+  var res = await findCampaignLogByCampaign({ campaignID: id })
+  if (res.code === 0) {
+    campaingLogs.value = res.data.recampaignLog
+  }
+}
+
 const zaloApplicationOptions = ref({})
 const getZaloApplications = async () => {
   const res = await getZaloApplicationList({ page: 1, pageSize: 100 })
@@ -177,11 +221,15 @@ getZaloApplications()
 
 
 const onCampaignDebugClick = async () => {
-  console.log('debug campaign')
-  debugger;
   var id = searchInfo.value.campaignID
-  await debugCampaign({ ID: id })
-  console.log('debug ok')
+  var res = await debugCampaign({ ID: id })
+  console.log(res)
+  if (res.code === 0) {
+    ElMessage({
+      type: 'success',
+      message: 'Debug successfully'
+    })
+  }
 }
 
 
@@ -252,9 +300,41 @@ const handleCurrentChange = (val) => {
   getTableData()
 }
 
+const handleExcelExportLog = async () => {
+  const fileName = "TriggerLog.xlsx"
+  if (!fileName || typeof fileName !== 'string') {
+    fileName = 'ExcelExport.xlsx'
+  }
+
+  await getCampaignAllLog()
+  const data = campaingLogs.value;
+  const exportType = exportFromJSON.types.csv;
+  if (data) exportFromJSON({ data, fileName, exportType });
+}
+
+const logRowClassName = (row, rowIndex) => {
+  let rowClass = `${row.row.type}-row`;
+  return rowClass.toLowerCase();
+}
+
 </script>
 
 <style lang="scss">
+
+.error-table .error-row {
+  // --el-table-tr-bg-color: var(--el-color-danger-light-9) !important;
+  background-color: var(--el-color-danger-light-9) !important;
+}
+
+.error-table .success-row {
+  // --el-table-tr-bg-color: var(--el-color-success-light-9) !important;
+  background-color: var(--el-color-success-light-9) !important;
+}
+
+.error-table .verbose-row{
+  background-color: var(--el-color-warning-light-9) !important;
+}
+
 .right-panel {
   margin-left: 24px;
 }
@@ -310,6 +390,7 @@ const handleCurrentChange = (val) => {
 </style>
 
 <style lang="scss" scoped>
+
 div.table-container {
   table.table-layout {
     width: 100%;

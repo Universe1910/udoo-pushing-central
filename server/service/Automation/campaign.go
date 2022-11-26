@@ -3,6 +3,7 @@ package Automation
 import (
 	"encoding/json"
 	"fmt"
+	"strconv"
 	"strings"
 	"time"
 
@@ -16,6 +17,7 @@ import (
 	ServiceSocial "github.com/flipped-aurora/gin-vue-admin/server/service/Social"
 	"github.com/flipped-aurora/gin-vue-admin/server/service/zalo"
 	"github.com/flipped-aurora/gin-vue-admin/server/utils"
+	"gorm.io/gorm"
 )
 
 type CampaignService struct {
@@ -55,7 +57,9 @@ func (campaignService *CampaignService) UpdateCampaign(campaign Automation.Campa
 // GetCampaign 根据id获取Campaign记录
 // Author [piexlmax](https://github.com/piexlmax)
 func (campaignService *CampaignService) GetCampaign(id uint) (campaign Automation.Campaign, err error) {
-	err = global.GVA_DB.Where("id = ?", id).Preload("Contacts").Preload("TriggerObject").Preload("ZaloApplication").First(&campaign).Error
+	err = global.GVA_DB.Where("id = ?", id).Preload("Contacts").Preload("TriggerObject").Preload("ZaloApplication").Preload("Logs", func(db *gorm.DB) *gorm.DB {
+		return db.Order("campaign_log.ID DESC").Limit(30)
+	}).First(&campaign).Error
 	return
 }
 
@@ -75,30 +79,50 @@ func (campaignService *CampaignService) GetCampaignInfoList(info AutomationReq.C
 	if err != nil {
 		return
 	}
-	err = db.Limit(limit).Offset(offset).Preload("Contacts").Preload("TriggerObject").Preload("ZaloApplication").Find(&campaigns).Error
+	err = db.Limit(limit).Offset(offset).Find(&campaigns).Error
 	return campaigns, total, err
 }
 
-func (CampaignService *CampaignService) DebugCampaign(id uint) (err error) {
+func (CampaignService *CampaignService) DebugCampaign(id uint) (res map[string]interface{}, err error) {
+
 	var campaign Automation.Campaign
 	err = global.GVA_DB.Where("id = ?", id).Preload("Contacts").Preload("TriggerObject").Preload("ZaloApplication").First(&campaign).Error
 	if err != nil {
-		return err
+		log := Automation.CampaignLog{
+			CampaignID: id,
+			Action:     "Find Campaign",
+			Message:    err.Error(),
+			Type:       "Error",
+		}
+		CampaignService.CampaignLog(log)
+		return nil, err
 	}
 	var triggerFlow []map[string]interface{}
 	err = json.Unmarshal([]byte(campaign.TriggerObject.Data), &triggerFlow)
 	if err != nil {
-		fmt.Println(err)
+		log := Automation.CampaignLog{
+			CampaignID: id,
+			Action:     "Extract Trigger Flow",
+			Message:    err.Error(),
+			Type:       "Error",
+		}
+		CampaignService.CampaignLog(log)
 	}
 	zaloApplication := campaign.ZaloApplication
-
 	var zaloApplicationService ServiceSocial.ZaloApplicationService
 	_, err = zaloApplicationService.FetchAccessToken(&zaloApplication)
 	if err != nil {
-		return err
+		log := Automation.CampaignLog{
+			CampaignID: id,
+			Action:     "Fetch Zalo AccessToken",
+			Message:    err.Error(),
+			Type:       "Error",
+		}
+		CampaignService.CampaignLog(log)
+		return nil, err
 	}
 
-	var actionLog []map[string]interface{}
+	var lastResponse map[string]interface{}
 	for _, v := range triggerFlow {
 		nexts := v["nexts"].([]interface{})
 		for _, next := range nexts {
@@ -111,20 +135,52 @@ func (CampaignService *CampaignService) DebugCampaign(id uint) (err error) {
 				Type:       node["type"].(string),
 				Data:       node["data"],
 			}
+			if actionNode.ActionName == "utils-wait" {
+				data := actionNode.Data.(map[string]interface{})
+				timeVal, err := strconv.Atoi(data["time"].(string))
+				if err != nil {
+					log := Automation.CampaignLog{
+						CampaignID: id,
+						Action:     "utils-wait",
+						Message:    err.Error(),
+						Type:       "Verbose",
+					}
+					CampaignService.CampaignLog(log)
+					continue
+				}
+				time.Sleep(time.Duration(timeVal) * time.Second)
+			}
 			if actionNode.ActionName == "action-send-zns" {
 				znsTemplate := actionNode.Data.(map[string]interface{})
 				for _, contact := range campaign.Contacts {
 					res, err := CampaignService.ActionSendZNS(znsTemplate, zaloApplication, campaign, *contact)
-					actionLog = append(actionLog, map[string]interface{}{
-						"response": res,
-						"err":      err,
-					})
+					if err != nil || res["message"].(string) != "" {
+						log := Automation.CampaignLog{
+							CampaignID: id,
+							Action:     "utils-wait",
+							Message:    res["message"].(string),
+							Type:       "Verbose",
+							ContactID:  contact.ID,
+						}
+						CampaignService.CampaignLog(log)
+					} else {
+						log := Automation.CampaignLog{
+							CampaignID: id,
+							Action:     "action-send-zns",
+							Message:    res["message"].(string),
+							ContactID:  contact.ID,
+							Type:       "Success",
+						}
+						CampaignService.CampaignLog(log)
+					}
+					lastResponse := res
+					fmt.Print(lastResponse)
 				}
 			}
+
 		}
 	}
-	fmt.Print(actionLog)
-	return
+	return lastResponse, err
 }
 
 func (campaignService *CampaignService) ActionSendZNS(znsTemplate map[string]interface{}, zaloApplication Social.ZaloApplication, campaign Automation.Campaign, contact Contacts.Contact) (res map[string]interface{}, err error) {
@@ -140,11 +196,15 @@ func (campaignService *CampaignService) ActionSendZNS(znsTemplate map[string]int
 	zaloPhone := phone[1:]
 	zaloPhone = "84" + zaloPhone
 	templateId := znsTemplate["id"].(float64)
+	// "mode":          "development",
 	body := map[string]interface{}{
-		"mode":          "development",
 		"phone":         zaloPhone,
 		"template_id":   templateId,
 		"template_data": templateData,
+	}
+
+	if zaloApplication.DevelopmentMode {
+		body["mode"] = "development"
 	}
 	var zaloNotificationServiceApi zalo.ZaloNotificationServiceAPI
 	zaloNotificationServiceApi.InitializeAPI()
@@ -160,7 +220,7 @@ func (campaignService *CampaignService) ReplaceValue(value string, campaign Auto
 		"__CID__", "__LASTNAME__", "__FIRSTNAME__", "__PHONE__", "__EMAIL__",
 		"__CAMPAIGN_NAME__", "__CAMPAIGN_START__", "__CAMPAIGN_END__",
 		"__ZALO_PHONE__", "__FB_ID__", "__ADDRESS__", "__CITY__", "__STATE__", "__ZIPCODE__", "__COUNTRY__",
-		"__DATE__", "__TIME__",
+		"__DATE__", "__TIME__", "__CREATED_AT__",
 	}
 
 	currentTime := time.Now()
@@ -181,7 +241,8 @@ func (campaignService *CampaignService) ReplaceValue(value string, campaign Auto
 		"__CAMPAIGN_START__": fmt.Sprint(campaign.StartAt),
 		"__CAMPAIGN_END__":   fmt.Sprint(campaign.EndAt),
 		"__DATE__":           currentTime.Format("02-01-2006"),
-		"__TIME__":           currentTime.Format("3:4:5 PM"),
+		"__TIME__":           currentTime.Format("15:04:05"),
+		"__CREATED_AT__":     fmt.Sprint(contact.CreatedAt),
 	}
 
 	exists, _ := utils.InArray(value, variables)
@@ -202,6 +263,7 @@ func (campaignService *CampaignService) ReplaceValue(value string, campaign Auto
 
 func (campaignService *CampaignService) RunTrigger(campaignId uint, contact Contacts.Contact) (err error) {
 	var campaign Automation.Campaign
+
 	err = global.GVA_DB.Where("id = ?", campaignId).Preload("TriggerObject").Preload("ZaloApplication").First(&campaign).Error
 	if err != nil {
 		return err
@@ -235,6 +297,7 @@ func (campaignService *CampaignService) RunTrigger(campaignId uint, contact Cont
 			if actionNode.ActionName == "action-send-zns" {
 				znsTemplate := actionNode.Data.(map[string]interface{})
 				res, err := campaignService.ActionSendZNS(znsTemplate, zaloApplication, campaign, contact)
+
 				actionLog = append(actionLog, map[string]interface{}{
 					"response": res,
 					"err":      err,
@@ -244,4 +307,13 @@ func (campaignService *CampaignService) RunTrigger(campaignId uint, contact Cont
 	}
 
 	return
+}
+
+func (campaignService *CampaignService) CampaignLog(log Automation.CampaignLog) {
+	var logService CampaignLogService
+	err := logService.CreateCampaignLog(log)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+
 }

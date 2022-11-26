@@ -26,9 +26,11 @@ type Campaign struct {
 	// Fields   []*DocumentFields   `json:"fields" gorm:"many2many:document_field_references;foreignKey:ID;joinForeignKey:DocumentId;References:ID;joinReferences:FieldId;"`
 	// ContactId
 	Contacts []*Contacts.Contact `json:"Contacts" gorm:"many2many:contact_campaign;foreignKey:ID;joinForeignKey:CampaignId;References:ID;joinReferences:ContactId;"`
+	Logs     []*CampaignLog      `json:"Logs" gorm:"foreignKey:CampaignID"`
 
 	TriggerObject   Trigger                `json:"triggerObject" form:"triggerObject" gorm:"foreignKey:TriggerId"`
 	ZaloApplication Social.ZaloApplication `json:"zaloApplication" form:"zaloApplication" gorm:"foreignKey:ZaloApplicationID"`
+
 	// CreatedObject sysModel.SysUser `json:"createdObject" form:"createdObject" gorm:"foreignKey:CreatedBy"`
 }
 

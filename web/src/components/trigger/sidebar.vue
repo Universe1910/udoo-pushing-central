@@ -20,12 +20,12 @@ const onDragStart = (event, nodeType, nodeLabel,actionName) => {
         <div class="input-title">Contact Added</div>
         <div class="input-description">The trigger will starting when contact added</div>
       </div>
-      <div class="vue-flow__node-input input-node" id="input-immediately" :draggable="true"
+      <!-- <div class="vue-flow__node-input input-node" id="input-immediately" :draggable="true"
         @dragstart="onDragStart($event, 'input', 'Immediately', 'input-immediately')">
         <div class="input-label-group">Event</div>
         <div class="input-title">Immediately</div>
         <div class="input-description">The trigger will starting when called</div>
-      </div>
+      </div> -->
       <div class="vue-flow__node-action action-node" id="action-send-zns" :draggable="true"
         @dragstart="onDragStart($event, 'action', 'Send ZNS', 'action-send-zns')">
         <div class="action-label-group">Action</div>
@@ -59,7 +59,7 @@ const onDragStart = (event, nodeType, nodeLabel,actionName) => {
 
 
 <style scoped>
-.vue-flow__node-default,
+/* .vue-flow__node-default,
 .vue-flow__node-output{
   padding: 10px;
   border-radius: 3px;
@@ -71,22 +71,26 @@ const onDragStart = (event, nodeType, nodeLabel,actionName) => {
   color: var(--vf-node-text);
   background-color: var(--vf-node-bg);
   border-color: var(--vf-node-color);
-}
+} */
 
-.input-node, .action-node, .utils-node {
+
+
+.input-node, .action-node, .utils-node, .event-node {
   background-color: #fff;
   color: black;
   border-radius: 4px;
   line-height: 1.5em;
+  width: 100%;
+  border: none;
+  padding: 0px;
 }
 
 
-.input-node .input-label-group {
+.vue-flow__node-input .input-label-group {
   font-size: 16px;
   text-transform: uppercase;
   border-bottom: 1px dashed gray;
   background-color: #4e70ff;
-  ;
   text-align: left;
   padding: 4px;
   color: #fff;
@@ -113,7 +117,6 @@ const onDragStart = (event, nodeType, nodeLabel,actionName) => {
   text-transform: uppercase;
   border-bottom: 1px dashed gray;
   background-color: #FF6464;
-  ;
   text-align: left;
   padding: 4px;
   color: #fff;
