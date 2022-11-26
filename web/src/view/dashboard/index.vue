@@ -51,6 +51,35 @@
       <el-card class="gva-card quick-entrance">
         <template #header>
           <div class="card-header">
+            <span>Stats</span>
+          </div>
+        </template>
+        <el-row :gutter="20" class="box-stats">
+          <el-col :span="4" :xs="8">
+            <div class="box-stats-container contact">
+              <div class="box-stats-label">Contacts</div>
+              <div class="box-stats-number">{{totalContact}}</div>
+            </div>
+          </el-col>
+          <el-col :span="4" :xs="8" class="box-stats">
+            <div class="box-stats-container campaign">
+              <div class="box-stats-label">Campaigns</div>
+              <div class="box-stats-number">{{totalCampaign}}</div>
+            </div>
+          </el-col>
+          <el-col :span="4" :xs="8" class="box-stats">
+            <div class="box-stats-container event">
+              <div class="box-stats-label">Events</div>
+              <div class="box-stats-number">{{totalEvents}}</div>
+            </div>
+          </el-col>
+        </el-row>
+      </el-card>
+    </div>
+    <div class="gva-card-box">
+      <el-card class="gva-card quick-entrance">
+        <template #header>
+          <div class="card-header">
             <span>Navigation</span>
           </div>
         </template>
@@ -68,8 +97,8 @@
           </el-col>
         </el-row>
       </el-card>
-      <!-- <div class="quick-entrance-title"></div> -->
     </div>
+
     <div class="gva-card-box">
       <div class="gva-card">
         <div class="card-header">
@@ -96,6 +125,48 @@ import DashboardTable from '@/view/dashboard/dashboardTable/dashboardTable.vue'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useWeatherInfo } from '@/view/dashboard/weather.js'
+
+import {
+  getContactList
+} from '@/api/contact'
+
+import {
+  getCampaignList
+} from '@/api/campaign'
+
+
+import {
+  getCampaignLogList
+} from '@/api/campaignLog'
+
+const totalContact = ref(0)
+const totalCampaign= ref(0)
+const totalEvents = ref(0)
+
+const getTotalContact = async () => {
+  var res = await  getContactList()
+  if(res.code == 0){
+    totalContact.value = res.data.total
+  }
+}
+getTotalContact()
+
+const getTotalCampaign = async () => {
+  var res = await  getCampaignList()
+  if(res.code == 0){
+    totalCampaign.value = res.data.total
+  }
+}
+
+getTotalCampaign()
+
+const getTotalEvents = async () => {
+  var res = await  getCampaignLogList()
+  if(res.code == 0){
+    totalEvents.value = res.data.total
+  }
+}
+getTotalEvents()
 
 const weatherInfo = useWeatherInfo()
 
@@ -151,24 +222,6 @@ const toTarget = (name) => {
 }
 
 
-// const listenerZaloAuthentication = () => {
-//   let uri = window.location.search.substring(1);
-//   let params = new URLSearchParams(uri);
-//   console.log(params.get("oa_id"));
-//   console.log(params.get("code"));
-//   if (params.get("code")) {
-//     router.push({
-//       name: 'zaloAuth',
-//       params: {
-//         id: 1,
-//         code: params.get("code"),
-//         appId: params.get("appId")
-//       }
-//     })
-//   }
-// }
-
-// listenerZaloAuthentication()
 </script>
 <script>
 export default {
@@ -177,6 +230,47 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.box-stats-container {
+
+  padding: 18px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-content: center;
+  align-items: center;
+}
+
+.contact {
+  background-color: #FFE2D4;
+}
+
+.campaign {
+  background-color: #D3ECFF;
+}
+
+.event {
+  background-color: #FF4F3E;
+}
+
+.box-stats-number {
+  color: #fff;
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.box-stats-label {
+  color: #191A23;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.box-stats {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 @mixin flex-center {
   display: flex;
   align-items: center;
