@@ -6,6 +6,8 @@ import (
 	EmailMarketingReq "github.com/flipped-aurora/gin-vue-admin/server/model/EmailMarketing/request"
 	"github.com/flipped-aurora/gin-vue-admin/server/model/common/request"
 	"github.com/flipped-aurora/gin-vue-admin/server/model/common/response"
+	email_response "github.com/flipped-aurora/gin-vue-admin/server/plugin/email/model/response"
+	"github.com/flipped-aurora/gin-vue-admin/server/plugin/email/utils"
 	"github.com/flipped-aurora/gin-vue-admin/server/service"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
@@ -25,7 +27,7 @@ var email_templateService = service.ServiceGroupApp.EmailmarketingServiceGroup.E
 // @Param data body EmailMarketing.EmailTemplate true "Create EmailTemplate"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"Successful"}"
 // @Router /email_template/createEmailTemplate [post]
-func (email_templateApi *EmailTemplateApi) CreateEmailTemplate(c *gin.Context) {
+func (emailTemplateApi *EmailTemplateApi) CreateEmailTemplate(c *gin.Context) {
 	var email_template EmailMarketing.EmailTemplate
 	err := c.ShouldBindJSON(&email_template)
 	if err != nil {
@@ -49,7 +51,7 @@ func (email_templateApi *EmailTemplateApi) CreateEmailTemplate(c *gin.Context) {
 // @Param data body EmailMarketing.EmailTemplate true "Delete EmailTemplate"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"successfully deleted"}"
 // @Router /email_template/deleteEmailTemplate [delete]
-func (email_templateApi *EmailTemplateApi) DeleteEmailTemplate(c *gin.Context) {
+func (emailTemplateApi *EmailTemplateApi) DeleteEmailTemplate(c *gin.Context) {
 	var email_template EmailMarketing.EmailTemplate
 	err := c.ShouldBindJSON(&email_template)
 	if err != nil {
@@ -73,7 +75,7 @@ func (email_templateApi *EmailTemplateApi) DeleteEmailTemplate(c *gin.Context) {
 // @Param data body request.IdsReq true "批量Delete EmailTemplate"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"批量successfully deleted"}"
 // @Router /email_template/deleteEmailTemplateByIds [delete]
-func (email_templateApi *EmailTemplateApi) DeleteEmailTemplateByIds(c *gin.Context) {
+func (emailTemplateApi *EmailTemplateApi) DeleteEmailTemplateByIds(c *gin.Context) {
 	var IDS request.IdsReq
 	err := c.ShouldBindJSON(&IDS)
 	if err != nil {
@@ -97,7 +99,7 @@ func (email_templateApi *EmailTemplateApi) DeleteEmailTemplateByIds(c *gin.Conte
 // @Param data body EmailMarketing.EmailTemplate true "更新EmailTemplate"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"update completed"}"
 // @Router /email_template/updateEmailTemplate [put]
-func (email_templateApi *EmailTemplateApi) UpdateEmailTemplate(c *gin.Context) {
+func (emailTemplateApi *EmailTemplateApi) UpdateEmailTemplate(c *gin.Context) {
 	var email_template EmailMarketing.EmailTemplate
 	err := c.ShouldBindJSON(&email_template)
 	if err != nil {
@@ -121,7 +123,7 @@ func (email_templateApi *EmailTemplateApi) UpdateEmailTemplate(c *gin.Context) {
 // @Param data query EmailMarketing.EmailTemplate true "用idSearchEmailTemplate"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"Find Successfully"}"
 // @Router /email_template/findEmailTemplate [get]
-func (email_templateApi *EmailTemplateApi) FindEmailTemplate(c *gin.Context) {
+func (emailTemplateApi *EmailTemplateApi) FindEmailTemplate(c *gin.Context) {
 	var email_template EmailMarketing.EmailTemplate
 	err := c.ShouldBindQuery(&email_template)
 	if err != nil {
@@ -145,7 +147,7 @@ func (email_templateApi *EmailTemplateApi) FindEmailTemplate(c *gin.Context) {
 // @Param data query EmailMarketingReq.EmailTemplateSearch true "分页获取EmailTemplate列表"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"Successful"}"
 // @Router /email_template/getEmailTemplateList [get]
-func (email_templateApi *EmailTemplateApi) GetEmailTemplateList(c *gin.Context) {
+func (emailTemplateApi *EmailTemplateApi) GetEmailTemplateList(c *gin.Context) {
 	var pageInfo EmailMarketingReq.EmailTemplateSearch
 	err := c.ShouldBindQuery(&pageInfo)
 	if err != nil {
@@ -163,4 +165,28 @@ func (email_templateApi *EmailTemplateApi) GetEmailTemplateList(c *gin.Context) 
 			PageSize: pageInfo.PageSize,
 		}, "Successful", c)
 	}
+}
+
+// SendEmail
+// @Tags      System
+// @Summary   发送邮件
+// @Security  ApiKeyAuth
+// @Produce   application/json
+// @Param     data  body      email_response.Email  true  "发送邮件必须的参数"
+// @Success   200   {string}  string                "{"success":true,"data":{},"msg":"发送成功"}"
+// @Router    /email_template/sendEmailTemplate [post]
+func (emailTemplateApi *EmailTemplateApi) SendEmailTemplate(c *gin.Context) {
+	var email email_response.Email
+	err := c.ShouldBindJSON(&email)
+	if err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+	err = utils.Email(email.To, email.Subject, email.Body)
+	if err != nil {
+		global.GVA_LOG.Error("Failed to send!", zap.Error(err))
+		response.FailWithMessage("Failed to send", c)
+		return
+	}
+	response.OkWithMessage("Sent successfully", c)
 }

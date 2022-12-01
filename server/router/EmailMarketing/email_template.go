@@ -23,5 +23,6 @@ func (s *EmailTemplateRouter) InitEmailTemplateRouter(Router *gin.RouterGroup) {
 	{
 		email_templateRouterWithoutRecord.GET("findEmailTemplate", email_templateApi.FindEmailTemplate)       // 根据ID获取EmailTemplate
 		email_templateRouterWithoutRecord.GET("getEmailTemplateList", email_templateApi.GetEmailTemplateList) // 获取EmailTemplate列表
+		email_templateRouterWithoutRecord.POST("sendEmailTemplate", email_templateApi.SendEmailTemplate)      // 获取EmailTemplate列表
 	}
 }

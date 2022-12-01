@@ -22,6 +22,8 @@ func (s *CampaignRouter) InitCampaignRouter(Router *gin.RouterGroup) {
 	}
 	{
 		campaignRouterWithoutRecord.POST("debugCampaign", campaignApi.DebugCampaign)
+		campaignRouterWithoutRecord.POST("debugSequence", campaignApi.DebugSequence)
+		campaignRouterWithoutRecord.POST("startSequence", campaignApi.StartSequence)
 		campaignRouterWithoutRecord.GET("findCampaign", campaignApi.FindCampaign)       // 根据ID获取Campaign
 		campaignRouterWithoutRecord.GET("getCampaignList", campaignApi.GetCampaignList) // 获取Campaign列表
 	}

@@ -49,6 +49,38 @@ export const debugCampaign = (data) => {
 };
 
 // @Tags Campaign
+// @Summary Debug Campaign
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body model.Campaign true "Debug Campaign"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"successfully Debug"}"
+// @Router /campaign/debugSequence [post]
+export const debugSequence = (data) => {
+  return service({
+    url: "/campaign/debugSequence",
+    method: "post",
+    data,
+  });
+};
+
+// @Tags Campaign
+// @Summary Start Sequence
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body model.Campaign true "Debug Campaign"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"successfully Debug"}"
+// @Router /campaign/startSequence [post]
+export const startSequence = (data) => {
+  return service({
+    url: "/campaign/startSequence",
+    method: "post",
+    data,
+  });
+};
+
+// @Tags Campaign
 // @Summary Delete Campaign
 // @Security ApiKeyAuth
 // @accept application/json

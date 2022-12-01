@@ -201,7 +201,63 @@ func (campaignApi *CampaignApi) DebugCampaign(c *gin.Context) {
 	}
 	if res, err := campaignService.DebugCampaign(campaign.ID); err != nil {
 		global.GVA_LOG.Error("failed to debug!", zap.Error(err))
-		response.FailWithMessage("failed to debug", c)
+		response.FailWithMessage(err.Error(), c)
+	} else {
+		if res["error"] == 0 {
+			global.GVA_LOG.Error(res["message"].(string), zap.Error(err))
+			response.FailWithMessage(res["message"].(string), c)
+			return
+		}
+		response.OkWithMessage("successfully debuged", c)
+	}
+}
+
+// Debug Sequence
+// @Tags Campaign
+// @Summary Debug Sequence
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data query Automation.Campaign true "用idSearchCampaign"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"successfully debug"}"
+// @Router /campaign/debugSequence [post]
+func (campaignApi *CampaignApi) DebugSequence(c *gin.Context) {
+	var campaign Automation.Campaign
+	err := c.ShouldBindJSON(&campaign)
+	if err != nil {
+		response.FailWithMessage(err.Error(), c)
+	}
+	if res, err := campaignService.DebugSequence(campaign.ID); err != nil {
+		global.GVA_LOG.Error("failed to debug!", zap.Error(err))
+		response.FailWithMessage(err.Error(), c)
+	} else {
+		if res["error"] == 0 {
+			global.GVA_LOG.Error(res["message"].(string), zap.Error(err))
+			response.FailWithMessage(res["message"].(string), c)
+			return
+		}
+		response.OkWithMessage("successfully debuged", c)
+	}
+}
+
+// Start Sequence
+// @Tags Campaign
+// @Summary Debug Sequence
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data query Automation.Campaign true "用idSearchCampaign"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"successfully debug"}"
+// @Router /campaign/startSequence [post]
+func (campaignApi *CampaignApi) StartSequence(c *gin.Context) {
+	var campaign Automation.Campaign
+	err := c.ShouldBindJSON(&campaign)
+	if err != nil {
+		response.FailWithMessage(err.Error(), c)
+	}
+	if res, err := campaignService.RunSequence(campaign.ID); err != nil {
+		global.GVA_LOG.Error("failed to debug!", zap.Error(err))
+		response.FailWithMessage(err.Error(), c)
 	} else {
 		if res["error"] == 0 {
 			global.GVA_LOG.Error(res["message"].(string), zap.Error(err))

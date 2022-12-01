@@ -31,14 +31,13 @@
       <el-table ref="multipleTable" style="width: 100%" tooltip-effect="dark" :data="tableData" row-key="ID"
         @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55" />
-        <el-table-column align="left" label="date" width="180">
+        <el-table-column align="left" label="Name" prop="name" />
+        <el-table-column align="left" label="Subject" prop="subject" />
+        <el-table-column align="left" label="Created" prop="createdObject.nickName" width="100" />
+        <el-table-column align="left" label="Date" width="180">
           <template #default="scope">{{ formatDate(scope.row.CreatedAt) }}</template>
         </el-table-column>
-        <el-table-column align="left" label="Name" prop="name" width="120" />
-        <!-- <el-table-column align="left" label="Content" prop="content" width="120" /> -->
-        <el-table-column align="left" label="Subject" prop="subject" width="120" />
-        <el-table-column align="left" label="Created" prop="createdObject.nickName" width="120" />
-        <el-table-column align="left" label="Action">
+        <el-table-column align="left" label="Action" width="200">
           <template #default="scope">
             <el-button type="primary" link icon="edit" size="small" class="table-button"
               @click="toEmailBuilder(scope.row)">Builder</el-button>
@@ -66,7 +65,6 @@
           <el-input v-model="formData.subject" :clearable="true" placeholder="Please enter" />
         </el-form-item>
         <el-form-item label="Created by:" prop="createdBy">
-          <!-- <el-input v-model.number="formData.createdBy" :clearable="true" placeholder="Plse enter" /> -->
           <el-select v-model="selectedUser" clearable placeholder="Select">
             <el-option v-for="item in options" :key="item.ID" :label="item.nickName" :value="item.ID" />
           </el-select>
@@ -108,6 +106,9 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 
+import { useUserStore } from '@/pinia/modules/user'
+
+const userStore = useUserStore()
 
 const router = useRouter()
 
@@ -116,7 +117,7 @@ const formData = ref({
   name: '',
   // content: '',
   subject: '',
-  createdBy: 1,
+  createdBy: userStore.userInfo.ID,
 })
 
 const selectedUser = ref(0);
@@ -124,14 +125,10 @@ const options = ref([]);
 
 
 const getUsers = async () => {
-  
-    const table = await getUserList({ page: 1, pageSize: 100 })
-    if(table.code === 0){
-      options.value = table.data.list
-
-    }    
-    console.log(options.value);
-
+  const table = await getUserList({ page: 1, pageSize: 100 })
+  if (table.code === 0) {
+    options.value = table.data.list
+  }
 }
 
 // 验证规则
@@ -173,7 +170,7 @@ const handleCurrentChange = (val) => {
 
 // Search
 const getTableData = async () => {
-  
+
   const table = await getEmailTemplateList({ page: page.value, pageSize: pageSize.value, ...searchInfo.value })
   if (table.code === 0) {
     tableData.value = table.data.list

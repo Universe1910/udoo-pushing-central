@@ -13,6 +13,7 @@ type CampaignLog struct {
 	ContactID  uint   `json:"contactID" form:"contactID" gorm:"column:contact_id;comment:;"`
 	Message    string `json:"message" form:"message" gorm:"column:message;comment:;"`
 	Type       string `json:"type" form:"type" gorm:"column:type;comment:;"`
+	Source       string `json:"source" form:"source" gorm:"column:source;comment:;"`
 }
 
 // TableName CampaignLog 表名

@@ -18,15 +18,16 @@ type Campaign struct {
 	Description       string     `json:"description" form:"description" gorm:"column:description;comment:;"`
 	ParentID          *int       `json:"parentID" form:"parentID" gorm:"column:parent_id;comment:;"`
 	CreatedBy         *int       `json:"createdBy" form:"createdBy" gorm:"column:created_by;comment:;"`
-	Status            *bool      `json:"status" form:"status" gorm:"column:status;comment;"`
+	Status            bool      `json:"status" form:"status" gorm:"column:status;comment;"`
 	TriggerId         *int       `json:"triggerId" form:"triggerId" gorm:"column:trigger_id;comment:;"`
 	SequenceId        *int       `json:"sequenceId" form:"sequenceId" gorm:"column:sequence_id;comment:;"`
 	ZaloApplicationID *int       `json:"zaloApplicationID" form:"zaloApplication" gorm:"column:zalo_application_id;comment:;"`
 
 	// Fields   []*DocumentFields   `json:"fields" gorm:"many2many:document_field_references;foreignKey:ID;joinForeignKey:DocumentId;References:ID;joinReferences:FieldId;"`
 	// ContactId
-	Contacts []*Contacts.Contact `json:"Contacts" gorm:"many2many:contact_campaign;foreignKey:ID;joinForeignKey:CampaignId;References:ID;joinReferences:ContactId;"`
-	Logs     []*CampaignLog      `json:"Logs" gorm:"foreignKey:CampaignID"`
+	Contacts  []*Contacts.Contact `json:"Contacts" gorm:"many2many:contact_campaign;foreignKey:ID;joinForeignKey:CampaignId;References:ID;joinReferences:ContactId;"`
+	Logs      []*CampaignLog      `json:"Logs" gorm:"foreignKey:CampaignID"`
+	Sequences []*Sequence         `json:"sequences" gorm:"foreignKey:CampaignId"`
 
 	TriggerObject   Trigger                `json:"triggerObject" form:"triggerObject" gorm:"foreignKey:TriggerId"`
 	ZaloApplication Social.ZaloApplication `json:"zaloApplication" form:"zaloApplication" gorm:"foreignKey:ZaloApplicationID"`

@@ -5,32 +5,17 @@ import { nextTick, watch, ref, reactive } from 'vue'
 import Sidebar from '@/components/trigger/sidebar.vue'
 import SidebarDetail from '@/components/trigger/sidebar_detail.vue'
 
-import {
-  updateCampaign,
-  findCampaign,
-} from '@/api/campaign'
+import { updateCampaign, findCampaign } from '@/api/campaign'
 
-import {
-  createTrigger,
-  updateTrigger,
-} from '@/api/trigger'
+import { createTrigger, updateTrigger } from '@/api/trigger'
 
-
-import {
-  createZaloApplication,
-  deleteZaloApplication,
-  deleteZaloApplicationByIds,
-  updateZaloApplication,
-  findZaloApplication,
-  getZaloApplicationList,
-  getZaloNotificationTemplate
-
-} from '@/api/zaloApplication'
+import { getZaloNotificationTemplate } from '@/api/zaloApplication'
 
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 
 import { makeTriggerActions } from '@/utils/trigger.js'
+import { getEmailTemplateList } from '@/api/emailTemplate'
 
 
 const router = useRouter()
@@ -54,8 +39,19 @@ const getCampaign = async () => {
   }
   getZnsTemplates()
 }
-
 getCampaign()
+
+
+const emailTemplateOptions = ref([])
+const getEmailTemplate = async () => {
+  const res = await getEmailTemplateList({})
+  if (res.code === 0) {
+    emailTemplateOptions.value = res.data.list
+    console.log(emailTemplateOptions.value)
+  }
+}
+
+getEmailTemplate()
 
 const getZnsTemplates = async () => {
   var res = await getZaloNotificationTemplate(campaigndata.value.zaloApplication)
@@ -65,13 +61,12 @@ const getZnsTemplates = async () => {
   }
 }
 
-const getId = () => { 
-  debugger;
+const getId = () => {
   var len = nodes.value.length;
   if (typeof len == "undefined") {
     len = 0;
   }
-  var nextId = len  +1
+  var nextId = len + 1
   return `dndnode_${nextId}`
 }
 
@@ -105,6 +100,10 @@ const flowSetEvent = () => {
         if (element.actionName == "utils-wait") {
           openDialogSetDataUtils(element.data)
         }
+        if (element.actionName == "action-send-email") {
+          openDialogSetDataActionSendEmail(element.data)
+        }
+        // openDialogSetDataActionSendEmail
       },
     }
   });
@@ -150,6 +149,9 @@ const onDrop = (event) => {
         }
         if (actionName == "utils-wait") {
           openDialogSetDataUtils()
+        }
+        if (actionName == "action-send-email") {
+          openDialogSetDataActionSendEmail()
         }
       },
     }
@@ -230,6 +232,7 @@ const type = ref('')
 
 const dialogDataActionSendZNSVisible = ref(false)
 const dialogDataUtilsWaitVisible = ref(false)
+const dialogDataActionSendEmailVisible = ref(false)
 
 const actionSendZNSData = ref(
   {
@@ -256,13 +259,30 @@ const openDialogSetDataUtils = (data) => {
   dialogDataUtilsWaitVisible.value = true
 }
 
+const openDialogSetDataActionSendEmail = (data) => {
+  if (typeof data == "undefined") {
+    emailData.value.id = 1
+  } else {
+    emailData.value = data
+  }
+  dialogDataActionSendEmailVisible.value = true
+}
+
 const znsCurrentTemplateData = ref()
+
 const waitData = ref({
   time: 0
 })
 
+const emailData = ref(
+  {
+    id: 0
+  }
+)
+
 const currentSelectedNodeId = ref()
 const znsTemplateSelected = ref()
+const emailTemplateSelected = ref()
 
 const ZNSTemplateOptions = ref([])
 
@@ -280,6 +300,12 @@ const saveUtilsWait = () => {
   dialogDataUtilsWaitVisible.value = false;
 }
 
+const saveEmailData = () => {
+  var nodeId = currentSelectedNodeId.value;
+  updateNodeData(emailData.value, nodeId)
+  dialogDataActionSendEmailVisible.value = false;
+}
+
 const getZNSTemplateById = (id) => {
   var template = ZNSTemplateOptions.value.filter((e) => e.id == id)
   return template[0]
@@ -293,12 +319,12 @@ const updateNodeData = (data, nodeId) => {
 const znsChangeTemplate = (value) => {
   var newTemplate = getZNSTemplateById(value);
   znsCurrentTemplateData.value.data = newTemplate.data
-
 }
 
 const closeDialog = () => {
   dialogDataActionSendZNSVisible.value = false;
   dialogDataUtilsWaitVisible.value = false;
+  dialogDataActionSendEmailVisible.value = false;
 }
 
 
@@ -326,7 +352,6 @@ const variables = ref(
   <!-- dialog note send ZNS -->
   <el-dialog v-model="dialogDataActionSendZNSVisible" :before-close="closeDialog" title="Pop-up">
     <el-form :model="znsCurrentTemplateData" label-position="right" ref="elFormRef" :rules="rule" label-width="120px">
-
       <el-form-item label="Template:" prop="id">
         <el-select v-model="znsCurrentTemplateData.id" @change="znsChangeTemplate" clearable placeholder="Select">
           <el-option v-for="item in ZNSTemplateOptions" :key="item.id" :label="item.name" :value="item.id" />
@@ -337,7 +362,6 @@ const variables = ref(
           <el-tag class="el-tag-margin-4" v-for="variable in variables" :key="variable" :type="variable" text bg>
             {{ variable }}</el-tag>
         </div>
-
       </el-form-item>
       <el-form-item label="Template Data">
         <el-table :data="znsCurrentTemplateData.data" style="width: 100%">
@@ -360,8 +384,6 @@ const variables = ref(
         <el-button size="small" type="primary" @click="saveSendZNSConfig">Save</el-button>
       </div>
     </template>
-
-    //Wait dialog
   </el-dialog>
   <el-dialog v-model="dialogDataUtilsWaitVisible" :before-close="closeDialog" title="Pop-up">
     <el-form :model="waitData" label-position="right" :rules="rule" label-width="120px">
@@ -375,6 +397,21 @@ const variables = ref(
       <div class="dialog-footer">
         <el-button size="small" @click="closeDialog">Cancel</el-button>
         <el-button size="small" type="primary" @click="saveUtilsWait">Save</el-button>
+      </div>
+    </template>
+  </el-dialog>
+  <el-dialog v-model="dialogDataActionSendEmailVisible" :before-close="closeDialog" title="Email Template">
+    <el-form :model="emailData" label-position="right" :rules="rule" label-width="120px">
+      <el-form-item label=" Select Template:" prop="id">
+        <el-select v-model="emailData.id" clearable placeholder="Select">
+          <el-option v-for="item in emailTemplateOptions" :key="item.ID" :label="item.name" :value="item.ID" />
+        </el-select>
+      </el-form-item>
+    </el-form>
+    <template #footer>
+      <div class="dialog-footer">
+        <el-button size="small" @click="closeDialog">Cancel</el-button>
+        <el-button size="small" type="primary" @click="saveEmailData">Save</el-button>
       </div>
     </template>
   </el-dialog>

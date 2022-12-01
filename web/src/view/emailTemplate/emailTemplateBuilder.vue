@@ -2,27 +2,50 @@
   <div id="emailBuilder">
     <div class="container">
       <el-row class="mb-4">
-        <el-button type="primary" @click="exportHtml">Save</el-button>
-        <!-- <el-button type="primary" @click="saveDesign">Save</el-button> -->
+        <el-button type="primary" @click="exportHtml">Apply Tempalte</el-button>
+        <el-button type="success" @click="openVariableDialog">Variables</el-button>
         <el-button type="info" @click="openSendDialog">Send Test</el-button>
       </el-row>
 
       <EmailEditor ref="emailEditor" v-on:load="editorLoaded" v-on:ready="editorReady" />
     </div>
   </div>
+
   <el-dialog v-model="dialogSendTestVisible" :before-close="closeDialog" title="Pop-up">
-      <el-form :model="testEmailData" label-position="right" ref="elFormRef" :rules="rule" label-width="120px">
-        <el-form-item label="Name:" prop="name">
-          <el-input v-model="testEmailData.to" :clearable="true" placeholder="Please enter" />
-        </el-form-item>
-      </el-form>
-      <template #footer>
-        <div class="dialog-footer">
-          <el-button size="small" @click="closeDialog">Cancel</el-button>
-          <el-button size="small" type="primary" @click="sendEmailTest">Send</el-button>
+    <el-form :model="testEmailData" label-position="right" ref="elFormRef" :rules="rule" label-width="120px">
+      <el-form-item label="Name:" prop="name">
+        <el-input v-model="testEmailData.to" :clearable="true" placeholder="Please enter" />
+      </el-form-item>
+    </el-form>
+    <template #footer>
+      <div class="dialog-footer">
+        <el-button size="small" @click="closeDialog">Cancel</el-button>
+        <el-button size="small" type="primary" @click="sendEmailTest">Send</el-button>
+      </div>
+    </template>
+  </el-dialog>
+
+  <el-dialog v-model="dialogVariableVisible" :before-close="closeDialog" title="Pop-up">
+    <el-form label-width="120px">
+      <el-form-item label="Variables">
+        <div class="flex justify-space-between mb-4 flex-wrap gap-4">
+          <el-tag class="el-tag-margin-4" v-for="variable in variables" :key="variable" :type="variable" text bg>
+            {{ variable }}</el-tag>
         </div>
-      </template>
-    </el-dialog>
+        
+      </el-form-item>
+      <el-form-item>
+        <div>Variable only use in string content</div>
+      </el-form-item>
+
+    </el-form>
+    <template #footer>
+      <div class="dialog-footer">
+        <el-button size="small" @click="closeDialog">Cancel</el-button>
+      </div>
+    </template>
+  </el-dialog>
+
 </template>
 
 <script>
@@ -43,7 +66,7 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import { useRoute, onBeforeRouteUpdate } from 'vue-router'
 import { EmailEditor } from 'vue-email-editor';
 import { ref, watch } from 'vue'
-import { sendEmail, emailTest } from '@/api/email.js'
+import { sendEmail } from '@/api/emailTemplate.js'
 
 
 const route = useRoute()
@@ -73,14 +96,21 @@ const emailEditor = ref({
 const email = ref(null);
 
 const searchInfo = ref({ emailTemplateId: Number(route.params.id) })
-
+const variables = ref(
+  [
+    "__CID__", "__LASTNAME__", "__FIRSTNAME__", "__PHONE__", "__EMAIL__",
+    "__CAMPAIGN_NAME__", "__CAMPAIGN_START__", "__CAMPAIGN_END__",
+    "__ZALO_PHONE__", "__FB_ID__", "__ADDRESS__", "__CITY__", "__STATE__", "__ZIPCODE__", "__COUNTRY__",
+    "__DATE__", "__TIME__", "__CREATED_AT__"
+  ]
+)
 const editorLoaded = async () => {
   console.log('editorLoaded');
-  if(email.value.content){
+  if (email.value.content) {
     const emailContent = JSON.parse(email.value.content);
-  emailEditor.value.editor.loadDesign(emailContent.design);
+    emailEditor.value.editor.loadDesign(emailContent.design);
   }
-  
+
 }
 // called when the editor has finished loading
 const editorReady = () => {
@@ -139,49 +169,45 @@ const testEmailData = ref({
   to: 'tinh.phan@udoo.ooo'
 })
 const dialogSendTestVisible = ref(false);
-
-const openSendDialog = () =>{
+const dialogVariableVisible = ref(false);
+const openSendDialog = () => {
   dialogSendTestVisible.value = true;
 }
 
-const sendEmailTest = async() => {
+const openVariableDialog = () => {
+  dialogVariableVisible.value = true;
+}
+const sendEmailTest = async () => {
   dialogSendTestVisible.value = false;
   //send email test
-  
+
   var mailTo = testEmailData.value.to;
-  var emailContent  = JSON.parse(email.value.content);
-  console.log(emailContent);
+  var emailContent = JSON.parse(email.value.content);
   var contentHTML = emailContent.html;
-  var emailData   = {
+  var emailData = {
     to: mailTo,
     subject: email.value.subject,
     body: contentHTML
   }
-  debugger;
   var res = await sendEmail(emailData)
   // var res = await emailTest()
-  if(res.code == 200){
+  if (res.code == 200) {
     ElMessage({
       type: 'success',
       message: 'Send Email successfully'
     })
-  }else{
+  } else {
     ElMessage({
       type: 'warning',
       message: 'Send email failed'
     })
   }
-  
+
 }
 
 const closeDialog = () => {
   dialogSendTestVisible.value = false
-  // formData.value = {
-  //   name: '',
-  //   content: '',
-  //   subject: '',
-  //   createdBy: 0,
-  // }
+  dialogVariableVisible.value = false
 }
 
 

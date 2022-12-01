@@ -31,19 +31,22 @@
           <el-col :span="12" class="grid-cell">
             <div class="static-content-item">
               <el-button type="primary" @click="addTrigger">{{ textData.trigger }}</el-button>
+              <el-button type="success" class="btn-debug" @click="onTriggerDebugClick">Debug Trigger</el-button>
+              
             </div>
           </el-col>
           <el-col :span="12" class="grid-cell">
             <div class="static-content-item">
-              <el-button type="primary">Add Sequence</el-button>
+              <el-button type="primary" @click="addSequence">{{ textData.sequence }}</el-button>
+              <el-button type="success" class="btn-debug" @click="onSequenceDebugClick">Debug Sequence</el-button>
             </div>
           </el-col>
         </el-row>
       </el-col>
       <el-col :span="6" class="grid-cell right-panel">
         <div class="static-content-item">
-          <el-button type="success" class="btn-debug" @click="onCampaignDebugClick">Debug</el-button>
-          <el-button type="primary" class="btn-apply" @click="applyClick">Apply</el-button>
+          <el-button type="primary" class="btn-apply" @click="applyClick">Update Campaign</el-button>
+          <el-button type="danger" @click="onStartSequenceClick">Start Sequence</el-button>
         </div>
       </el-col>
     </el-row>
@@ -81,6 +84,19 @@
           </div>
         </el-tab-pane>
         <el-tab-pane name="sequenceTab" label="Sequence">
+          <div class="gva-table-box">
+            <el-table style="width: 100%" tooltip-effect="dark" :data="formData.sequences" row-key="ID"
+              class="error-table">
+              <el-table-column align="left" label="Order" prop="order" width="60" />
+              <el-table-column align="left" label="Date" width="180">
+                <template #default="scope">{{ formatDate(scope.row.date) }}</template>
+              </el-table-column>
+              <!-- <el-table-column align="left" label="Time" width="180">
+                <template #default="scope">{{ formatShortTime(scope.row.time) }}</template>
+              </el-table-column> -->
+              <el-table-column align="left" label="Action Name" prop="actionName" />
+            </el-table>
+          </div>
         </el-tab-pane>
         <el-tab-pane name="errorLogTab" label="Error Log">
           <el-button class="excel-btn" size="small" type="primary" icon="download" @click="handleExcelExportLog()">
@@ -88,13 +104,19 @@
           <div class="gva-table-box">
             <el-table style="width: 100%" tooltip-effect="dark" :data="formData.Logs" row-key="ID"
               :row-class-name="logRowClassName" class="error-table">
-              <el-table-column align="left" label="Action" prop="action" width="200" />
-              <el-table-column align="left" label="Type" prop="type" width="100" />
+              <el-table-column align="left" label="Source" prop="source" width="100"/>
+              <el-table-column align="left" label="Action" prop="action" />
+              <el-table-column align="left" label="Type" prop="type" />
               <el-table-column align="left" label="Message" prop="message" />
-              <el-table-column align="left" label="Contact ID" prop="contactID" width="100" />
+              <el-table-column align="left" label="Contact ID" prop="contactID">
+                <template #default="scope">
+                    <div v-if="getFullNameContactById(scope.row.contactID)">{{getFullNameContactById(scope.row.contactID)}}</div>
+                    <div v-else>{{scope.row.contactID}}</div>
+                </template>
+              </el-table-column>
               <el-table-column align="left" label="Date" width="180">
-          <template #default="scope">{{ formatDate(scope.row.CreatedAt) }}</template>
-        </el-table-column>
+                <template #default="scope">{{ formatDate(scope.row.CreatedAt) }}</template>
+              </el-table-column>
             </el-table>
           </div>
         </el-tab-pane>
@@ -115,11 +137,13 @@ export default {
 <script setup>
 import { reactive, ref, nextTick, watch, } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { getDictFunc, formatDate, formatBoolean, filterDict } from '@/utils/format'
+import { getDictFunc, formatDate, formatBoolean, filterDict, formatShortTime } from '@/utils/format'
 import {
   updateCampaign,
   findCampaign,
-  debugCampaign
+  debugCampaign,
+  debugSequence,
+  startSequence
 } from '@/api/campaign'
 
 import {
@@ -140,6 +164,7 @@ import { VueFlow, useVueFlow } from '@vue-flow/core'
 
 import { useRoute, useRouter } from 'vue-router'
 
+
 const { findNode, onConnect, setNodes, setEdges, dimensions, setTransform, nodes, edges, addEdges, addNodes, viewport, project, vueFlowRef, toObject } = useVueFlow({
   nodes: [
   ],
@@ -150,8 +175,10 @@ const { findNode, onConnect, setNodes, setEdges, dimensions, setTransform, nodes
 onConnect((params) => addEdges([params]))
 
 const textData = ref({
-  "trigger": "Add Trigger"
+  trigger: "Add Trigger",
+  sequence: "Add Sequence"
 })
+
 const onRestore = (flow) => {
   if (flow) {
     const [x = 0, y = 0] = flow.position
@@ -190,6 +217,10 @@ const getCampaign = async () => {
     formData.value = res.data.recampaign
     if (res.code === 0) {
       formData.value = res.data.recampaign
+      console.log(formData.value)
+      if (formData.value.sequences) {
+        textData.value.sequence = "Edit Sequence"
+      }
       var tf = formData.value.triggerObject.flow;
       var flow = tf.length > 0 ? JSON.parse(tf) : null
       onRestore(flow)
@@ -219,8 +250,15 @@ const getZaloApplications = async () => {
 }
 getZaloApplications()
 
+const getFullNameContactById = (contactID) => {
+  var ts = formData.value.Contacts.filter((e) => (e.ID == contactID))
+  if (ts.length == 0){
+    return false
+  }
+  return `${ts[0].firstname } ${ts[0].lastname }`
+}
 
-const onCampaignDebugClick = async () => {
+const onTriggerDebugClick = async () => {
   var id = searchInfo.value.campaignID
   var res = await debugCampaign({ ID: id })
   console.log(res)
@@ -231,6 +269,31 @@ const onCampaignDebugClick = async () => {
     })
   }
 }
+
+const onSequenceDebugClick = async () => {
+  var id = searchInfo.value.campaignID
+  var res = await debugSequence({ ID: id })
+  console.log(res)
+  if (res.code === 0) {
+    ElMessage({
+      type: 'success',
+      message: 'Debug sequence successfully'
+    })
+  }
+}
+
+const onStartSequenceClick = async () => {
+  var id = searchInfo.value.campaignID
+  var res = await startSequence({ ID: id })
+  console.log(res)
+  if (res.code === 0) {
+    ElMessage({
+      type: 'success',
+      message: 'Start sequence successfully'
+    })
+  }
+}
+
 
 
 const applyClick = async () => {
@@ -271,9 +334,16 @@ const rule = reactive({})
 const formRef = reactive({})
 
 const addTrigger = () => {
-  // triggerBuilder
   router.push({
     name: 'triggerBuilder',
+    params: {
+      id: searchInfo.value.campaignID
+    }
+  })
+}
+const addSequence = () => {
+  router.push({
+    name: 'sequenceBuilder',
     params: {
       id: searchInfo.value.campaignID
     }
@@ -320,7 +390,6 @@ const logRowClassName = (row, rowIndex) => {
 </script>
 
 <style lang="scss">
-
 .error-table .error-row {
   // --el-table-tr-bg-color: var(--el-color-danger-light-9) !important;
   background-color: var(--el-color-danger-light-9) !important;
@@ -331,7 +400,7 @@ const logRowClassName = (row, rowIndex) => {
   background-color: var(--el-color-success-light-9) !important;
 }
 
-.error-table .verbose-row{
+.error-table .verbose-row {
   background-color: var(--el-color-warning-light-9) !important;
 }
 
@@ -390,7 +459,6 @@ const logRowClassName = (row, rowIndex) => {
 </style>
 
 <style lang="scss" scoped>
-
 div.table-container {
   table.table-layout {
     width: 100%;

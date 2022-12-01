@@ -95,3 +95,18 @@ export const getEmailTemplateList = (params) => {
     params
   })
 }
+
+// @Tags System
+// @Summary 发送邮件
+// @Security ApiKeyAuth
+// @Produce  application/json
+// @Param data body email_response.Email true "发送邮件必须的参数"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"发送成功"}"
+// @Router /email_template/sendEmailTemplate [post]
+export const sendEmail = (data) => {
+  return service({
+    url: '/email_template/sendEmailTemplate',
+    method: 'post',
+    data
+  })
+}

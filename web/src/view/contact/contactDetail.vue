@@ -6,7 +6,6 @@
                     <el-tab-pane label="Campaings" name="campaign">Campaings</el-tab-pane>
                     <el-tab-pane label="History" name="History">History</el-tab-pane>
                     <el-tab-pane label="Knowledge" name="Knowledge">Knowledge</el-tab-pane>
-
                 </el-tabs>
             </div>
         </el-col>
