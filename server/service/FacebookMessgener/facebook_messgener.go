@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 
 	fbm "github.com/flipped-aurora/gin-vue-admin/server/model/FacebookMessgener"
@@ -12,6 +11,7 @@ import (
 
 type FacebookMessgenerService struct {
 }
+
 // https://graph.facebook.com/LATEST-API-VERSION/PAGE-ID/messages
 
 const (
@@ -47,17 +47,19 @@ func (fms *FacebookMessgenerService) ProcessMessage(event fbm.Messaging) {
 	}
 	body := new(bytes.Buffer)
 	json.NewEncoder(body).Encode(&response)
-	pageToken := "EAAF51YITUEYBAC1UQU8UU7uvwKbQvlMQCuTTsl14cK60zfVk6LfAvjf8CxiW1wnv6ivdFtaMZAIY81WgRms87QygPYSbNZCahJk9wH1lCZCp2nmZC7FOvQfiAFjjtpBZBkqYtMZA9a6WAqLU0L4lXGmZBsoaRFTmWwZASCGGZAFr2OAdVpsaycatnhUO1fQRcZCQEkZBnyh1ChuFAZDZD"
+	pageToken := "EAAF51YITUEYBAOVaJUmp1CFt5pNcNrIUOc2Ji6anm8lj5AQZCYAYhSkEZB7TDcrbdktf1pkHwnOTBUX4pZCPgfghcqzsmGbckE6OK8uZBvXupVJuYWB9tn3YafQvMUXfr4y9KrXlxd8xC7DXmD69PeQSA09vLi0v7ZC0vH8amDAJSNXXOapmQFLIJkAr5BMI2VtS8Rtur8wZDZD"
 	url := fmt.Sprintf(FACEBOOK_API, pageToken)
 	req, err := http.NewRequest("POST", url, body)
 	req.Header.Add("Content-Type", "application/json")
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("after new request")
+		fmt.Println(err.Error())
 	}
 
 	resp, err := client.Do(req)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("after client. do")
+		fmt.Println(err.Error())
 	}
 	defer resp.Body.Close()
 }
