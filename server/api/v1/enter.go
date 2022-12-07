@@ -5,6 +5,7 @@ import (
 	"github.com/flipped-aurora/gin-vue-admin/server/api/v1/Contacts"
 	"github.com/flipped-aurora/gin-vue-admin/server/api/v1/EmailMarketing"
 	"github.com/flipped-aurora/gin-vue-admin/server/api/v1/Social"
+	"github.com/flipped-aurora/gin-vue-admin/server/api/v1/Webhook"
 	"github.com/flipped-aurora/gin-vue-admin/server/api/v1/example"
 	"github.com/flipped-aurora/gin-vue-admin/server/api/v1/system"
 )
@@ -16,6 +17,7 @@ type ApiGroup struct {
 	ContactsApiGroup       Contacts.ApiGroup
 	SocialApiGroup         Social.ApiGroup
 	AutomationApiGroup     Automation.ApiGroup
+	WebhookApiGroup        Webhook.ApiGroup
 }
 
 var ApiGroupApp = new(ApiGroup)

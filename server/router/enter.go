@@ -5,6 +5,7 @@ import (
 	"github.com/flipped-aurora/gin-vue-admin/server/router/Contacts"
 	"github.com/flipped-aurora/gin-vue-admin/server/router/EmailMarketing"
 	"github.com/flipped-aurora/gin-vue-admin/server/router/Social"
+	"github.com/flipped-aurora/gin-vue-admin/server/router/Webhook"
 	"github.com/flipped-aurora/gin-vue-admin/server/router/example"
 	"github.com/flipped-aurora/gin-vue-admin/server/router/system"
 )
@@ -16,6 +17,7 @@ type RouterGroup struct {
 	Contacts       Contacts.RouterGroup
 	Social         Social.RouterGroup
 	Automation     Automation.RouterGroup
+	Webhook        Webhook.RouterGroup
 }
 
 var RouterGroupApp = new(RouterGroup)
