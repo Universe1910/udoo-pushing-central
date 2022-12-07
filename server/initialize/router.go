@@ -8,7 +8,7 @@ import (
 	"github.com/flipped-aurora/gin-vue-admin/server/middleware"
 	"github.com/flipped-aurora/gin-vue-admin/server/router"
 	"github.com/gin-gonic/gin"
-	"github.com/swaggo/gin-swagger"
+	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
 )
 
@@ -22,6 +22,7 @@ func Routers() *gin.Engine {
 	EmailMarketingRouter := router.RouterGroupApp.Emailmarketing
 	systemRouter := router.RouterGroupApp.System
 	exampleRouter := router.RouterGroupApp.Example
+	WebhookRouter := router.RouterGroupApp.Webhook
 	// 如果想要不使用nginx代理前端网页，可以修改 web/.env.production 下的
 	// VUE_APP_BASE_API = /
 	// VUE_APP_BASE_PATH = http://localhost
@@ -56,6 +57,11 @@ func Routers() *gin.Engine {
 	PushingCentralPublicGroup := Router.Group("api/v1")
 	{
 		ContactsRouter.InitPublicContactRouter(PushingCentralPublicGroup)
+	}
+
+	PushingCentralPublicWebhookGroup := Router.Group("hook/v1")
+	{
+		WebhookRouter.InitWebhookRouter(PushingCentralPublicWebhookGroup)
 	}
 
 	PrivateGroup := Router.Group("")
