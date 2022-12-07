@@ -22,6 +22,7 @@ func (s *WebhookRouter) InitWebhookRouter(Router *gin.RouterGroup) {
 	// }
 	// {
 	webhookWithoutRecord.POST("facebookMessgenerHook", webhookApi.FacebookMessgenerWebHook)
+	webhookWithoutRecord.GET("facebookMessgenerHook", webhookApi.VerifierFacebookMessgenerWebHook)
 	// 	webhookWithoutRecord.POST("debugSequence", campaignApi.DebugSequence)
 	// 	webhookWithoutRecord.POST("startSequence", campaignApi.StartSequence)
 	// 	webhookWithoutRecord.GET("findCampaign", campaignApi.FindCampaign)       // 根据ID获取Campaign
