@@ -7,11 +7,14 @@ import (
 
 	"github.com/flipped-aurora/gin-vue-admin/server/model/FacebookMessgener"
 	"github.com/flipped-aurora/gin-vue-admin/server/model/common/response"
+	"github.com/flipped-aurora/gin-vue-admin/server/service"
 	"github.com/gin-gonic/gin"
 )
 
 type WebhookApi struct {
 }
+
+var facebookMessgenerService = service.ServiceGroupApp.FacebookMessgenerServiceGroup.FacebookMessgenerService
 
 // Debug Campaign
 // @Tags Campaign
@@ -40,8 +43,9 @@ func (webhookApi *WebhookApi) FacebookMessgenerWebHook(c *gin.Context) {
 			for _, event := range entry.Messaging {
 				if !reflect.DeepEqual(event.Message, FacebookMessgener.Message{}) && event.Message.Text != "" {
 					// ProcessMessage(event)
-					fmt.Println("event:")
-					fmt.Println(event)
+					// fmt.Println("event:")
+					// fmt.Println(event)
+					facebookMessgenerService.ProcessMessage(event)
 				}
 			}
 		}
