@@ -5,6 +5,7 @@ import (
 	"github.com/flipped-aurora/gin-vue-admin/server/service/Contacts"
 	"github.com/flipped-aurora/gin-vue-admin/server/service/EmailMarketing"
 	"github.com/flipped-aurora/gin-vue-admin/server/service/FacebookMessgener"
+	"github.com/flipped-aurora/gin-vue-admin/server/service/Scenario"
 	"github.com/flipped-aurora/gin-vue-admin/server/service/Social"
 	"github.com/flipped-aurora/gin-vue-admin/server/service/example"
 	"github.com/flipped-aurora/gin-vue-admin/server/service/system"
@@ -18,6 +19,7 @@ type ServiceGroup struct {
 	SocialServiceGroup            Social.ServiceGroup
 	AutomationServiceGroup        Automation.ServiceGroup
 	FacebookMessgenerServiceGroup FacebookMessgener.ServiceGroup
+	ScenarioServiceGroup          Scenario.ServiceGroup
 }
 
 var ServiceGroupApp = new(ServiceGroup)
